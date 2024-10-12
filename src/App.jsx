@@ -1,3 +1,9 @@
+import { ChakraProvider } from "@chakra-ui/react";
+
 export default function App() {
-  return <div id="App">APP</div>;
+  return (
+    <ChakraProvider>
+      <div id="App">APP</div>
+    </ChakraProvider>
+  );
 }
