@@ -1,8 +1,8 @@
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
-<symbol id="icon-log-in" viewBox="0 0 32 32">
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.2" d="M20 4h1.6c2.24 0 3.36 0 4.216 0.436 0.753 0.383 1.364 0.995 1.748 1.748 0.436 0.856 0.436 1.976 0.436 4.216v11.2c0 2.24 0 3.36-0.436 4.216-0.384 0.753-0.995 1.364-1.748 1.748-0.856 0.436-1.976 0.436-4.216 0.436h-1.6"></path>
-<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.2" d="M13.333 9.333l6.667 6.667M20 16l-6.667 6.667M20 16h-16"></path>
+<symbol id="icon-log-in" viewBox="0 0 20 20">
+<path fill="none" stroke="#f4c550" style="stroke: var(--color1, #f4c550)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M12.5 2.5h1c1.4 0 2.1 0 2.635 0.272 0.47 0.24 0.853 0.622 1.093 1.093 0.273 0.535 0.273 1.235 0.273 2.635v7c0 1.4 0 2.1-0.273 2.635-0.24 0.47-0.622 0.853-1.093 1.093-0.535 0.273-1.235 0.273-2.635 0.273h-1"></path>
+<path fill="none" stroke="#f4c550" style="stroke: var(--color1, #f4c550)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M8.333 5.833l4.167 4.167M12.5 10l-4.167 4.167M12.5 10h-10"></path>
 </symbol>
 <symbol id="icon-ukraine" viewBox="0 0 32 32">
 <path fill="#ffda44" style="fill: var(--color1, #ffda44)" d="M16 32c8.837 0 16-7.163 16-16s-7.163-16-16-16c-8.837 0-16 7.163-16 16s7.163 16 16 16z"></path>

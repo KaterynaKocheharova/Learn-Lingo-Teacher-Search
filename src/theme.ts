@@ -1,13 +1,10 @@
-import { extendTheme, ComponentStyleConfig  } from "@chakra-ui/react";
-
-const ComponentStyle: ComponentStyleConfig = {
-  defaultProps: {
-
-  },
-}
+import { extendTheme, ComponentStyleConfig } from "@chakra-ui/react";
 
 const colors = {
   brand: {
+    white: {
+      900: "#FFFFFF",
+    },
     orange: {
       900: "#F4C550",
       100: "#FBE9BA",
@@ -33,7 +30,7 @@ const styles = {
   global: {
     body: {
       bg: "#FFFFFF",
-      color: "black.900",
+      color: "brand.black.900",
     },
   },
 };

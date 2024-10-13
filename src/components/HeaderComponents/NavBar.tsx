@@ -1,17 +1,20 @@
-import { Box, HStack } from "@chakra-ui/react";
+import { HStack, Spacer } from "@chakra-ui/react";
 import PageContainer from "../common/PageContainer";
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";
+import AuthButtons from "./AuthButtons";
 
 const NavBar = () => {
   return (
     <PageContainer>
-      <Box as="header" mx={{ lg: "16" }}>
-        <HStack as="nav" maxW="462px">
+      <HStack wrap="wrap" justify="space-between" as="header" mx={{ lg: "16" }}>
+        <HStack as="nav" w={{ lg: "390px" }}>
           <Logo />
+          <Spacer />
           <NavLinks />
         </HStack>
-      </Box>
+        <AuthButtons />
+      </HStack>
     </PageContainer>
   );
 };
