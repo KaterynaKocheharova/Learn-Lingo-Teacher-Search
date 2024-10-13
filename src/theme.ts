@@ -1,4 +1,10 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, ComponentStyleConfig  } from "@chakra-ui/react";
+
+const ComponentStyle: ComponentStyleConfig = {
+  defaultProps: {
+
+  },
+}
 
 const colors = {
   brand: {
