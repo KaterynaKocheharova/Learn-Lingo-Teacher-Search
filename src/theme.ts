@@ -14,6 +14,7 @@ const colors = {
     },
     gray: {
       400: "#8A8A89",
+      500: "#F8F8F8"
     },
     green: {
       400: "#38CD3E",

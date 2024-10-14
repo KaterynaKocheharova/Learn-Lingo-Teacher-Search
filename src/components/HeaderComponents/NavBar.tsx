@@ -7,7 +7,13 @@ import AuthButtons from "./AuthButtons";
 const NavBar = () => {
   return (
     <PageContainer>
-      <HStack wrap="wrap" justify="space-between" as="header" mx={{ lg: "16" }}>
+      <HStack
+        wrap="wrap"
+        justify="space-between"
+        as="header"
+        mx={{ lg: "16" }}
+        pb={{ base: "45px", lg: "none" }}
+      >
         <HStack as="nav" w={{ lg: "390px" }}>
           <Logo />
           <Spacer />

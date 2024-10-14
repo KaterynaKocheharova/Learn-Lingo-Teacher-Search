@@ -1,11 +1,12 @@
-import { Container } from "@chakra-ui/react";
+import { Container, ContainerProps } from "@chakra-ui/react";
 
 type PageContainerProps = {
   children: React.ReactNode;
-};
-const PageContainer = ({ children }: PageContainerProps) => {
+} & ContainerProps;
+
+const PageContainer = ({ children, ...props }: PageContainerProps) => {
   return (
-    <Container maxW="1440" px={{ base: "16px", lg: "64px" }}>
+    <Container maxW="1440" px={{ base: "16px", lg: "64px" }} {...props}>
       {children}
     </Container>
   );
