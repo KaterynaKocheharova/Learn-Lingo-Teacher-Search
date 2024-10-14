@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Text, Highlight } from "@chakra-ui/react";
 import AppButton from "../../common/AppButton";
 import { NavLink } from "react-router-dom";
 
@@ -21,9 +21,30 @@ const Description = () => {
         mb="8"
       >
         Unlock your potential with the best{" "}
-        <Text as="i" borderRadius="8px" bg="orange.100" px="1">
+        <Text
+          as="i"
+          fontWeight="normal"
+          position="relative"
+          zIndex="1"
+          mr="8px"
+          sx={{
+            "::after": {
+              position: "absolute",
+              content: '""',
+              display: "block",
+              bg: "brand.orange.100",
+              top: "50%",
+              left: "0",
+              transform: "translateY(-40%)",
+              width: "calc(100% + 4px)",
+              height: "70%",
+              zIndex: "-1",
+              borderRadius: "6px",
+            },
+          }}
+        >
           language
-        </Text>{" "}
+        </Text>
         tutors
       </Heading>
       <Text mb="16">
