@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from "@chakra-ui/react";
 
-type AppButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  ButtonProps & {
+type AppButtonProps = Partial<React.ButtonHTMLAttributes<HTMLButtonElement>> &
+  Partial<ButtonProps> & {
     children: React.ReactNode;
   };
 
