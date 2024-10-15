@@ -23,7 +23,13 @@ const StyledBenefitsListItem = ({ benefit }: StyledBenefitsListItem) => {
       >
         {benefit.number}
       </Text>
-      <Text as="li" fontSize="14px" color="brand.black.400" lineHeight="1.3">
+      <Text
+        as="li"
+        fontSize="14px"
+        color="brand.black.400"
+        lineHeight="1.3"
+        textAlign={{ base: "right", lg: "left" }}
+      >
         {benefit.item}
       </Text>
     </HStack>

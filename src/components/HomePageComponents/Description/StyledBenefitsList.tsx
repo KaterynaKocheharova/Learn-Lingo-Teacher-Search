@@ -10,13 +10,16 @@ const StyledBenefitsList = ({ children }: StyledBenefitsListProps) => {
       as="ul"
       w="100%"
       wrap="wrap"
-      borderWidth="1.5px"
-      borderStyle="dashed"
-      borderColor="brand.orange.900"
-      p={{ base: "20px", lg: "40px 122px" }}
+      p={{ base: "30px", lg: "40px 122px" }}
       gap={{ base: "50px", md: "70px", lg: "100px" }}
       borderRadius="30px"
+      borderWidth={{ base: "1.5px", lg: "0" }}
+      borderStyle={{ base: "dashed", lg: "none" }}
+      borderColor={{ base: "brand.orange.900", lg: "transparent" }}
       justify={{ base: "center", lg: "space-between" }}
+      bgImage={{ lg: "url('/benefits-border.png')" }}
+      bgPosition="center"
+      bgRepeat="no-repeat"
     >
       {children}
     </HStack>
