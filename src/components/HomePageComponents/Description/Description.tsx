@@ -10,7 +10,6 @@ const Description = () => {
       bg="brand.gray.500"
       borderRadius="30px"
       p={{ base: "6", lg: "98px 108px 98px 64px" }}
-      minH="530px"
     >
       <Heading
         as="h1"

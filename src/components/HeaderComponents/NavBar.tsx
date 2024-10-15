@@ -11,8 +11,8 @@ const NavBar = () => {
         wrap="wrap"
         justify="space-between"
         as="header"
-        mx={{ lg: "16" }}
-        pb={{ base: "45px", lg: "none" }}
+        px={{ md: "16" }}
+        pb={{ base: "45px", md: "0" }}
       >
         <HStack as="nav" w={{ lg: "390px" }}>
           <Logo />

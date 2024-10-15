@@ -25,7 +25,7 @@ const StyledBenefitsListItem = ({ benefit }: StyledBenefitsListItem) => {
       </Text>
       <Text
         as="li"
-        fontSize="14px"
+        fontSize={{ base: "16px", md: "20px", lg: "16px" }}
         color="brand.black.400"
         lineHeight="1.3"
         textAlign={{ base: "right", lg: "left" }}
