@@ -5,8 +5,13 @@ import { benefits } from "../../../utils/benefits";
 const Benefits = () => {
   return (
     <StyledBenefitsList>
-      {benefits.map((benefit) => {
-        return <StyledBenefitsListItem benefit={benefit} />;
+      {benefits.map((benefit, index) => {
+        return (
+          <StyledBenefitsListItem
+            key={`${benefit.number}${benefit.item}${index}`}
+            benefit={benefit}
+          />
+        );
       })}
     </StyledBenefitsList>
   );

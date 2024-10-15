@@ -18,9 +18,8 @@ const HomePage = () => {
           boxSize={{ base: "100%", md: "400px", lg: "568px" }}
           borderRadius="30px"
           objectFit="cover"
-          srcSet="/hero-image@2x.png 2x /hero-image@1x.png 1x"
+          src="/hero-image.png"
           alt="home page banner playful cartoon girl at the computer"
-          src="/hero-image@1x.png"
           alignSelf="center"
         />
         <Benefits />
