@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import StyledModalHeader from "../common/StyledModalHeader";
 import StyledModalText from "../common/StyledModalText";
 import InputsColumn from "../common/InputsColumn";
-import TextField from "../common/TextField";
+import InputGroup from "../common/InputGroup";
 import AppButton from "../common/AppButton";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { type RegisterInputValues } from "./types";
@@ -47,21 +47,21 @@ const RegistrationForm = () => {
       </StyledModalText>
       <Box as="form" onSubmit={handleSubmit(onSubmit)}>
         <InputsColumn>
-          <TextField
+          <InputGroup
             register={register}
             type="text"
             name="name"
             placeholder="Name"
             errorMessage={errors.name ? errors.name.message : ""}
           />
-          <TextField
+          <InputGroup
             register={register}
             type="email"
             name="email"
             placeholder="Email"
             errorMessage={errors.email ? errors.email.message : ""}
           />
-          <TextField
+          <InputGroup
             register={register}
             type="password"
             name="password"
