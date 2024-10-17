@@ -23,7 +23,6 @@ const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<RegisterInputValues>({
     resolver: yupResolver(registerUserSchema),
