@@ -16,17 +16,17 @@ const AppButton = ({ children, onClick, ...props }: AppButtonProps) => {
       fontSize="md"
       backgroundColor="brand.orange.900"
       _hover={{
-        bg: "brand.orange.900",
+        bg: "brand.orange.800",
         color: "brand.black.900",
         border: "none",
       }}
       _focus={{
-        bg: "brand.orange.900",
+        bg: "brand.orange.800",
         color: "brand.black.900",
         border: "none",
       }}
       _active={{
-        bg: "brand.orange.900",
+        bg: "brand.orange.800",
         color: "brand.black.900",
         border: "none",
       }}
