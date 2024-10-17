@@ -4,6 +4,7 @@ import StyledModalText from "../common/StyledModalText";
 import InputsColumn from "../common/InputsColumn";
 import InputGroup from "../common/InputGroup";
 import AppButton from "../common/AppButton";
+import PasswordGroup from "./PasswordGroup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { type RegisterInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -35,7 +36,7 @@ const RegistrationForm = () => {
 
   type FormData = yup.InferType<typeof registerUserSchema>;
 
-  const onSubmit: SubmitHandler<RegisterInputValues> = (data) =>
+  const onSubmit: SubmitHandler<RegisterInputValues> = (data: FormData) =>
     console.log(data);
 
   return (
@@ -61,11 +62,11 @@ const RegistrationForm = () => {
             placeholder="Email"
             errorMessage={errors.email ? errors.email.message : ""}
           />
-          <InputGroup
+          <PasswordGroup
             register={register}
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             errorMessage={errors.password ? errors.password.message : ""}
           />
         </InputsColumn>

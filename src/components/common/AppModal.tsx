@@ -11,7 +11,8 @@ const AppModal = ({ isOpen, onClose, children }: ModalProps) => {
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent
-        maxW={{ base: "300px", md: "566px" }}
+        mx="15px"
+        maxW={{ md: "566px" }}
         bg="brand.white.900"
         borderRadius="30px"
         p={{ base: "40px", md: "64px" }}
