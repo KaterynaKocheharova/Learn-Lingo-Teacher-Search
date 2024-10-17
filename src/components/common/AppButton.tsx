@@ -31,6 +31,7 @@ const AppButton = ({ children, onClick, ...props }: AppButtonProps) => {
         border: "none",
       }}
       {...props}
+      line-height="1.5"
     >
       {children}
     </Button>

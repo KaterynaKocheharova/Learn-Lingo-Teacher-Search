@@ -39,10 +39,6 @@ const RegistrationForm = () => {
   const onSubmit: SubmitHandler<RegisterInputValues> = (data) =>
     console.log(data);
 
-  console.log(watch("name"));
-  console.log(watch("password"));
-  console.log(watch("email"));
-
   return (
     <>
       <StyledModalHeader>Registration</StyledModalHeader>
@@ -74,7 +70,9 @@ const RegistrationForm = () => {
             errorMessage={errors.password ? errors.password.message : ""}
           />
         </InputsColumn>
-        <AppButton type="submit">Sign Up</AppButton>
+        <AppButton type="submit" w="100%" py="16px" h="60px">
+          Sign Up
+        </AppButton>
       </Box>
     </>
   );
