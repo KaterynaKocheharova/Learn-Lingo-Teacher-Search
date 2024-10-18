@@ -29,7 +29,7 @@ const RegistrationButton = () => {
         Registration
       </AppButton>
       <AppModal isOpen={isOpen} onClose={onClose}>
-        <RegistrationForm />
+        <RegistrationForm onClose={onClose} />
       </AppModal>
     </>
   );

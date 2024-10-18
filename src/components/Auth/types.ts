@@ -3,3 +3,7 @@ export type RegisterInputValues = {
   email: string;
   password: string;
 };
+
+export type ModalForm = {
+  onClose: () => void;
+}

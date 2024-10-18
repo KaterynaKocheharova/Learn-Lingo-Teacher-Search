@@ -5,7 +5,7 @@ type ToastConfigs = {
 };
 
 export const toastConfigs: ToastConfigs = {
-  duration: 9000,
+  duration: 2000,
   isClosable: true,
 };
 

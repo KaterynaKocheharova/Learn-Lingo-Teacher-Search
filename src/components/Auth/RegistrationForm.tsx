@@ -8,13 +8,14 @@ import InputsColumn from "../common/InputsColumn";
 import InputGroup from "../common/InputGroup";
 import AppButton from "../common/AppButton";
 import PasswordGroup from "./PasswordGroup";
-import { Spinner } from '@chakra-ui/react'
+import { Spinner } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { type RegisterInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toastConfigs } from "../../utils/toast.ts";
 import { useToast } from "@chakra-ui/react";
+import { type ModalForm } from "./types";
 
 const registerUserSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -25,7 +26,7 @@ const registerUserSchema = yup.object({
     .required("Password is required"),
 });
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ onClose }: ModalForm) => {
   const {
     register,
     handleSubmit,
@@ -56,8 +57,10 @@ const RegistrationForm = () => {
           description: "Registered",
         });
       })
+      .then(() => {
+        onClose();
+      })
       .catch((error) => {
-        console.log(error);
         if (error.includes("email-already-in-use")) {
           toast({
             ...toastConfigs,
