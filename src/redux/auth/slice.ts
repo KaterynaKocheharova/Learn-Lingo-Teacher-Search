@@ -41,15 +41,11 @@ const userSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.isLoading = "button-loader";
       })
-      .addCase(
-        loginUser.fulfilled,
-        (state, action: PayloadAction<LoginInputValues>) => {
-          state.isLoggedIn = true;
-          // state.user.email = action.payload.email;
-          state.isLoading = "";
-          state.error = null;
-        }
-      )
+      .addCase(loginUser.fulfilled, (state) => {
+        state.isLoggedIn = true;
+        state.isLoading = "";
+        state.error = null;
+      })
       .addCase(loginUser.rejected, handleError)
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = "overlay-loader";

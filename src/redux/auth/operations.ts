@@ -31,7 +31,7 @@ export const loginUser = createAsyncThunk(
   async (data: LoginInputValues, thunkAPI) => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      return data;
+      return;
     } catch (error: any) {
       const errorMessage =
         error.message || "Registration failed. Please try again.";

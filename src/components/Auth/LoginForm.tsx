@@ -98,7 +98,7 @@ const LoginForm = ({ onClose }: ModalForm) => {
           isLoading={Boolean(isLoading)}
           spinner={<Spinner size="sm" />}
         >
-          Sign Up
+          Sign In
         </AppButton>
       </Box>
     </>
