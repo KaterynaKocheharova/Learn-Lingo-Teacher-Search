@@ -1,3 +1,6 @@
+import { useState, useCallback } from "react";
+import AppModal from "../common/AppModal";
+import LoginForm from "../Auth/LoginForm";
 import { Button, Spinner, useToast } from "@chakra-ui/react";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { selectIsLoggedIn, selectIsLoading } from "../../redux/auth/selectors";
@@ -11,6 +14,12 @@ const loginIcon = (
 );
 
 const LoginLogoutButton = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
   const dispatch = useAppDispatch();
   const toast = useToast();
 
@@ -27,23 +36,28 @@ const LoginLogoutButton = () => {
   };
 
   const handleLogin = () => {
-    console.log("loginning");
+    setIsModalOpen(true);
   };
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
-    <Button
-      variant="ghost"
-      _hover={{ bg: "transparent" }}
-      px="16px"
-      leftIcon={loginIcon}
-      onClick={isLoggedIn ? handleLogout : handleLogin}
-      isLoading={Boolean(isLoading)}
-      spinner={<Spinner size="sm" />}
-    >
-      {isLoggedIn ? "Log out" : "Log in"}
-    </Button>
+    <>
+      <Button
+        variant="ghost"
+        _hover={{ bg: "transparent" }}
+        px="16px"
+        leftIcon={loginIcon}
+        onClick={isLoggedIn ? handleLogout : handleLogin}
+        isLoading={Boolean(isLoading)}
+        spinner={<Spinner size="sm" />}
+      >
+        {isLoggedIn ? "Log out" : "Log in"}
+      </Button>
+      <AppModal isOpen={isModalOpen} onClose={closeModal}>
+        <LoginForm onClose={closeModal} />
+      </AppModal>
+    </>
   );
 };
 

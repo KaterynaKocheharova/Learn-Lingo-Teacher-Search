@@ -7,6 +7,7 @@ import { auth } from "../../config/firebase.js";
 type AuthProviderProps = {
   children: React.ReactNode;
 };
+
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const dispatch = useAppDispatch();
 
