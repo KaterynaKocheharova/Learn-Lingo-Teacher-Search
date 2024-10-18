@@ -1,7 +1,7 @@
+import { type RegisterInputValues } from "./../../components/Auth/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { type UserData } from "./types";
 import { registerUser } from "./operations";
-import { type RegisterInputValues } from "../../components/Auth/types";
 
 const initialState: UserData = {
   user: {
@@ -21,7 +21,6 @@ const handleError = (state: UserData, action: PayloadAction<any>) => {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -41,6 +40,17 @@ const userSlice = createSlice({
       )
       .addCase(registerUser.rejected, handleError);
   },
+  reducers: {
+    refreshUser: (
+      state,
+      action: PayloadAction<Pick<RegisterInputValues, "name" | "email">>
+    ) => {
+      console.log(action.payload);
+      state.user.name = action.payload.name;
+      state.user.email = action.payload.email;
+    },
+  },
 });
 
 export default userSlice.reducer;
+export const { refreshUser } = userSlice.actions;

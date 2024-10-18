@@ -41,11 +41,14 @@ const RegistrationForm = () => {
   const onSubmit: SubmitHandler<RegisterInputValues> = async (
     data: FormData
   ) => {
-    // test if state updates when the user registers
     // add user refresh to the observer
     // show toast if registration is successful
     // remove browser validation
     // process different error types
+    // add loader
+    // login feature
+    // logout feature
+
     dispatch(registerUser(data))
       .unwrap()
       .then(() => {
