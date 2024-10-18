@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import userReducer from "./auth/slice.ts";
 
 const persistConfiguration = {
   key: "",
@@ -18,9 +19,7 @@ const persistConfiguration = {
 };
 
 export const store = configureStore({
-  reducer: {
-   
-  },
+  reducer: { userReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -30,3 +29,6 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

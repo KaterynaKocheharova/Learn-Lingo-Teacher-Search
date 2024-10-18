@@ -1,3 +1,5 @@
+import { useAppDispatch } from "../../redux/hooks";
+import { registerUser } from "../../redux/auth/operations.ts";
 import { Box } from "@chakra-ui/react";
 import StyledModalHeader from "../common/StyledModalHeader";
 import StyledModalText from "../common/StyledModalText";
@@ -8,7 +10,6 @@ import PasswordGroup from "./PasswordGroup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { type RegisterInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import * as yup from "yup";
 
 const registerUserSchema = yup.object({
@@ -34,10 +35,30 @@ const RegistrationForm = () => {
     },
   });
 
-  type FormData = yup.InferType<typeof registerUserSchema>;
+  const dispatch = useAppDispatch();
 
-  const onSubmit: SubmitHandler<RegisterInputValues> = (data: FormData) =>
-    console.log(data);
+  type FormData = yup.InferType<typeof registerUserSchema>;
+  const onSubmit: SubmitHandler<RegisterInputValues> = async (
+    data: FormData
+  ) => {
+    // test if state updates when the user registers
+    // add user refresh to the observer
+    // show toast if registration is successful
+    // remove browser validation
+    // process different error types
+    dispatch(registerUser(data))
+      .unwrap()
+      .then(() => {
+        console.log("Success");
+      })
+      .catch((error) => {
+        if (error.includes("email-already-in-use")) {
+          console.log("Email is in use");
+        } else {
+          console.log("Registration error");
+        }
+      });
+  };
 
   return (
     <>
