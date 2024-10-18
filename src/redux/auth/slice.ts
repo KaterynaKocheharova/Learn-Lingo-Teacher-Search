@@ -1,7 +1,10 @@
-import { type RegisterInputValues } from "./../../components/Auth/types";
+import {
+  LoginInputValues,
+  type RegisterInputValues,
+} from "./../../components/Auth/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { type UserData } from "./types";
-import { registerUser, logoutUser } from "./operations";
+import { registerUser, loginUser, logoutUser } from "./operations";
 
 const initialState: UserData = {
   user: {
@@ -30,18 +33,28 @@ const userSlice = createSlice({
         registerUser.fulfilled,
         (state, action: PayloadAction<RegisterInputValues>) => {
           state.isLoggedIn = true;
-          state.user = {
-            name: action.payload.name,
-            email: action.payload.email,
-          };
           state.isLoading = "";
           state.error = null;
         }
       )
       .addCase(registerUser.rejected, handleError)
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = "button-loader";
+      })
+      .addCase(
+        loginUser.fulfilled,
+        (state, action: PayloadAction<LoginInputValues>) => {
+          state.isLoggedIn = true;
+          // state.user.email = action.payload.email;
+          state.isLoading = "";
+          state.error = null;
+        }
+      )
+      .addCase(loginUser.rejected, handleError)
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = "overlay-loader";
       })
+
       .addCase(logoutUser.fulfilled, (state) => {
         state.isLoggedIn = false;
         state.user = {

@@ -4,6 +4,8 @@ export type RegisterInputValues = {
   password: string;
 };
 
+export type LoginInputValues = Pick<RegisterInputValues, "password" | "email">; 
+
 export type ModalForm = {
   onClose: () => void;
 }

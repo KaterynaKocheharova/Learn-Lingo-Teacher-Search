@@ -1,13 +1,15 @@
 import { InputProps, Box } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
-import { type RegisterInputValues } from "../Auth/types";
+import { type RegisterInputValues, LoginInputValues } from "../Auth/types";
 import StyledInput from "./StyledInput";
 import StyledFormError from "./StyledFormError";
 
 export type InputGroupProps = Partial<InputProps> &
   Partial<React.InputHTMLAttributes<HTMLInputElement>> & {
     errorMessage: string | undefined;
-    register: UseFormRegister<RegisterInputValues>;
+    register:
+      | UseFormRegister<RegisterInputValues>
+      | UseFormRegister<LoginInputValues>;
     name: keyof RegisterInputValues;
   };
 

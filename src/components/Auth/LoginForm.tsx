@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { registerUser } from "../../redux/auth/operations.ts";
+import { loginUser } from "../../redux/auth/operations.ts";
 import { selectIsLoading } from "../../redux/auth/selectors.ts";
 import { Box } from "@chakra-ui/react";
 import StyledModalHeader from "../common/StyledModalHeader";
@@ -10,15 +10,14 @@ import AppButton from "../common/AppButton";
 import PasswordGroup from "./PasswordGroup";
 import { Spinner } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { type RegisterInputValues } from "./types";
+import { type LoginInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toastConfigs } from "../../utils/toast.ts";
 import { useToast } from "@chakra-ui/react";
 import { type ModalForm } from "./types";
 
-const registerUserSchema = yup.object({
-  name: yup.string().required("Name is required"),
+const loginUserSchema = yup.object({
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
     .string()
@@ -31,12 +30,11 @@ const LoginForm = ({ onClose }: ModalForm) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterInputValues>({
-    resolver: yupResolver(registerUserSchema),
+  } = useForm<LoginInputValues>({
+    resolver: yupResolver(loginUserSchema),
     defaultValues: {
-      name: "",
-      email: "",
       password: "",
+      email: "",
     },
   });
 
@@ -44,36 +42,26 @@ const LoginForm = ({ onClose }: ModalForm) => {
 
   const dispatch = useAppDispatch();
 
-  type FormData = yup.InferType<typeof registerUserSchema>;
-  const onSubmit: SubmitHandler<RegisterInputValues> = async (
-    data: FormData
-  ) => {
-    dispatch(registerUser(data))
+  type FormData = yup.InferType<typeof loginUserSchema>;
+  const onSubmit: SubmitHandler<LoginInputValues> = async (data: FormData) => {
+    dispatch(loginUser(data))
       .unwrap()
       .then(() => {
         toast({
           ...toastConfigs,
           status: "success",
-          description: "Registered",
+          description: "Logged in!",
         });
       })
       .then(() => {
         onClose();
       })
-      .catch((error) => {
-        if (error.includes("email-already-in-use")) {
-          toast({
-            ...toastConfigs,
-            status: "error",
-            description: "Email in use",
-          });
-        } else {
-          toast({
-            ...toastConfigs,
-            status: "error",
-            description: "Registration error",
-          });
-        }
+      .catch(() => {
+        toast({
+          ...toastConfigs,
+          status: "error",
+          description: "Incorrect login or password",
+        });
       });
   };
 
@@ -81,20 +69,13 @@ const LoginForm = ({ onClose }: ModalForm) => {
 
   return (
     <>
-      <StyledModalHeader>Registration</StyledModalHeader>
+      <StyledModalHeader>Log In</StyledModalHeader>
       <StyledModalText mb="40px">
-        Thank you for your interest in our platform! In order to register, we
-        need some information. Please provide us with the following information
+        Welcome back! Please enter your credentials to access your account and
+        continue your search for an teacher.
       </StyledModalText>
       <Box as="form" onSubmit={handleSubmit(onSubmit)}>
         <InputsColumn>
-          <InputGroup
-            register={register}
-            type="text"
-            name="name"
-            placeholder="Name"
-            errorMessage={errors.name ? errors.name.message : ""}
-          />
           <InputGroup
             register={register}
             type="email"
