@@ -5,5 +5,5 @@ export type UserData = {
   };
   error: Error | string | null;
   isLoggedIn: boolean;
-  isLoading: boolean;
+  isLoading: "overlay-loader" | "button-loader" | "";
 };

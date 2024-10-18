@@ -16,10 +16,6 @@ import * as yup from "yup";
 import { toastConfigs } from "../../utils/toast.ts";
 import { useToast } from "@chakra-ui/react";
 
-// loader to the btn
-// logout feature - first markup
-// login feature - first markup
-
 const registerUserSchema = yup.object({
   name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -115,7 +111,7 @@ const RegistrationForm = () => {
           w="100%"
           py="16px"
           h="60px"
-          isLoading={isLoading}
+          isLoading={Boolean(isLoading)}
           spinner={<Spinner size="sm" />}
         >
           Sign Up
