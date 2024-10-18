@@ -58,6 +58,7 @@ const userSlice = createSlice({
       state,
       action: PayloadAction<Pick<RegisterInputValues, "name" | "email">>
     ) => {
+      state.isLoggedIn = true;
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
     },
