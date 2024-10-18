@@ -11,6 +11,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { type RegisterInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { toastConfigs } from "../../utils/toast.ts";
+import { useToast } from "@chakra-ui/react";
+
+// reusable toast
+// loader
+// logout feature - first markup
+// login feature - first markup
 
 const registerUserSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -35,30 +42,37 @@ const RegistrationForm = () => {
     },
   });
 
+  const toast = useToast();
+
   const dispatch = useAppDispatch();
 
   type FormData = yup.InferType<typeof registerUserSchema>;
   const onSubmit: SubmitHandler<RegisterInputValues> = async (
     data: FormData
   ) => {
-    // add user refresh to the observer
-    // show toast if registration is successful
-    // remove browser validation
-    // process different error types
-    // add loader
-    // login feature
-    // logout feature
-
     dispatch(registerUser(data))
       .unwrap()
       .then(() => {
-        console.log("Success");
+        toast({
+          ...toastConfigs,
+          status: "success",
+          description: "Registered",
+        });
       })
       .catch((error) => {
+        console.log(error);
         if (error.includes("email-already-in-use")) {
-          console.log("Email is in use");
+          toast({
+            ...toastConfigs,
+            status: "error",
+            description: "Email in use",
+          });
         } else {
-          console.log("Registration error");
+          toast({
+            ...toastConfigs,
+            status: "error",
+            description: "Registration error",
+          });
         }
       });
   };

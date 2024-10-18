@@ -45,7 +45,6 @@ const userSlice = createSlice({
       state,
       action: PayloadAction<Pick<RegisterInputValues, "name" | "email">>
     ) => {
-      console.log(action.payload);
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
     },

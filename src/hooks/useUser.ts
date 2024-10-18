@@ -7,7 +7,6 @@ export const useUser = () => {
   const dispatch = useAppDispatch();
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user);
       dispatch(
         refreshUser({
           name: user.displayName as string,
