@@ -1,5 +1,6 @@
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { registerUser } from "../../redux/auth/operations.ts";
+import { selectIsLoading } from "../../redux/auth/selectors.ts";
 import { Box } from "@chakra-ui/react";
 import StyledModalHeader from "../common/StyledModalHeader";
 import StyledModalText from "../common/StyledModalText";
@@ -7,6 +8,7 @@ import InputsColumn from "../common/InputsColumn";
 import InputGroup from "../common/InputGroup";
 import AppButton from "../common/AppButton";
 import PasswordGroup from "./PasswordGroup";
+import { Spinner } from '@chakra-ui/react'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { type RegisterInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,8 +16,7 @@ import * as yup from "yup";
 import { toastConfigs } from "../../utils/toast.ts";
 import { useToast } from "@chakra-ui/react";
 
-// reusable toast
-// loader
+// loader to the btn
 // logout feature - first markup
 // login feature - first markup
 
@@ -77,6 +78,8 @@ const RegistrationForm = () => {
       });
   };
 
+  const isLoading = useAppSelector(selectIsLoading);
+
   return (
     <>
       <StyledModalHeader>Registration</StyledModalHeader>
@@ -107,7 +110,14 @@ const RegistrationForm = () => {
             errorMessage={errors.password ? errors.password.message : ""}
           />
         </InputsColumn>
-        <AppButton type="submit" w="100%" py="16px" h="60px">
+        <AppButton
+          type="submit"
+          w="100%"
+          py="16px"
+          h="60px"
+          isLoading={isLoading}
+          spinner={<Spinner size="sm" />}
+        >
           Sign Up
         </AppButton>
       </Box>
