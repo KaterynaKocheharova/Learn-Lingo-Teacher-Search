@@ -15,12 +15,12 @@ const AppModal = ({ isOpen, onClose, children }: ModalProps) => {
         maxW={{ md: "566px" }}
         bg="brand.white.900"
         borderRadius="30px"
-        p={{ base: "40px", md: "64px" }}
+        p={{ base: "30px", md: "64px" }}
       >
         <ModalCloseButton
           w="32px"
           h="32px"
-          top="20px"
+          top={{ base: "10px", md: "20px" }}
           right="20px"
           _hover={{ bg: "brand.orange.400" }}
           _active={{ bg: "brand.orange.400" }}

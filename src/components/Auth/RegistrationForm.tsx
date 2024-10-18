@@ -64,7 +64,6 @@ const RegistrationForm = () => {
           />
           <PasswordGroup
             register={register}
-            type="password"
             name="password"
             placeholder="Password"
             errorMessage={errors.password ? errors.password.message : ""}
