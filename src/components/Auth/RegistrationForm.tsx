@@ -114,7 +114,7 @@ const RegistrationForm = ({ onClose }: ModalForm) => {
           w="100%"
           py="16px"
           h="60px"
-          isLoading={Boolean(isLoading)}
+          isLoading={Boolean(isLoading === "registration-in-progress")}
           spinner={<Spinner size="sm" />}
         >
           Sign Up

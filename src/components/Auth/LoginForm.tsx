@@ -95,7 +95,7 @@ const LoginForm = ({ onClose }: ModalForm) => {
           w="100%"
           py="16px"
           h="60px"
-          isLoading={Boolean(isLoading)}
+          isLoading={Boolean(isLoading === "logining-in-progress")}
           spinner={<Spinner size="sm" />}
         >
           Sign In

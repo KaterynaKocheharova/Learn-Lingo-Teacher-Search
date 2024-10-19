@@ -5,5 +5,5 @@ export type UserData = {
   };
   error: Error | string | null;
   isLoggedIn: boolean;
-  isLoading: "overlay-loader" | "button-loader" | "";
+  isLoading: "registration-in-progress" | "logining-in-progress" | "logout-in-progress" | "";
 };

@@ -27,7 +27,7 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
-        state.isLoading = "button-loader";
+        state.isLoading = "registration-in-progress";
       })
       .addCase(
         registerUser.fulfilled,
@@ -39,7 +39,7 @@ const userSlice = createSlice({
       )
       .addCase(registerUser.rejected, handleError)
       .addCase(loginUser.pending, (state) => {
-        state.isLoading = "button-loader";
+        state.isLoading = "logining-in-progress";
       })
       .addCase(loginUser.fulfilled, (state) => {
         state.isLoggedIn = true;
@@ -48,7 +48,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, handleError)
       .addCase(logoutUser.pending, (state) => {
-        state.isLoading = "overlay-loader";
+        state.isLoading = "logout-in-progress";
       })
 
       .addCase(logoutUser.fulfilled, (state) => {

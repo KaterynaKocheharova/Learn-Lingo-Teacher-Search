@@ -49,7 +49,7 @@ const LoginLogoutButton = () => {
         px="16px"
         leftIcon={loginIcon}
         onClick={isLoggedIn ? handleLogout : handleLogin}
-        isLoading={Boolean(isLoading)}
+        isLoading={Boolean(isLoading === "logout-in-progress")}
         spinner={<Spinner size="sm" />}
       >
         {isLoggedIn ? "Log out" : "Log in"}
