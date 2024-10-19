@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,13 +17,4 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 export const user = auth.currentUser;
-const database = getDatabase(app);
-
-console.log(database);
-
-const teachers = ref(database, "/");
-
-onValue(teachers, (snapshot) => {
-  const data = snapshot.val();
-  console.log(data);
-});
+export const teachersDB = getDatabase(app);
