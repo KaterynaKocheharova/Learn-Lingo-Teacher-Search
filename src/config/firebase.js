@@ -1,6 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  orderByKey,
+  startAt,
+  endAt,
+  query,
+  get
+} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -18,3 +26,14 @@ export const auth = getAuth(app);
 
 export const user = auth.currentUser;
 export const teachersDB = getDatabase(app);
+
+const firstTeachersQuery = query(
+  ref(teachersDB, "/"),
+  orderByKey(),
+  startAt("0"),
+  endAt("1")
+);
+
+const data = await get(firstTeachersQuery);
+
+console.log(data.val());

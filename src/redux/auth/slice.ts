@@ -16,7 +16,7 @@ const initialState: UserData = {
   isLoading: "",
 };
 
-const handleError = (state: UserData, action: PayloadAction<any>) => {
+export const handleError = (state: UserData, action: PayloadAction<any>) => {
   state.isLoading = "";
   state.error = action.payload?.message || action.payload || null;
 };
