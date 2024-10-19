@@ -10,10 +10,7 @@ export type QueryDetails = {
   // the last field is needed for redux reducer to know if it should spread or overrite the array of teachers
   isFirstBatch: boolean;
 };
-export const fetchTeachers = createAsyncThunk<
-  TeachersPayloadType | undefined, // Specify the return type explicitly
-  QueryDetails
->(
+export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async (queryDetails: QueryDetails, thunkAPI) => {
     const { from, to, isFirstBatch } = queryDetails;
@@ -34,10 +31,13 @@ export const fetchTeachers = createAsyncThunk<
           isFirstBatch: isFirstBatch,
         };
 
-        return payload; // return the payload
+        return payload;
       } else {
         console.log("No data available");
-        return undefined; // Return undefined explicitly when no data is available
+        return {
+          teachers: [],
+          isFirstBatch,
+        };
       }
     } catch (error) {
       let errorMessage;

@@ -28,7 +28,7 @@ const TeachersSlice = createSlice({
         fetchTeachers.fulfilled,
         (
           state: TeachersSliceState,
-          action: PayloadAction<TeachersPayloadType | undefined>
+          action: PayloadAction<TeachersPayloadType>
         ) => {
           state.isLoading = false;
           state.error = null;
