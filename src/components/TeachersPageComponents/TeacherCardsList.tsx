@@ -9,11 +9,9 @@ type TeacherCardsListProps = {
 const TeacherCardsList = ({ teachers }: TeacherCardsListProps) => {
   return (
     <VStack as="ul" spacing="32px" align="center" justify="center">
-      <ul>
-        {teachers.map((teacher) => {
-          return <TeacherCard key={teacher.id} teacher={teacher} />;
-        })}
-      </ul>
+      {teachers.map((teacher) => {
+        return <TeacherCard key={teacher.id} teacher={teacher} />;
+      })}
     </VStack>
   );
 };
