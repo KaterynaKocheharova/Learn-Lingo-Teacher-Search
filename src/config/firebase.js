@@ -1,13 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
-  getDatabase,
-  ref,
-  orderByKey,
-  startAt,
-  endAt,
-  query,
-  get
+  getDatabase
 } from "firebase/database";
 
 const firebaseConfig = {
@@ -26,3 +20,4 @@ export const auth = getAuth(app);
 
 export const user = auth.currentUser;
 export const teachersDB = getDatabase(app);
+
