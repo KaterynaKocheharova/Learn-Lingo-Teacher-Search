@@ -1,5 +1,3 @@
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { type Teachers } from "./types.js";
@@ -20,8 +18,6 @@ export const fetchTeachers = createAsyncThunk(
       const response = await axios.get(
         `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&startAt="${from}"&endAt="${to}"`
       );
-
-      // Extract teachers from the response
       const teachers = Object.entries(response.data || {})
         .filter(([key, value]) => value !== null && value !== undefined)
         .reduce((acc, [key, value]) => {
