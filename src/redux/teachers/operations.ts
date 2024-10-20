@@ -80,14 +80,12 @@ export const fetchTeachers = createAsyncThunk(
       const data = await get(firstTeachersQuery);
 
       if (data.exists()) {
-        // Get the data and filter out any null or undefined entries
         const teachers = Object.entries(data.val() || {})
           .filter(([key, value]) => value !== null && value !== undefined)
           .reduce((acc, [key, value]) => {
             acc[key] = value;
             return acc;
-          }, [] as Teachers); // Ensure the accumulator matches the Teachers type
-
+          }, [] as Teachers); 
         const payload: TeachersPayloadType = {
           teachers,
           isFirstBatch: isFirstBatch,
