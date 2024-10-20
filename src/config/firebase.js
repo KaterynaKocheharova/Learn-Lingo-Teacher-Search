@@ -1,8 +1,9 @@
+
+
+
 // import { initializeApp } from "firebase/app";
 // import { getAuth } from "firebase/auth";
-// import {
-//   getDatabase
-// } from "firebase/database";
+// import { getDatabase, ref, get, set, push } from "firebase/database";
 
 // const firebaseConfig = {
 //   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,14 +18,17 @@
 
 // const app = initializeApp(firebaseConfig);
 // export const auth = getAuth(app);
-
 // export const user = auth.currentUser;
-// export const teachersDB = getDatabase(app);
+
+// const teachersDB = getDatabase(app);
+
+
 
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase, ref, get, set } from "firebase/database";
+import { v4 as uuidv4 } from "uuid"; // Make sure to install uuid
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -42,33 +46,32 @@ export const auth = getAuth(app);
 export const user = auth.currentUser;
 
 const teachersDB = getDatabase(app);
-const addUniqueIdToTeachers = async () => {
-  const teachersRef = ref(teachersDB, 'teachers');
-  try {
-    const snapshot = await get(teachersRef);
-    if (snapshot.exists()) {
-      snapshot.forEach((childSnapshot) => {
-        const teacherKey = childSnapshot.key;
 
-        const uniqueIdRef = ref(teachersDB, 'teachers/' + teacherKey + '/id');
-        const uniqueId = uniqueIdRef.key || childSnapshot.ref.push().key; // Correctly generate a unique ID
+// adding ids 
 
-        // Update the teacher data with the unique ID
-        set(uniqueIdRef, uniqueId) // Set the generated unique ID in the existing record
-          .then(() => {
-            console.log(`Added ID ${uniqueId} to teacher ${teacherKey}`);
-          })
-          .catch((error) => {
-            console.error('Error adding ID to teacher:', error);
-          });
-      });
-    } else {
-      console.log('No teachers found');
-    }
-  } catch (error) {
-    console.error('Error adding IDs to teachers:', error);
-  }
-};
+// const addIdsToTeachers = async () => {
+//   const teachersRef = ref(teachersDB, 'teachers');
+  
+//   const snapshot = await get(teachersRef);
+//   if (snapshot.exists()) {
+//     const teachersData = snapshot.val();
+    
+//     // Loop through each teacher object and assign a unique ID
+//     const updatedTeachers = {};
+//     for (const [key, teacher] of Object.entries(teachersData)) {
+//       updatedTeachers[key] = {
+//         ...teacher,
+//         id: uuidv4(), // Assign a unique ID
+//       };
+//     }
 
-addUniqueIdToTeachers();
+//     // Update the database with the new teacher objects
+//     await set(teachersRef, updatedTeachers);
+//     console.log("IDs added to teachers successfully.");
+//   } else {
+//     console.log("No teachers found.");
+//   }
+// };
 
+// // Call the function to add IDs
+// addIdsToTeachers().catch(console.error);

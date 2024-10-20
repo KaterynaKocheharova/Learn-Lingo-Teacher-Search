@@ -9,7 +9,6 @@ import LoadMore from "../components/TeachersPageComponents/LoadMore";
 
 const TeachersPage = () => {
   const teachers = useAppSelector(selectTeachers);
-  console.log(teachers.filter((teacher) => teacher !== undefined));
 
   const dispatch = useAppDispatch();
 

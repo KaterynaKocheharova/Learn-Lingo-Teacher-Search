@@ -18,6 +18,7 @@ export const fetchTeachers = createAsyncThunk(
       const response = await axios.get(
         `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&startAt="${from}"&endAt="${to}"`
       );
+
       const teachers = Object.entries(response.data || {})
         .filter(([key, value]) => value !== null && value !== undefined)
         .reduce((acc, [key, value]) => {
@@ -26,7 +27,7 @@ export const fetchTeachers = createAsyncThunk(
         }, [] as Teachers);
 
       const payload: TeachersPayloadType = {
-        teachers,
+        teachers: teachers.filter((teacher) => teacher !== undefined),
         isFirstBatch: isFirstBatch,
       };
 
