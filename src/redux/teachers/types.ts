@@ -6,7 +6,7 @@ type Review = {
   comment: string;
 };
 
-type Teacher = {
+export type Teacher = {
   name: string;
   surname: string;
   languages: string[];
@@ -19,6 +19,7 @@ type Teacher = {
   lesson_info: string;
   conditions: string[];
   experience: string;
+  id: string;
 };
 
 export type Teachers = Teacher[];
