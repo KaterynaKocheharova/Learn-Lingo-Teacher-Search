@@ -1,6 +1,7 @@
 import { type Teacher } from "../../redux/teachers/types";
 import { HStack, Box } from "@chakra-ui/react";
 import TeacherAvatar from "./TeacherAvatar";
+import CardGrayText from "./CardGrayText";
 
 type TeacherCardProps = {
   teacher: Teacher;
@@ -23,9 +24,20 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
   } = teacher;
 
   return (
-    <Box as="li">
-      <TeacherAvatar avatar_url={avatar_url} name={name} surname={surname}/>
-    </Box>
+    <HStack
+      as="li"
+      w={{ base: "100%", lg: "1184px" }}
+      minHeight="328px"
+      bg="brand.white.900"
+      p="24px"
+      rounded="24px"
+      wrap="wrap"
+      justify="space-between"
+      align="flex-start"
+      spacing="48px"
+    >
+      <TeacherAvatar avatar_url={avatar_url} />
+    </HStack>
   );
 };
 

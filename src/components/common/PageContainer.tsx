@@ -6,7 +6,11 @@ type PageContainerProps = {
 
 const PageContainer = ({ children, ...props }: PageContainerProps) => {
   return (
-    <Container maxW="1440" px={{ base: "16px", lg: "64px" }} {...props}>
+    <Container
+      maxW={{ lg: "1440px" }}
+      px={{ base: "16px", lg: "64px" }}
+      {...props}
+    >
       {children}
     </Container>
   );
