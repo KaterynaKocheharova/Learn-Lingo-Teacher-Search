@@ -26,14 +26,3 @@ export const auth = getAuth(app);
 
 export const user = auth.currentUser;
 export const teachersDB = getDatabase(app);
-
-const firstTeachersQuery = query(
-  ref(teachersDB, "/"),
-  orderByKey(),
-  startAt("0"),
-  endAt("1")
-);
-
-const data = await get(firstTeachersQuery);
-
-console.log(data.val());

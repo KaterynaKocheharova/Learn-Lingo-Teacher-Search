@@ -4,7 +4,7 @@ import { type QueryDetails } from "./operations";
 import { fetchTeachers } from "./operations";
 
 const initialState: TeachersSliceState = {
-  teachers: [],
+  items: [],
   isLoading: false,
   error: null,
 };
@@ -36,9 +36,9 @@ const TeachersSlice = createSlice({
           if (action.payload) {
             const { isFirstBatch, teachers } = action.payload;
             if (isFirstBatch) {
-              state.teachers = teachers;
+              state.items = teachers;
             } else {
-              state.teachers = [...state.teachers, ...teachers];
+              state.items = [...state.items, ...teachers];
             }
           }
         }

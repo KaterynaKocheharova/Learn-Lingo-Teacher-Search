@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "./auth/slice.ts";
+import teachersReducer from "./teachers/slice.ts";
 
 const persistConfiguration = {
   key: "",
@@ -19,7 +20,7 @@ const persistConfiguration = {
 };
 
 export const store = configureStore({
-  reducer: { user: userReducer },
+  reducer: { user: userReducer, teachers: teachersReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
