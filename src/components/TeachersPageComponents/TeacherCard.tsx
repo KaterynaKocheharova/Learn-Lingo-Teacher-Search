@@ -5,6 +5,8 @@ import ThickGrayText from "./ThickGrayText";
 import { FiHeart } from "react-icons/fi";
 import UnstyledButton from "../common/UnstyledButton";
 import TopDetails from "./TopDetails";
+import { Text } from "@chakra-ui/react";
+import TeacherMainInfo from "./TeacherMainInfo";
 
 type TeacherCardProps = {
   teacher: Teacher;
@@ -41,7 +43,12 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
     >
       <TeacherAvatar avatar_url={avatar_url} />
       <Box>
-        <HStack justify="space-between" wrap="wrap" w={{ lg: "968px" }}>
+        <HStack
+          justify="space-between"
+          wrap="wrap"
+          w={{ lg: "968px" }}
+          mb="8px"
+        >
           <ThickGrayText>Languages</ThickGrayText>
           <Spacer />
           <TopDetails
@@ -53,6 +60,17 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
             <FiHeart size="26" />
           </UnstyledButton>
         </HStack>
+        <Text
+          fontSize="24px"
+          fontWeight="medium"
+          lineHeight="1"
+          mb="32px"
+        >{`${name}${surname}`}</Text>
+        <TeacherMainInfo
+          conditions={conditions}
+          lesson_info={lesson_info}
+          languages={languages}
+        />
       </Box>
     </HStack>
   );
