@@ -1,5 +1,6 @@
+import { useCallback, useState } from "react";
 import { type Teacher } from "../../redux/teachers/types";
-import { HStack, Box, Spacer } from "@chakra-ui/react";
+import { HStack, Box, Spacer, useStatStyles } from "@chakra-ui/react";
 import TeacherAvatar from "./TeacherAvatar";
 import ThickGrayText from "./ThickGrayText";
 import { FiHeart } from "react-icons/fi";
@@ -7,12 +8,18 @@ import UnstyledButton from "../common/UnstyledButton";
 import TopDetails from "./TopDetails";
 import { Text } from "@chakra-ui/react";
 import TeacherMainInfo from "./TeacherMainInfo";
+import ThickBlackText from "./ThickBlackText";
 
 type TeacherCardProps = {
   teacher: Teacher;
 };
 
 const TeacherCard = ({ teacher }: TeacherCardProps) => {
+  const [isFullInfoShown, setIsFullInfoShown] = useState(false);
+  const toggleShowInfo = useCallback(() => {
+    setIsFullInfoShown(!isFullInfoShown);
+  }, [isFullInfoShown]);
+
   const {
     name,
     surname,
@@ -71,6 +78,9 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
           lesson_info={lesson_info}
           languages={languages}
         />
+        <UnstyledButton onClick={toggleShowInfo}>
+          <ThickBlackText textDecoration="underline">Read more</ThickBlackText>
+        </UnstyledButton>
       </Box>
     </HStack>
   );

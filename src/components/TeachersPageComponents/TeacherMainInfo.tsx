@@ -21,7 +21,7 @@ const TeacherMainInfo = ({
         { title: "Conditions", text: conditions },
       ].map(({ title, text }) => {
         return (
-          <HStack spacing="8px">
+          <HStack spacing="8px" mb="16px">
             <ThickGrayText>{title}:</ThickGrayText>
             <ThickBlackText
               textDecoration={title === "Speaks" ? "underline" : "none"}
