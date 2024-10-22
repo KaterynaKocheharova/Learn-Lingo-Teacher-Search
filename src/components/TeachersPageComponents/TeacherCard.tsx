@@ -40,6 +40,7 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
   return (
     <HStack
       as="li"
+      pos="relative"
       w={{ base: "100%", lg: "1184px" }}
       minHeight="328px"
       bg="brand.white.900"
@@ -56,18 +57,17 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
           justify="space-between"
           wrap="wrap"
           w={{ lg: "968px" }}
-          mb="8px"
+          mb={{ base: "32px", lg: "8px" }}
         >
-          <ThickGrayText>Languages</ThickGrayText>
+          <ThickGrayText mb={{ base: "24px", md: "unset" }}>
+            Languages
+          </ThickGrayText>
           <Spacer />
           <TopDetails
             rating={rating}
             price_per_hour={price_per_hour}
             lessons_done={lessons_done}
           />
-          <UnstyledButton>
-            <FiHeart size="26" />
-          </UnstyledButton>
         </HStack>
         <Text
           fontSize="24px"
@@ -92,6 +92,9 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
         )}
         <Languages levels={levels} />
       </Box>
+      <UnstyledButton pos="absolute" top="24px" right="24px" h="unset">
+        <FiHeart size="26" />
+      </UnstyledButton>
     </HStack>
   );
 };

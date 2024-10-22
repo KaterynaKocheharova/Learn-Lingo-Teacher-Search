@@ -6,7 +6,7 @@ import ThickGrayText from "./ThickGrayText";
 type TeacherMainInfoProps = Pick<
   Teacher,
   "lesson_info" | "languages" | "conditions"
-> 
+>;
 
 const TeacherMainInfo = ({
   lesson_info,
@@ -16,9 +16,9 @@ const TeacherMainInfo = ({
   return (
     <VStack
       as="ul"
-      spacing="8px"
+      spacing={{ base: "24px", lg: "8px" }}
       align="flex-start"
-      mb= "16px"
+      mb="16px"
     >
       {[
         { title: "Speaks", text: languages },
@@ -26,7 +26,7 @@ const TeacherMainInfo = ({
         { title: "Conditions", text: conditions },
       ].map(({ title, text }) => {
         return (
-          <HStack spacing="8px">
+          <HStack spacing="8px" wrap="wrap">
             <ThickGrayText>{title}:</ThickGrayText>
             <ThickBlackText
               textDecoration={title === "Speaks" ? "underline" : "none"}
