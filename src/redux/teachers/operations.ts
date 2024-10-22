@@ -4,22 +4,29 @@ import { type Teachers } from "./types.js";
 import { type TeachersPayloadType } from "./slice.js";
 
 export type QueryDetails = {
-  from: number;
-  to: number;
+  startKey?: string;  // Track the last key fetched
+  limit: number;
   isFirstBatch: boolean;
 };
 
 export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async (queryDetails: QueryDetails, thunkAPI) => {
-    const { from, to, isFirstBatch } = queryDetails;
+    const { startKey, limit, isFirstBatch } = queryDetails;
+
+    console.log(limit);
 
     try {
-      const response = await axios.get(
-        `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&startAt="${from}"&endAt="${to}"`
-      );
+      let url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&limitToFirst=${limit}`;
+      
+      // If this is not the first batch, fetch the next set of data after the last key
+      if (startKey) {
+        url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&startAfter="${startKey}"&limitToFirst=${limit}`;
+      }
 
+      const response = await axios.get(url);
       console.log(response.data);
+
       const teachers = Object.entries(response.data || {})
         .filter(([key, value]) => value !== null && value !== undefined)
         .reduce((acc, [key, value]) => {
@@ -30,6 +37,7 @@ export const fetchTeachers = createAsyncThunk(
       const payload: TeachersPayloadType = {
         teachers: teachers.filter((teacher) => teacher !== undefined),
         isFirstBatch: isFirstBatch,
+        lastKey: Object.keys(response.data).pop(),  // Track the last key fetched
       };
 
       return payload;

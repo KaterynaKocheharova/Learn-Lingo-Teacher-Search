@@ -13,8 +13,10 @@ const handlePending = (state: TeachersSliceState) => {
   state.isLoading = true;
 };
 
+
 export type TeachersPayloadType = {
   teachers: Teachers;
+  lastKey: string; // Add lastKey to the payload
 } & Pick<QueryDetails, "isFirstBatch">;
 
 const TeachersSlice = createSlice({
@@ -34,12 +36,13 @@ const TeachersSlice = createSlice({
           state.error = null;
 
           if (action.payload) {
-            const { isFirstBatch, teachers } = action.payload;
+            const { isFirstBatch, teachers, lastKey } = action.payload;
             if (isFirstBatch) {
               state.items = teachers;
             } else {
               state.items = [...state.items, ...teachers];
             }
+            state.lastKey = lastKey; // Save the last key for the next batch
           }
         }
       )
