@@ -1,11 +1,7 @@
-import { useAppSelector } from "../../redux/hooks";
-import { selectIsLoading } from "../../redux/auth/selectors";
 import { Flex, Spinner } from "@chakra-ui/react";
 
 const Loader = () => {
-  const isLoading = useAppSelector(selectIsLoading);
 
-  if (isLoading === "overlay-loader") {
     return (
       <Flex
         pos="fixed"
@@ -16,11 +12,11 @@ const Loader = () => {
         bg="brand.gray.300"
         w="100%"
         height="100%"
+        zIndex="999"
       >
         <Spinner color="brand.orange.900" size="xl" />
       </Flex>
     );
-  }
 };
 
 export default Loader;

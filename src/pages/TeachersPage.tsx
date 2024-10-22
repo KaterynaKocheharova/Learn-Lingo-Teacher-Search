@@ -1,13 +1,17 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchTeachers } from "../redux/teachers/operations";
-import { selectError, selectTeachers } from "../redux/teachers/selectros";
+import {
+  selectError,
+  selectTeachers,
+  selectIsLoading,
+} from "../redux/teachers/selectros";
 import { Box } from "@chakra-ui/react";
 import PageContainer from "../components/common/PageContainer";
 import TeacherCardsList from "../components/TeachersPageComponents/TeacherCardsList";
 import LoadMore from "../components/TeachersPageComponents/LoadMore";
-import { selectIsLoading } from "../redux/auth/selectors";
 import PageError from "../components/common/PageError";
+import Loader from "../components/common/Loader";
 
 const TeachersPage = () => {
   const teachers = useAppSelector(selectTeachers);
@@ -26,6 +30,7 @@ const TeachersPage = () => {
         {!error && <TeacherCardsList teachers={teachers} />}
         {!isLoading && !error && teachers.length > 0 && <LoadMore />}
         {error && <PageError />}
+        {isLoading && <Loader />}
       </PageContainer>
     </Box>
   );
