@@ -3,7 +3,12 @@ import { useAppDispatch } from "../../redux/hooks";
 import { fetchTeachers } from "../../redux/teachers/operations";
 import { type QueryDetails } from "../../redux/teachers/operations";
 
-const LoadMore = () => {
+
+type LoadMoreProps = {
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const LoadMore = ({setCurrentPage} : LoadMoreProps) => {
   const [fetchRange, setFetchRange] = useState<
     Pick<QueryDetails, "from" | "to">
   >({
@@ -14,6 +19,7 @@ const LoadMore = () => {
   const dispatch = useAppDispatch();
 
   const handleLoadMore = () => {
+    setCurrentPage((prev) => prev + 1)
     dispatch(fetchTeachers({ ...fetchRange, isFirstBatch: false }));
 
     const newRange = {

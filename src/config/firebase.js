@@ -45,7 +45,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const user = auth.currentUser;
 
-const teachersDB = getDatabase(app);
+export const teachersDB = getDatabase(app);
 
 // adding ids 
 

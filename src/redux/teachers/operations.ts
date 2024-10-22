@@ -19,6 +19,7 @@ export const fetchTeachers = createAsyncThunk(
         `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&startAt="${from}"&endAt="${to}"`
       );
 
+      console.log(response.data);
       const teachers = Object.entries(response.data || {})
         .filter(([key, value]) => value !== null && value !== undefined)
         .reduce((acc, [key, value]) => {
