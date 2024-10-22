@@ -14,14 +14,14 @@ const TeacherMainInfo = ({
   conditions,
 }: TeacherMainInfoProps) => {
   return (
-    <VStack as="ul" spacing="8px" align="flex-start">
+    <VStack as="ul" spacing="8px" align="flex-start" mb="16px">
       {[
         { title: "Speaks", text: languages },
         { title: "Lesson Info", text: lesson_info },
         { title: "Conditions", text: conditions },
       ].map(({ title, text }) => {
         return (
-          <HStack spacing="8px" mb="16px">
+          <HStack spacing="8px">
             <ThickGrayText>{title}:</ThickGrayText>
             <ThickBlackText
               textDecoration={title === "Speaks" ? "underline" : "none"}
