@@ -1,14 +1,18 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchTeachers } from "../redux/teachers/operations";
-import { selectTeachers } from "../redux/teachers/selectros";
+import { selectError, selectTeachers } from "../redux/teachers/selectros";
 import { Box } from "@chakra-ui/react";
 import PageContainer from "../components/common/PageContainer";
 import TeacherCardsList from "../components/TeachersPageComponents/TeacherCardsList";
 import LoadMore from "../components/TeachersPageComponents/LoadMore";
+import { selectIsLoading } from "../redux/auth/selectors";
+import PageError from "../components/common/PageError";
 
 const TeachersPage = () => {
   const teachers = useAppSelector(selectTeachers);
+  const error = useAppSelector(selectError);
+  const isLoading = useAppSelector(selectIsLoading);
 
   const dispatch = useAppDispatch();
 
@@ -18,9 +22,10 @@ const TeachersPage = () => {
 
   return (
     <Box bg="brand.gray.500" py="96px">
-      <PageContainer px={{ lg: "64px" }}>
-        <TeacherCardsList teachers={teachers} />
-        <LoadMore />
+      <PageContainer px={{ base: "16px", lg: "64px" }}>
+        {!error && <TeacherCardsList teachers={teachers} />}
+        {!isLoading && !error && teachers.length > 0 && <LoadMore />}
+        {error && <PageError />}
       </PageContainer>
     </Box>
   );

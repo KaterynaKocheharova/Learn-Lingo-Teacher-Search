@@ -9,7 +9,6 @@ const ReviewsList = ({ reviews }: ReviewsListProps) => {
     <VStack
       as="ul"
       spacing="32px"
-      // w={{ base: "300px", md: "400px" }}
       align="flex-start"
     >
       {reviews.map((review, index) => (
