@@ -1,6 +1,6 @@
 import { type FetchingData } from "../types";
 
-type Review = {
+export type Review = {
   reviewer_name: string;
   reviewer_rating: number;
   comment: string;

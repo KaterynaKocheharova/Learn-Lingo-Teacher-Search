@@ -10,6 +10,7 @@ import { Text } from "@chakra-ui/react";
 import TeacherMainInfo from "./TeacherMainInfo";
 import ThickBlackText from "./ThickBlackText";
 import Languages from "./Languages";
+import ExtraTeacherInfo from "./ExtraTeacherInfo";
 
 type TeacherCardProps = {
   teacher: Teacher;
@@ -50,7 +51,7 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
       spacing="48px"
     >
       <TeacherAvatar avatar_url={avatar_url} />
-      <Box>
+      <Box w={{ lg: "968px" }}>
         <HStack
           justify="space-between"
           wrap="wrap"
@@ -79,9 +80,16 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
           lesson_info={lesson_info}
           languages={languages}
         />
-        <UnstyledButton onClick={toggleShowInfo} mb="32px">
-          <ThickBlackText textDecoration="underline">Read more</ThickBlackText>
-        </UnstyledButton>
+        {!isFullInfoShown && (
+          <UnstyledButton onClick={toggleShowInfo} mb="32px">
+            <ThickBlackText textDecoration="underline">
+              Read more
+            </ThickBlackText>
+          </UnstyledButton>
+        )}
+        {isFullInfoShown && (
+          <ExtraTeacherInfo reviews={reviews} experience={experience} />
+        )}
         <Languages levels={levels} />
       </Box>
     </HStack>
