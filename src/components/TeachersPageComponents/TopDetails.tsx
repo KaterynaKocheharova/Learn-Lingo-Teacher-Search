@@ -3,6 +3,7 @@ import DetailsItem from "./DetailsItem";
 import { type Teacher } from "../../redux/teachers/types";
 import ThickBlackText from "./ThickBlackText";
 import { LuBookOpen } from "react-icons/lu";
+import RatingStar from "./RatingStar";
 
 type TopDetailsProps = Pick<
   Teacher,
@@ -22,9 +23,7 @@ const TopDetails = ({
       </DetailsItem>
       <DetailsItem>{` Lessons done: ${lessons_done}`}</DetailsItem>
       <DetailsItem>
-        <svg width="16" height="16">
-          <use href="/sprite.svg#icon-star"></use>
-        </svg>
+        <RatingStar />
         {` Rating: 4.8: ${rating}`}
       </DetailsItem>
       <DetailsItem hasLine={false}>
