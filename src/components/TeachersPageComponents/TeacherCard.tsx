@@ -42,7 +42,6 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
       as="li"
       pos="relative"
       w={{ base: "100%", lg: "1184px" }}
-      minHeight="328px"
       bg="brand.white.900"
       p="24px"
       rounded="24px"
@@ -52,7 +51,7 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
       spacing="48px"
     >
       <TeacherAvatar avatar_url={avatar_url} />
-      <Box w={{ lg: "968px" }}>
+      <Box w={{base: "100%", lg: "968px" }}>
         <HStack
           justify="space-between"
           wrap="wrap"
