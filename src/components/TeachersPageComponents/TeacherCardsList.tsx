@@ -14,6 +14,7 @@ const TeacherCardsList = ({ teachers }: TeacherCardsListProps) => {
       align="center"
       justify="center"
       px={{ base: "16px", lg: "64px" }}
+      mb="64px"
     >
       {teachers.map((teacher) => {
         return <TeacherCard key={teacher.id} teacher={teacher} />;
