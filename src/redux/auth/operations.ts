@@ -5,7 +5,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { auth } from "../../config/firebase.js";
+import { auth, firestore } from "../../config/firebase.js";
+import { doc, setDoc, addDoc, collection } from "firebase/firestore";
 import {
   type RegisterInputValues,
   type LoginInputValues,
@@ -15,10 +16,22 @@ export const registerUser = createAsyncThunk(
   "auth/register",
   async (data: RegisterInputValues, thunkAPI) => {
     try {
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const credentials = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+
+      const userRef = doc(firestore, "users", credentials.user.uid);
+
+      await setDoc(userRef, {
+        favorites: [],
+      });
+
       await updateProfile(auth.currentUser, { displayName: data.name });
       return data;
     } catch (error: any) {
+      console.log(error);
       const errorMessage =
         error.message || "Registration failed. Please try again.";
       return thunkAPI.rejectWithValue(errorMessage);
