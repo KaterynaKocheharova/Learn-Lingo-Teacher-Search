@@ -13,7 +13,7 @@ export const fetchTeachers = createAsyncThunk(
   async (queryDetails: QueryDetails, thunkAPI) => {
     const { startKey, isFirstBatch } = queryDetails;
 
-    const limit = 3;
+    const limit = 4;
     let url;
 
     if (isFirstBatch) {

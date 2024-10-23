@@ -3,14 +3,14 @@ import { type Teacher } from "../../redux/teachers/types";
 import { HStack, Box, Spacer } from "@chakra-ui/react";
 import TeacherAvatar from "./TeacherAvatar";
 import ThickGrayText from "./ThickGrayText";
-import { FiHeart } from "react-icons/fi";
-import UnstyledButton from "../common/UnstyledButton";
 import TopDetails from "./TopDetails";
+import UnstyledButton from "../common/UnstyledButton";
 import { Text } from "@chakra-ui/react";
 import TeacherMainInfo from "./TeacherMainInfo";
 import ThickBlackText from "./ThickBlackText";
 import Languages from "./Languages";
 import ExtraTeacherInfo from "./ExtraTeacherInfo";
+import AddToFavoritesButton from "./AddToFavoritesButton";
 
 type TeacherCardProps = {
   teacher: Teacher;
@@ -23,6 +23,7 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
   }, [isFullInfoShown]);
 
   const {
+    id,
     name,
     surname,
     languages,
@@ -51,7 +52,7 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
       spacing="48px"
     >
       <TeacherAvatar avatar_url={avatar_url} />
-      <Box w={{base: "100%", lg: "968px" }}>
+      <Box w={{ base: "100%", lg: "968px" }}>
         <HStack
           justify="space-between"
           wrap="wrap"
@@ -91,9 +92,7 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
         )}
         <Languages levels={levels} />
       </Box>
-      <UnstyledButton pos="absolute" top="24px" right="24px" h="unset">
-        <FiHeart size="26" />
-      </UnstyledButton>
+      <AddToFavoritesButton id={id} />
     </HStack>
   );
 };

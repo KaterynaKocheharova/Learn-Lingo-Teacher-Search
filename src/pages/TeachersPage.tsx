@@ -28,10 +28,6 @@ const TeachersPage = () => {
     [totalTeachers]
   );
 
-  useEffect(() => {
-    console.log(totalTeachers);
-  }, [totalTeachers]);
-
   const teacherDBRef = ref(teachersDB, "teacherInTotal/");
 
   useEffect(() => {
@@ -39,9 +35,7 @@ const TeachersPage = () => {
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
-          console.log(data);
           setTotalTeachers(data);
-          console.log("No data available");
         }
       })
       .catch((error) => {
