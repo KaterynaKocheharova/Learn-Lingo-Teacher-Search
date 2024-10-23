@@ -7,16 +7,16 @@ const initialState: TeachersSliceState = {
   items: [],
   isLoading: false,
   error: null,
+  lastKey: "",
 };
 
 const handlePending = (state: TeachersSliceState) => {
   state.isLoading = true;
 };
 
-
 export type TeachersPayloadType = {
   teachers: Teachers;
-  lastKey: string; // Add lastKey to the payload
+  lastKey: string | undefined;
 } & Pick<QueryDetails, "isFirstBatch">;
 
 const TeachersSlice = createSlice({
@@ -42,7 +42,7 @@ const TeachersSlice = createSlice({
             } else {
               state.items = [...state.items, ...teachers];
             }
-            state.lastKey = lastKey; // Save the last key for the next batch
+            state.lastKey = lastKey; 
           }
         }
       )

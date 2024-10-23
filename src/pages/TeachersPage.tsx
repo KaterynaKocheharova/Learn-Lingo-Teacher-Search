@@ -48,7 +48,7 @@ const TeachersPage = () => {
         console.error("Error fetching data:", error);
       });
 
-    dispatch(fetchTeachers({ startKey: "0", limit: 3, isFirstBatch: true }));
+    dispatch(fetchTeachers({ startKey: "0", isFirstBatch: true }));
   }, [dispatch]);
 
   return (
