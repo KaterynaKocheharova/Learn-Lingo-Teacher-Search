@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
-import { v4 as uuidv4 } from "uuid"; 
 import { getFirestore } from "firebase/firestore";
+import { onSnapshot, doc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -20,3 +20,5 @@ export const auth = getAuth(app);
 export const user = auth.currentUser;
 export const teachersDB = getDatabase(app);
 export const firestore = getFirestore(app);
+
+

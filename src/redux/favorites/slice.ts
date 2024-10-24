@@ -5,7 +5,7 @@ type FavoritesInitialState = {
   favoriteTeachersIds: string[];
 };
 
-type RefreshFavoritesPayload = FavoritesInitialState;
+export type RefreshFavoritesPayload = FavoritesInitialState;
 
 const favoritesInitialState: FavoritesInitialState = {
   favoriteTeachersIds: [],

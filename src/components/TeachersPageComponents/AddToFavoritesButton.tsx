@@ -7,7 +7,7 @@ import UnstyledButton from "../common/UnstyledButton";
 import { toastConfigs } from "../../utils/toast";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { firestore } from "../../config/firebase.js";
-import { doc, getDoc, exists } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 type AddToFavoritesButtonProps = {
   id: string;
@@ -19,33 +19,42 @@ type FavoritesType = {
 
 const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
   const favorites = useAppSelector(selectFavorites);
-  console.log(favorites);
   const userId = useAppSelector(selectUserId);
-
-  // set up favorites redux - refreshFavorites - favorites array []
-  // refresh will work on teachers load and get triggered every time data changes and teachers page mounts
-  // color depends on  wheather the favorites arrays includes current teacher id
-  // delete or add depends on wheather the favorites arrays includes current teacher id
-  // when clicking on the button if the user is logged in, addingFavorite, then the real time callback works and updates the redux
-  // when clicking delete, we make a delete request, the callback works again
-
-  // useEffect(() => {
-  //   if (userId) {
-  //     const userRef = doc(firestore, "users", userId);
-  //     getDoc(userRef)
-  //       .then((docSnap) => {
-  //         if (docSnap.exists() && docSnap.data().favorites.includes(id)) {
-  //           setIsFavorite(true);
-  //         }
-  //       })
-  //       .catch((error) => console.log(error));
-  //   } else {
-  //     console.error("User ID is not defined");
-  //   }
-  // }, [userId, id]);
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const toast = useToast();
+
+  // consider shortening the code in these two similiar functions
+
+  const handleAddToFavorites = () => {
+    const userRef = doc(firestore, "users", userId);
+    getDoc(userRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const prevFavorites = docSnap.data().favorites;
+          const newFavorites = [...prevFavorites, id];
+          setDoc(doc(firestore, "users", userId), {
+            favorites: newFavorites,
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleRemoveFromFavorites = () => {
+    const userRef = doc(firestore, "users", userId);
+    getDoc(userRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const prevFavorites = docSnap.data().favorites;
+          const newFavorites = [...prevFavorites].filter((item) => item !== id);
+          setDoc(doc(firestore, "users", userId), {
+            favorites: newFavorites,
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   const handleClick = () => {
     if (!isLoggedIn) {
@@ -55,6 +64,10 @@ const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
         status: "error",
         duration: 9000,
       });
+    } else if (!favorites.includes(id)) {
+      handleAddToFavorites();
+    } else if (favorites.includes(id)) {
+      handleRemoveFromFavorites();
     }
   };
 

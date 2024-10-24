@@ -6,6 +6,8 @@ import {
   selectTeachers,
   selectIsLoading,
 } from "../redux/teachers/selectros";
+import { refreshFavorites } from "../redux/favorites/slice.js";
+import { selectUserId } from "../redux/auth/selectors.js";
 import { Box } from "@chakra-ui/react";
 import PageContainer from "../components/common/PageContainer";
 import TeacherCardsList from "../components/TeachersPageComponents/TeacherCardsList";
@@ -14,14 +16,34 @@ import PageError from "../components/common/PageError";
 import Loader from "../components/common/Loader";
 import { teachersDB } from "../config/firebase.js";
 import { ref, get } from "firebase/database";
+import { onSnapshot, doc } from "firebase/firestore";
+import { firestore } from "../config/firebase.js";
+import { type RefreshFavoritesPayload } from "../redux/favorites/slice.js";
 
 const TeachersPage = () => {
+  const currentUserId = useAppSelector(selectUserId);
+
   const teachers = useAppSelector(selectTeachers);
   const error = useAppSelector(selectError);
   const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+
+  if (currentUserId) {
+    console.log(currentUserId);
+    onSnapshot(doc(firestore, "users", currentUserId), (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const favorites = docSnapshot.data()?.favorites;
+        console.log(favorites);
+        dispatch(refreshFavorites({ favoriteTeachersIds: favorites }));
+      } else {
+        console.log("No such document!");
+      }
+    });
+  } else {
+    console.log("Invalid user ID. Cannot set up onSnapshot.");
+  }
 
   const totalPages = useMemo(
     () => Math.ceil(totalTeachers / 3),
