@@ -73,14 +73,17 @@ const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
 
   return (
     <UnstyledButton
-      bg={favorites.includes(id) ? "orange" : "green"}
       pos="absolute"
       top="24px"
       right="24px"
       h="unset"
       onClick={handleClick}
     >
-      <FiHeart size="26" />
+      <FiHeart
+        size="26"
+        fill={favorites?.includes(id) ? "#F4C550" : "transparent"}
+        stroke={favorites?.includes(id) ? "#F4C550" : "black"}
+      />
     </UnstyledButton>
   );
 };
