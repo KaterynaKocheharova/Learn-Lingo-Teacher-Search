@@ -18,6 +18,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           refreshUser({
             name: user.displayName as string,
             email: user.email as string,
+            userId: user.uid as string,
           })
         );
       } else {

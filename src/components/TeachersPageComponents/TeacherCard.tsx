@@ -11,6 +11,7 @@ import ThickBlackText from "./ThickBlackText";
 import Languages from "./Languages";
 import ExtraTeacherInfo from "./ExtraTeacherInfo";
 import AddToFavoritesButton from "./AddToFavoritesButton";
+import {auth} from "../../config/firebase.js";
 
 type TeacherCardProps = {
   teacher: Teacher;

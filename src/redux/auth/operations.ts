@@ -29,7 +29,10 @@ export const registerUser = createAsyncThunk(
       });
 
       await updateProfile(auth.currentUser, { displayName: data.name });
-      return data;
+      return {
+        ...data,
+        userId: credentials.user.uid,
+      };
     } catch (error: any) {
       console.log(error);
       const errorMessage =

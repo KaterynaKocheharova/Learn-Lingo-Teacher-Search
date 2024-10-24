@@ -10,6 +10,7 @@ const initialState: UserData = {
   user: {
     name: "",
     email: "",
+    userId: "",
   },
   isLoggedIn: false,
   error: null,
@@ -19,6 +20,14 @@ const initialState: UserData = {
 export const handleError = (state: UserData, action: PayloadAction<any>) => {
   state.isLoading = "";
   state.error = action.payload?.message || action.payload || null;
+};
+
+type RegisterPayload = RegisterInputValues & {
+  userId: string;
+};
+
+type LoginPayload = Pick<RegisterInputValues, "name" | "email"> & {
+  userId: string;
 };
 
 const userSlice = createSlice({
@@ -31,10 +40,12 @@ const userSlice = createSlice({
       })
       .addCase(
         registerUser.fulfilled,
-        (state, action: PayloadAction<RegisterInputValues>) => {
+        (state, action: PayloadAction<RegisterPayload>) => {
+          console.log(action.payload.userId);
           state.isLoggedIn = true;
           state.isLoading = "";
           state.error = null;
+          state.user.userId = action.payload.userId;
         }
       )
       .addCase(registerUser.rejected, handleError)
@@ -56,6 +67,7 @@ const userSlice = createSlice({
         state.user = {
           name: "",
           email: "",
+          userId: "",
         };
         state.isLoading = "";
         state.error = null;
@@ -63,13 +75,11 @@ const userSlice = createSlice({
       .addCase(logoutUser.rejected, handleError);
   },
   reducers: {
-    refreshUser: (
-      state,
-      action: PayloadAction<Pick<RegisterInputValues, "name" | "email">>
-    ) => {
+    refreshUser: (state, action: PayloadAction<LoginPayload>) => {
       state.isLoggedIn = true;
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
+      state.user.userId = action.payload.userId;
     },
   },
 });

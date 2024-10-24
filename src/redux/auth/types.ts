@@ -2,6 +2,7 @@ export type UserData = {
   user: {
     name: string;
     email: string;
+    userId: string;
   };
   error: Error | string | null;
   isLoggedIn: boolean;
