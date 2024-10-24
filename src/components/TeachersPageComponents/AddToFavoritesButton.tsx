@@ -13,10 +13,6 @@ type AddToFavoritesButtonProps = {
   id: string;
 };
 
-type FavoritesType = {
-  favorites: string[];
-};
-
 const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
   const favorites = useAppSelector(selectFavorites);
   const userId = useAppSelector(selectUserId);

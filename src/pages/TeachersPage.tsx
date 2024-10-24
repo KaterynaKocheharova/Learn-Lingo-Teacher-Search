@@ -18,7 +18,6 @@ import { teachersDB } from "../config/firebase.js";
 import { ref, get } from "firebase/database";
 import { onSnapshot, doc } from "firebase/firestore";
 import { firestore } from "../config/firebase.js";
-import { type RefreshFavoritesPayload } from "../redux/favorites/slice.js";
 
 const TeachersPage = () => {
   const currentUserId = useAppSelector(selectUserId);
@@ -30,6 +29,8 @@ const TeachersPage = () => {
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
+  // consider reducing the amount of code later
+  
   if (currentUserId) {
     console.log(currentUserId);
     onSnapshot(doc(firestore, "users", currentUserId), (docSnapshot) => {
