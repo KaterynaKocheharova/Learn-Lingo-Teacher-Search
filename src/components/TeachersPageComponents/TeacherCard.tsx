@@ -8,10 +8,10 @@ import UnstyledButton from "../common/UnstyledButton";
 import { Text } from "@chakra-ui/react";
 import TeacherMainInfo from "./TeacherMainInfo";
 import ThickBlackText from "./ThickBlackText";
-import Languages from "./Languages";
+import Levels from "./Levels";
 import ExtraTeacherInfo from "./ExtraTeacherInfo";
 import AddToFavoritesButton from "./AddToFavoritesButton";
-import {auth} from "../../config/firebase.js";
+import BookLessonButton from "./BookLessonButton";
 
 type TeacherCardProps = {
   teacher: Teacher;
@@ -91,7 +91,8 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
         {isFullInfoShown && (
           <ExtraTeacherInfo reviews={reviews} experience={experience} />
         )}
-        <Languages levels={levels} />
+        <Levels levels={levels} />
+        <BookLessonButton />
       </Box>
       <AddToFavoritesButton id={id} />
     </HStack>

@@ -1,9 +1,9 @@
 import { HStack, Box } from "@chakra-ui/react";
 import { type Teacher } from "../../redux/teachers/types";
 
-type LanguagesProps = Pick<Teacher, "levels">;
+type LevelsProps = Pick<Teacher, "levels">;
 
-const Languages = ({ levels }: LanguagesProps) => {
+const Levels = ({ levels }: LevelsProps) => {
   return (
     <HStack as="ul" wrap="wrap" spacing="8px">
       {levels.map((level, index) => {
@@ -18,6 +18,7 @@ const Languages = ({ levels }: LanguagesProps) => {
             as="li"
             fontSize="14px"
             fontWeight="medium"
+            mb="32px"
           >
             #{level}
           </Box>
@@ -27,4 +28,4 @@ const Languages = ({ levels }: LanguagesProps) => {
   );
 };
 
-export default Languages;
+export default Levels;
