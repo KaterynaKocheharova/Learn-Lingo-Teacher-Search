@@ -34,7 +34,6 @@ export const registerUser = createAsyncThunk(
         userId: credentials.user.uid,
       };
     } catch (error: any) {
-      console.log(error);
       const errorMessage =
         error.message || "Registration failed. Please try again.";
       return thunkAPI.rejectWithValue(errorMessage);

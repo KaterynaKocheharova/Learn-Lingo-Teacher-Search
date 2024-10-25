@@ -3,6 +3,7 @@ import StyledModalText from "../common/StyledModalText";
 import ThickGrayText from "./ThickGrayText";
 import ThickBlackText from "./ThickBlackText";
 import { HStack, Image, Box } from "@chakra-ui/react";
+import LearningGoalRadios from "./LearningGoalRadios";
 // import InputsColumn from "../common/InputsColumn";
 // import InputGroup from "../common/InputGroup";
 import AppButton from "../common/AppButton";
@@ -28,11 +29,11 @@ const bookingSchema = yup.object({
     ),
 });
 
-type BookingValues = {
+export type BookingValues = {
   name: string;
   email: string;
   number: string;
-  learningGoal: string;
+  learningGoal: string; 
 };
 
 type BookingFormProps = ModalForm &
@@ -47,6 +48,7 @@ const BookingForm = ({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<BookingValues>({
     resolver: yupResolver(bookingSchema),
@@ -57,6 +59,8 @@ const BookingForm = ({
       learningGoal: "business",
     },
   });
+
+  const currentLearningGoal = watch("learningGoal");
 
   const toast = useToast();
 
@@ -87,6 +91,7 @@ const BookingForm = ({
           <ThickBlackText as="h4">{`${name} ${surname}`}</ThickBlackText>
         </Box>
       </HStack>
+      <LearningGoalRadios register={register} name="learningGoal" checkedGoal={currentLearningGoal} />
       <Box as="form" onSubmit={handleSubmit(onSubmit)}>
         {/* <InputsColumn>
           <InputGroup
@@ -110,14 +115,7 @@ const BookingForm = ({
             errorMessage={errors.password ? errors.password.message : ""}
           />
         </InputsColumn> */}
-        <AppButton
-          type="submit"
-          w="100%"
-          py="16px"
-          h="60px"
-          //   isLoading={Boolean(isLoading === "registration-in-progress")}
-          spinner={<Spinner size="sm" />}
-        >
+        <AppButton type="submit" w="100%" py="16px" h="60px">
           Book{" "}
         </AppButton>
       </Box>

@@ -32,11 +32,9 @@ const TeachersPage = () => {
   // consider reducing the amount of code later
   
   if (currentUserId) {
-    console.log(currentUserId);
     onSnapshot(doc(firestore, "users", currentUserId), (docSnapshot) => {
       if (docSnapshot.exists()) {
         const favorites = docSnapshot.data()?.favorites;
-        console.log(favorites);
         dispatch(refreshFavorites({ favoriteTeachersIds: favorites }));
       } else {
         console.log("No such document!");

@@ -41,7 +41,6 @@ const userSlice = createSlice({
       .addCase(
         registerUser.fulfilled,
         (state, action: PayloadAction<RegisterPayload>) => {
-          console.log(action.payload.userId);
           state.isLoggedIn = true;
           state.isLoading = "";
           state.error = null;
