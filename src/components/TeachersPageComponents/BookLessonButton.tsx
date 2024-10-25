@@ -2,8 +2,16 @@ import AppButton from "../common/AppButton";
 import AppModal from "../common/AppModal";
 import { useDisclosure } from "@chakra-ui/react";
 import BookingForm from "./BookingForm";
+import { type Teacher } from "../../redux/teachers/types";
 
-const BookLessonButton = () => {
+type BookLessonButtonProps = Pick<Teacher, "name" | "surname" | "avatar_url">;
+
+const BookLessonButton = ({
+  name,
+  surname,
+  avatar_url,
+}: BookLessonButtonProps) => {
+  console.log(avatar_url);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -19,7 +27,7 @@ const BookLessonButton = () => {
         Book trial lesson
       </AppButton>
       <AppModal isOpen={isOpen} onClose={onClose}>
-        <BookingForm />
+        <BookingForm name={name} surname={surname} avatar_url={avatar_url} />
       </AppModal>
     </>
   );

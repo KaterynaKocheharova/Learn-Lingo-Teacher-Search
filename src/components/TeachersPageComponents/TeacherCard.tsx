@@ -92,7 +92,11 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
           <ExtraTeacherInfo reviews={reviews} experience={experience} />
         )}
         <Levels levels={levels} />
-        <BookLessonButton />
+        <BookLessonButton
+          name={name}
+          surname={surname}
+          avatar_url={avatar_url}
+        />
       </Box>
       <AddToFavoritesButton id={id} />
     </HStack>
