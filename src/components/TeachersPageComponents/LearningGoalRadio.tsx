@@ -49,9 +49,7 @@ const LearningGoalRadio = ({
           }
         ></use>
       </svg>
-      <Text htmlFor={input.id} as="label">
-        {label}
-      </Text>
+      <Text>{label}</Text>
     </HStack>
   );
 };
