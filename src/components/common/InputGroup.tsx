@@ -1,6 +1,7 @@
 import { InputProps, Box } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
 import { type RegisterInputValues, LoginInputValues } from "../Auth/types";
+import { type BookingValues } from "../TeachersPageComponents/BookingForm";
 import StyledInput from "./StyledInput";
 import StyledFormError from "./StyledFormError";
 
@@ -10,7 +11,7 @@ export type InputGroupProps = Partial<InputProps> &
     register:
       | UseFormRegister<RegisterInputValues>
       | UseFormRegister<LoginInputValues>;
-    name: keyof RegisterInputValues;
+    name: keyof RegisterInputValues | keyof BookingValues;
   };
 
 const InputGroup = ({

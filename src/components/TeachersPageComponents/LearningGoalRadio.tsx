@@ -12,7 +12,7 @@ const LearningGoalRadio = ({
   label,
   value,
 }: LearningGoalRadioProps) => {
-  const { getInputProps, getLabelProps } = useRadio({
+  const { getInputProps } = useRadio({
     value,
     name,
   });

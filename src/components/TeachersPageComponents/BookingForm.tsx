@@ -4,18 +4,16 @@ import ThickGrayText from "./ThickGrayText";
 import ThickBlackText from "./ThickBlackText";
 import { HStack, Image, Box } from "@chakra-ui/react";
 import LearningGoalRadios from "./LearningGoalRadios";
-// import InputsColumn from "../common/InputsColumn";
-// import InputGroup from "../common/InputGroup";
+import InputsColumn from "../common/InputsColumn";
+import InputGroup from "../common/InputGroup";
 import AppButton from "../common/AppButton";
-// import PasswordGroup from "./PasswordGroup";
-import { Spinner } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import { toastConfigs } from "../../utils/toast.ts";
 import { useToast } from "@chakra-ui/react";
 import { type ModalForm } from "./types";
 import { type Teacher } from "../../redux/teachers/types";
+import { type FormEvent } from "react";
 
 const bookingSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -61,13 +59,19 @@ const BookingForm = ({
   });
 
   const currentLearningGoal = watch("learningGoal");
-  console.log(currentLearningGoal)
+  console.log(currentLearningGoal);
 
   const toast = useToast();
 
   type FormData = yup.InferType<typeof bookingSchema>;
-  const onSubmit: SubmitHandler<BookingValues> = async (data: FormData) => {
+  const onSubmit: SubmitHandler<BookingValues> = async (
+    data: FormData,
+    event
+  ) => {
     console.log(data);
+    if (event) {
+      event?.target.reset();
+    }
   };
 
   return (
@@ -92,18 +96,18 @@ const BookingForm = ({
           <ThickBlackText as="h4">{`${name} ${surname}`}</ThickBlackText>
         </Box>
       </HStack>
-      <LearningGoalRadios
-        register={register}
-        name="learningGoal"
-        checkedGoal={currentLearningGoal}
-      />
       <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-        {/* <InputsColumn>
+        <LearningGoalRadios
+          register={register}
+          name="learningGoal"
+          checkedGoal={currentLearningGoal}
+        />
+        <InputsColumn>
           <InputGroup
             register={register}
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder="Full Name"
             errorMessage={errors.name ? errors.name.message : ""}
           />
           <InputGroup
@@ -113,13 +117,14 @@ const BookingForm = ({
             placeholder="Email"
             errorMessage={errors.email ? errors.email.message : ""}
           />
-          <PasswordGroup
+          <InputGroup
             register={register}
-            name="password"
-            placeholder="Password"
-            errorMessage={errors.password ? errors.password.message : ""}
+            type="tel"
+            name="number"
+            placeholder="Phone number"
+            errorMessage={errors.email ? errors.email.message : ""}
           />
-        </InputsColumn> */}
+        </InputsColumn>
         <AppButton type="submit" w="100%" py="16px" h="60px">
           Book{" "}
         </AppButton>

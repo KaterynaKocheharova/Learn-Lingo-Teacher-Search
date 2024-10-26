@@ -45,6 +45,7 @@ const RegistrationForm = ({ onClose }: ModalForm) => {
   const dispatch = useAppDispatch();
 
   type FormData = yup.InferType<typeof registerUserSchema>;
+  
   const onSubmit: SubmitHandler<RegisterInputValues> = async (
     data: FormData
   ) => {
