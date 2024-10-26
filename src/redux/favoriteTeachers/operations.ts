@@ -10,16 +10,18 @@ export const fetchFavoriteTeachers = createAsyncThunk(
   async (queryDetails: QueryDetails, thunkAPI) => {
     try {
       const { favoriteTeachersIds } = queryDetails;
-      console.log(favoriteTeachersIds);
 
-      const BASE_URL = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&`;
+      const BASE_URL = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="id"&`;
 
       const promises = favoriteTeachersIds.map((id) => {
-        return axios.get(`${BASE_URL}equalTo(${id})`);
+        console.log(id);
+        return axios
+          .get(`${BASE_URL}equalTo="${id}"`)
+          .then((response) => Object.values(response.data));
       });
 
       const results = await Promise.all(promises);
-      console.log(results);
+      return results.flat();
     } catch (error) {
       let errorMessage;
       if (error instanceof Error) {
