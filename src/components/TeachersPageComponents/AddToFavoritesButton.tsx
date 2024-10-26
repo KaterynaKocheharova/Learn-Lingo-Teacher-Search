@@ -16,7 +16,6 @@ type AddToFavoritesButtonProps = {
 const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
   const favorites = useAppSelector(selectFavorites);
   const userId = useAppSelector(selectUserId);
-
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const toast = useToast();
 
@@ -77,7 +76,7 @@ const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
     >
       <FiHeart
         size="26"
-        fill={favorites?.includes(id) ? "#F4C550" : "transparent"}
+        fill={favorites?.includes(id) && isLoggedIn ? "#F4C550" : "transparent"}
         stroke={favorites?.includes(id) ? "#F4C550" : "black"}
       />
     </UnstyledButton>

@@ -13,20 +13,20 @@ import storage from "redux-persist/lib/storage";
 import userReducer from "./auth/slice.ts";
 import teachersReducer from "./teachers/slice.ts";
 import { favoritesReducer } from "./favorites/slice.ts";
-import favoriteTeachersReaducer from "./favoriteTeachers/slice.ts"
+import favoriteTeachersReaducer from "./favoriteTeachers/slice.ts";
 
 const persistConfiguration = {
-  key: "",
+  key: "favorites",
   storage,
-  whitelist: [""],
+  whitelist: ["favoriteTeachersIds"],
 };
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     teachers: teachersReducer,
-    favorites: favoritesReducer,
-    favoriteTeachers: favoriteTeachersReaducer
+    favorites: persistReducer(persistConfiguration, favoritesReducer),
+    favoriteTeachers: favoriteTeachersReaducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -37,6 +37,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
