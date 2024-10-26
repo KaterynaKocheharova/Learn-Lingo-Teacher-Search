@@ -21,7 +21,6 @@ import { firestore } from "../config/firebase.js";
 
 const TeachersPage = () => {
   const currentUserId = useAppSelector(selectUserId);
-
   const teachers = useAppSelector(selectTeachers);
   const error = useAppSelector(selectError);
   const isLoading = useAppSelector(selectIsLoading);
@@ -29,7 +28,6 @@ const TeachersPage = () => {
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // consider reducing the amount of code later
   
   if (currentUserId) {
     onSnapshot(doc(firestore, "users", currentUserId), (docSnapshot) => {
@@ -70,12 +68,12 @@ const TeachersPage = () => {
     <Box bg="brand.gray.500" py="96px">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
         {!error && <TeacherCardsList teachers={teachers} />}
-        {!isLoading &&
+        {/* {!isLoading &&
           !error &&
           teachers.length > 0 &&
-          currentPage < totalPages && (
+          currentPage < totalPages && ( */}
             <LoadMore setCurrentPage={setCurrentPage} />
-          )}
+          {/* )} */}
         {error && <PageError />}
         {isLoading && <Loader />}
       </PageContainer>

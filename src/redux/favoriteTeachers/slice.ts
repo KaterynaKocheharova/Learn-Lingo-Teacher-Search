@@ -2,7 +2,6 @@ import { fetchFavoriteTeachers } from "./operations";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TeachersPayloadType } from "./../teachers/slice";
 import { TeachersSliceState } from "./../teachers/types";
-import { handlePending } from "./../teachers/slice";
 
 type FavoriteTeachersState = Omit<TeachersSliceState, "lastKey">;
 
@@ -17,6 +16,10 @@ export type FavoriteTeachersPayload = Omit<
   "lastKey" | "isFirstBatch"
 >;
 
+export const handlePending = (state: FavoriteTeachersState) => {
+  state.isLoading = true;
+};
+
 const favoriteTeachersSlice = createSlice({
   name: "favoriteTeachers",
   initialState,
@@ -28,12 +31,11 @@ const favoriteTeachersSlice = createSlice({
         fetchFavoriteTeachers.fulfilled,
         (
           state: FavoriteTeachersState,
-          action: PayloadAction<any>
-          // action: PayloadAction<FavoriteTeachersPayload>
+          action: PayloadAction<FavoriteTeachersPayload>
         ) => {
           state.isLoading = false;
           state.error = null;
-          // state.items = action.payload.teachers;
+          state.items = action.payload.teachers;
         }
       )
       .addCase(fetchFavoriteTeachers.rejected, (state, action) => {

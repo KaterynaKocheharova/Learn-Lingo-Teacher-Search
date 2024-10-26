@@ -2,12 +2,22 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectFavorites } from "../redux/favorites/selectors";
 import { fetchFavoriteTeachers } from "../redux/favoriteTeachers/operations";
-
+import TeacherCardsList from "../components/TeachersPageComponents/TeacherCardsList";
+import PageError from "../components/common/PageError";
+import Loader from "../components/common/Loader";
 import { Box } from "@chakra-ui/react";
 import PageContainer from "../components/common/PageContainer";
+import {
+  selectError,
+  selectFavoriteTeachers,
+} from "../redux/favoriteTeachers/seletcors";
+import { selectIsLoading } from "../redux/teachers/selectros";
 
 const FavoriteTeachersPage = () => {
   const favoriteTeachersIds = useAppSelector(selectFavorites);
+  const favoriteTeachers = useAppSelector(selectFavoriteTeachers);
+  const error = useAppSelector(selectError);
+  const isLoading = useAppSelector(selectIsLoading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,11 +30,11 @@ const FavoriteTeachersPage = () => {
 
   return (
     <Box bg="brand.gray.500" py="96px">
-      {/* <PageContainer px={{ base: "16px", lg: "64px" }}> */}
-      {/* {!error && <TeacherCardsList teachers={teachers} />} */}
-      {/* {error && <PageError />}
-        {isLoading && <Loader />} */}
-      {/* </PageContainer> */}
+      <PageContainer px={{ base: "16px", lg: "64px" }}>
+        {!error && <TeacherCardsList teachers={favoriteTeachers} />}
+        {error && <PageError />}
+        {isLoading && <Loader />}
+      </PageContainer>
     </Box>
   );
 };

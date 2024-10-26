@@ -14,14 +14,15 @@ export const fetchFavoriteTeachers = createAsyncThunk(
       const BASE_URL = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="id"&`;
 
       const promises = favoriteTeachersIds.map((id) => {
-        console.log(id);
         return axios
           .get(`${BASE_URL}equalTo="${id}"`)
           .then((response) => Object.values(response.data));
       });
 
       const results = await Promise.all(promises);
-      return results.flat();
+      return {
+        teachers: results.flat(),
+      };
     } catch (error) {
       let errorMessage;
       if (error instanceof Error) {
