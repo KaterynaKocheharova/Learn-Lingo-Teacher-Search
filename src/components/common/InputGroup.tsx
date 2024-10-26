@@ -12,7 +12,7 @@ export type InputGroupProps = Partial<InputProps> &
     register:
       | UseFormRegister<RegisterInputValues>
       | UseFormRegister<LoginInputValues> | UseFormRegister<BookingValues>;
-    name: keyof RegisterInputValues | keyof BookingValues;
+    name: keyof RegisterInputValues | keyof BookingValues | keyof LoginInputValues;
   };
 
 const InputGroup = ({

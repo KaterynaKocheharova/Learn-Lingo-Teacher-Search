@@ -17,7 +17,7 @@ import { type Teacher } from "../../redux/teachers/types";
 const bookingSchema = yup.object({
   name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  number: yup.string().min(9, "Min 9 numbers").required("Number is required"),
+  number: yup.string().required("Number is required"),
   learningGoal: yup
     .string()
     .oneOf(
@@ -121,7 +121,7 @@ const BookingForm = ({
             type="tel"
             name="number"
             placeholder="Phone number"
-            errorMessage={errors.email ? errors.email.message : ""}
+            errorMessage={errors.number ? errors.number.message : ""}
           />
         </InputsColumn>
         <AppButton type="submit" w="100%" py="16px" h="60px">
