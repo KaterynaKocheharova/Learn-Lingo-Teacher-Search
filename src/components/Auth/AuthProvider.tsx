@@ -21,9 +21,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             userId: user.uid as string,
           })
         );
-      } else {
-        console.log("No user is logged in.");
-      }
+      } 
     });
 
     return () => unsubscribe();

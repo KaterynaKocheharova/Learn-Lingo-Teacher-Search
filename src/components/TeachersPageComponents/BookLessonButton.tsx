@@ -11,7 +11,6 @@ const BookLessonButton = ({
   surname,
   avatar_url,
 }: BookLessonButtonProps) => {
-  console.log(avatar_url);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

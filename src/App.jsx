@@ -6,6 +6,7 @@ import Loader from "./components/common/Loader";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const TeachersPage = lazy(() => import("./pages/TeachersPage"));
+const FavoriteTeachersPage = lazy(() => import("./pages/FavoriteTeachersPage"));
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/teachers" element={<TeachersPage />} />
+              <Route path="/favorites" element={<FavoriteTeachersPage />} />
             </Routes>
           </Layout>
         </AuthProvider>

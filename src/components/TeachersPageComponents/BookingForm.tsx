@@ -58,7 +58,6 @@ const BookingForm = ({
   });
 
   const currentLearningGoal = watch("learningGoal");
-  console.log(currentLearningGoal);
 
   const toast = useToast();
 

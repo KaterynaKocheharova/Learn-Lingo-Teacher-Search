@@ -10,7 +10,7 @@ const initialState: TeachersSliceState = {
   lastKey: "",
 };
 
-const handlePending = (state: TeachersSliceState) => {
+export const handlePending = (state: TeachersSliceState) => {
   state.isLoading = true;
 };
 
