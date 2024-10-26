@@ -33,7 +33,7 @@ export type BookingValues = {
   name: string;
   email: string;
   number: string;
-  learningGoal: string; 
+  learningGoal: "business" | "kids" | "abroad" | "study" | "travel";
 };
 
 type BookingFormProps = ModalForm &
@@ -61,6 +61,7 @@ const BookingForm = ({
   });
 
   const currentLearningGoal = watch("learningGoal");
+  console.log(currentLearningGoal)
 
   const toast = useToast();
 
@@ -91,7 +92,11 @@ const BookingForm = ({
           <ThickBlackText as="h4">{`${name} ${surname}`}</ThickBlackText>
         </Box>
       </HStack>
-      <LearningGoalRadios register={register} name="learningGoal" checkedGoal={currentLearningGoal} />
+      <LearningGoalRadios
+        register={register}
+        name="learningGoal"
+        checkedGoal={currentLearningGoal}
+      />
       <Box as="form" onSubmit={handleSubmit(onSubmit)}>
         {/* <InputsColumn>
           <InputGroup

@@ -16,6 +16,15 @@ const AppModal = ({ isOpen, onClose, children }: ModalProps) => {
         bg="brand.white.900"
         borderRadius="30px"
         p={{ base: "30px", md: "64px" }}
+        maxH="99%"
+        overflow="auto"
+        sx={{
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          msOverflowStyle: "none", 
+          scrollbarWidth: "none", 
+        }}
       >
         <ModalCloseButton
           w="32px"
