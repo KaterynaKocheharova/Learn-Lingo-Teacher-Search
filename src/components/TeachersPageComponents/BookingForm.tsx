@@ -13,7 +13,6 @@ import * as yup from "yup";
 import { useToast } from "@chakra-ui/react";
 import { type ModalForm } from "./types";
 import { type Teacher } from "../../redux/teachers/types";
-import { type FormEvent } from "react";
 
 const bookingSchema = yup.object({
   name: yup.string().required("Name is required"),
