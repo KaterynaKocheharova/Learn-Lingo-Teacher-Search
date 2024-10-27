@@ -21,8 +21,20 @@ const favoritesSlice = createSlice({
     ) => {
       state.favoriteTeachersIds = action.payload.favoriteTeachersIds;
     },
+    addToFavorites: (state, action: PayloadAction<string>) => {
+      state.favoriteTeachersIds = [
+        ...state.favoriteTeachersIds,
+        action.payload,
+      ];
+    },
+    removeFromFavorites: (state, action: PayloadAction<string>) => {
+      state.favoriteTeachersIds = state.favoriteTeachersIds.filter(
+        (id) => id !== action.payload
+      );
+    },
   },
 });
 
-export const { refreshFavorites } = favoritesSlice.actions;
+export const { refreshFavorites, addToFavorites, removeFromFavorites } =
+  favoritesSlice.actions;
 export const favoritesReducer = favoritesSlice.reducer;

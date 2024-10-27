@@ -2,6 +2,8 @@ import { fetchFavoriteTeachers } from "./operations";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TeachersPayloadType } from "./../teachers/slice";
 import { TeachersSliceState } from "./../teachers/types";
+import { removeFromFavorites } from "../favorites/slice";
+import { type Teacher } from "./../teachers/types";
 
 type FavoriteTeachersState = Omit<TeachersSliceState, "lastKey">;
 
@@ -23,7 +25,12 @@ export const handlePending = (state: FavoriteTeachersState) => {
 const favoriteTeachersSlice = createSlice({
   name: "favoriteTeachers",
   initialState,
-  reducers: {},
+  reducers: {
+    removeFromFavorites: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+      state.items = state.items.filter((item: Teacher) => id !== item.id);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFavoriteTeachers.pending, handlePending)
