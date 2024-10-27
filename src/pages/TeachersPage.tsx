@@ -14,6 +14,7 @@ import PageError from "../components/common/PageError";
 import Loader from "../components/common/Loader";
 import { teachersDB } from "../config/firebase.js";
 import { ref, get } from "firebase/database";
+import Filters from "../components/Filters/Filters.js";
 
 const TeachersPage = () => {
   const teachers = useAppSelector(selectTeachers);
@@ -45,6 +46,7 @@ const TeachersPage = () => {
   return (
     <Box bg="brand.gray.500" py="96px">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
+        <Filters />
         {!error && <TeacherCardsList teachers={teachers} />}
         {!isLoading &&
           !error &&
@@ -60,4 +62,3 @@ const TeachersPage = () => {
 };
 
 export default TeachersPage;
-

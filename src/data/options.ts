@@ -6,7 +6,7 @@ type Option = {
   label: string;
 };
 
-type Options = Option[];
+export type Options = Option[];
 
 export const levelsOptions: Options = [
   { value: "A1 Beginner", label: "A1 Beginner" },
