@@ -29,18 +29,18 @@ const TeachersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   
-  if (currentUserId) {
-    onSnapshot(doc(firestore, "users", currentUserId), (docSnapshot) => {
-      if (docSnapshot.exists()) {
-        const favorites = docSnapshot.data()?.favorites;
-        dispatch(refreshFavorites({ favoriteTeachersIds: favorites }));
-      } else {
-        console.log("No such document!");
-      }
-    });
-  } else {
-    console.log("Invalid user ID. Cannot set up onSnapshot.");
-  }
+  // if (currentUserId) {
+  //   onSnapshot(doc(firestore, "users", currentUserId), (docSnapshot) => {
+  //     if (docSnapshot.exists()) {
+  //       const favorites = docSnapshot.data()?.favorites;
+  //       dispatch(refreshFavorites({ favoriteTeachersIds: favorites }));
+  //     } else {
+  //       console.log("No such document!");
+  //     }
+  //   });
+  // } else {
+  //   console.log("Invalid user ID. Cannot set up onSnapshot.");
+  // }
 
   const totalPages = useMemo(
     () => Math.ceil(totalTeachers / 3),
