@@ -5,7 +5,7 @@ import { fetchFavoriteTeachers } from "../redux/favoriteTeachers/operations";
 import TeacherCardsList from "../components/TeachersPageComponents/TeacherCardsList";
 import PageError from "../components/common/PageError";
 import Loader from "../components/common/Loader";
-import { Box } from "@chakra-ui/react";
+import { Box, Text, Center } from "@chakra-ui/react";
 import PageContainer from "../components/common/PageContainer";
 import {
   selectError,
@@ -34,6 +34,13 @@ const FavoriteTeachersPage = () => {
         {!error && <TeacherCardsList teachers={favoriteTeachers} />}
         {error && <PageError />}
         {isLoading && <Loader />}
+        {
+          <Center>
+            <Text as="h2" fontSize="3xl">
+              You have no teachers in your favorites
+            </Text>
+          </Center>
+        }
       </PageContainer>
     </Box>
   );
