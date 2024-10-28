@@ -17,3 +17,9 @@ export const levelsOptions: Options = [
   { value: "C2 Proficient", label: "C2 Proficient" },
 ];
 
+export const pricesOptions: Options = [
+  { value: "10", label: "10 $" },
+  { value: "20", label: "20 $" },
+  { value: "30", label: "30 $" },
+  { value: "40", label: "40 $" },
+];

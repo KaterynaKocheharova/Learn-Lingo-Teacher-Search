@@ -9,7 +9,6 @@ type FilterationSelectProps = {
 const FiltrationSelect = ({ options, name }: FilterationSelectProps) => {
   return (
     <Select
-      defaultValue={options[0]}
       isSearchable={true}
       name={name}
       options={options}
