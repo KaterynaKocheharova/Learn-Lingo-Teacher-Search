@@ -18,10 +18,14 @@ const FiltrationSelect = ({
   labelText,
 }: FilterationSelectProps) => {
   return (
-    <VStack spacing="8px" align='flex-start'>
+    <VStack spacing="8px" align="flex-start">
       <ThickGrayText fontSize="14px">{labelText}</ThickGrayText>
       <Select
-        defaultValue={options[0]}
+        defaultValue={
+          name === "languages"
+            ? { value: "English", label: "English" }
+            : options[0]
+        }
         unstyled
         styles={{
           container: (baseStyles) => ({

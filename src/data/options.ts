@@ -1,10 +1,10 @@
 import { getDatabase, ref, get } from "firebase/database";
 import { teachersDB } from "../config/firebase.js";
 
-type Option = {
+export type Option = {
   value: string;
   label: string;
-};
+} | {};
 
 export type Options = Option[];
 
