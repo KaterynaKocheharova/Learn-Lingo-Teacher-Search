@@ -164,6 +164,7 @@ const FiltrationSelect = <Option, IsMulti extends boolean = false, Group extends
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            cursor: "pointer"
           }),
         }}
         classNames={{
