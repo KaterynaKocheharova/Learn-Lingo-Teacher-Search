@@ -1,5 +1,3 @@
-import { getDatabase, ref, get } from "firebase/database";
-import { teachersDB } from "../config/firebase.js";
 
 export type Option = {
   value: string;
@@ -23,3 +21,4 @@ export const pricesOptions: Options = [
   { value: "30", label: "30 $" },
   { value: "40", label: "40 $" },
 ];
+
