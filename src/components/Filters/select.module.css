@@ -1,0 +1,7 @@
+.custom-option::not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.custom-option:last-child {
+  margin-bottom: 0;
+}

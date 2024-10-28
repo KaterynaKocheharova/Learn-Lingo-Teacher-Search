@@ -22,7 +22,7 @@ export const getPricesOptions = async () => {
 };
 
 const LevelsFilter = () => {
-  return <FiltrationSelect options={levelsOptions} name="language" width="198px" />;
+  return <FiltrationSelect options={levelsOptions} name="language" width="198px" labelText="Level of knowledge" />;
 };
 
 export default LevelsFilter;

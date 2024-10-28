@@ -30,7 +30,14 @@ const LanguageFilter = () => {
 
     getOptions();
   }, []);
-  return <FiltrationSelect options={options} name="languages" width="221px" />;
+  return (
+    <FiltrationSelect
+      options={options}
+      name="languages"
+      width="221px"
+      labelText="Languages"
+    />
+  );
 };
 
 export default LanguageFilter;
