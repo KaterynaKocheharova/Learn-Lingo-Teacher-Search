@@ -13,7 +13,6 @@ const TeacherCardsList = ({ teachers }: TeacherCardsListProps) => {
       spacing="32px"
       align="center"
       justify="center"
-      px={{ base: "16px", lg: "64px" }}
       mb="64px"
     >
       {teachers.map((teacher) => {
