@@ -1,4 +1,4 @@
-import Select, { DropdownIndicatorProps } from "react-select";
+import Select from "react-select";
 import { type Options } from "../../data/options";
 import css from "./select.module.css";
 import { VStack } from "@chakra-ui/react";
@@ -10,27 +10,6 @@ type FilterationSelectProps = {
   width: string;
   labelText: string;
 };
-
-// group
-// groupHeading
-// indicatorsContainer
-// indicatorSeparator
-// input
-// loadingIndicator
-// loadingMessage
-
-// menuList
-// menuPortal
-// multiValue
-// multiValueLabel
-// multiValueRemove
-// noOptionsMessage
-
-// option
-
-// placeholder
-// singleValue
-// valueContainer
 
 const FiltrationSelect = ({
   options,
