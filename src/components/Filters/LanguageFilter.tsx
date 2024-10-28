@@ -29,8 +29,8 @@ const LanguageFilter = () => {
     };
 
     getOptions();
-  });
-  return <FiltrationSelect options={options} name="languages" />;
+  }, []);
+  return <FiltrationSelect options={options} name="languages" width="221px" />;
 };
 
 export default LanguageFilter;

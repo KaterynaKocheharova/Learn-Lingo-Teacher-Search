@@ -33,5 +33,8 @@
 <symbol id="icon-radio-init" viewBox="0 0 32 32">
 <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.6667" d="M16 4c6.627 0 12 5.373 12 12s-5.373 12-12 12c-6.627 0-12-5.373-12-12s5.373-12 12-12z"></path>
 </symbol>
+<symbol id="icon-dropdown" viewBox="0 0 20 20">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M5 7.5l5 5 5-5"></path>
+</symbol>
 </defs>
 </svg>
