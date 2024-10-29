@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref, get, child, set } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 import "../data/options.ts";
 
@@ -20,3 +20,33 @@ export const auth = getAuth(app);
 export const user = auth.currentUser;
 export const teachersDB = getDatabase(app);
 export const firestore = getFirestore(app);
+
+// const changeLevels = () => {
+//   const teachersRef = ref(teachersDB, "teachers/");
+//   get(teachersRef)
+//     .then((snapshot) => {
+//       if (snapshot.exists()) {
+//         const allTeachers = snapshot.val();
+//         const teachersWithUpdatedLevels = allTeachers.map((teacher) => {
+//           const oldLevels = teacher.levels;
+//           const newLevels = oldLevels.reduce((acc, level) => {
+//             acc[level] = true;
+//             return acc;
+//           }, {});
+
+//           return {
+//             ...teacher,
+//             levels: newLevels,
+//           };
+//         });
+//         set(teachersRef, teachersWithUpdatedLevels);
+//       } else {
+//         console.log("No data available");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching teachers data:", error);
+//     });
+// };
+
+// changeLevels();

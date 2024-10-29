@@ -1,5 +1,6 @@
 import { VStack, HStack } from "@chakra-ui/react";
 import { type Teacher } from "../../redux/teachers/types";
+import { useMemo } from "react";
 import ThickBlackText from "./ThickBlackText";
 import ThickGrayText from "./ThickGrayText";
 
@@ -13,6 +14,7 @@ const TeacherMainInfo = ({
   languages,
   conditions,
 }: TeacherMainInfoProps) => {
+  const langArray = useMemo(() => Object.keys(languages), [languages]);
   return (
     <VStack
       as="ul"
@@ -21,7 +23,7 @@ const TeacherMainInfo = ({
       mb="16px"
     >
       {[
-        { title: "Speaks", text: languages },
+        { title: "Speaks", text: langArray },
         { title: "Lesson Info", text: lesson_info },
         { title: "Conditions", text: conditions },
       ].map(({ title, text }) => {

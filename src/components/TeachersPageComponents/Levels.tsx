@@ -4,9 +4,10 @@ import { type Teacher } from "../../redux/teachers/types";
 type LevelsProps = Pick<Teacher, "levels">;
 
 const Levels = ({ levels }: LevelsProps) => {
+  const levelsArray = Object.keys(levels);
   return (
     <HStack as="ul" wrap="wrap" spacing="8px">
-      {levels.map((level, index) => {
+      {levelsArray.map((level, index) => {
         return (
           <Box
             py="8px"
