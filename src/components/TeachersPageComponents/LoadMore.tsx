@@ -14,7 +14,12 @@ const LoadMore = ({ setCurrentPage }: LoadMoreProps) => {
 
   const handleLoadMore = () => {
     setCurrentPage((prev) => prev + 1);
-    dispatch(fetchTeachers({ startKey: lastKey, isFirstBatch: false }))
+    dispatch(
+      fetchTeachers({
+        startKey: lastKey,
+        isFirstBatch: false,
+      })
+    )
       .unwrap()
       .then(() => {
         handleSmoothScrollDown();

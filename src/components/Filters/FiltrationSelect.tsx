@@ -1,26 +1,35 @@
+
 import Select from "react-select";
 import { type Option } from "../../data/options";
 import css from "./select.module.css";
 import { VStack } from "@chakra-ui/react";
 import ThickGrayText from "../TeachersPageComponents/ThickGrayText";
+import { ActionMeta } from "react-select";
+
+export type SelectChangeHandler = (option: Option, actionMeta: ActionMeta<Option>) => void;
 
 type FilterationSelectProps = {
   options: Option[];
   name: string;
   width: string;
   labelText: string;
+  onChange: SelectChangeHandler;
 };
+
+
 
 const FiltrationSelect = ({
   options,
   name,
   width,
   labelText,
+  onChange,
 }: FilterationSelectProps) => {
   return (
     <VStack spacing="8px" align="flex-start">
       <ThickGrayText fontSize="14px">{labelText}</ThickGrayText>
       <Select
+        onChange={onChange}
         defaultValue={
           name === "languages"
             ? { value: "English", label: "English" }

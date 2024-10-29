@@ -1,8 +1,11 @@
+import { useAppDispatch } from "../../redux/hooks.ts";
+import { fetchTeachers } from "../../redux/teachers/operations.ts";
 import { ref, get } from "firebase/database";
 import { teachersDB } from "../../config/firebase.js";
 import FiltrationSelect from "./FiltrationSelect.tsx";
 import { useEffect, useState } from "react";
-import { type Options } from "../../data/options.ts";
+import { type Options, Option } from "../../data/options.ts";
+import { type SelectChangeHandler } from "./FiltrationSelect.tsx";
 
 export const getLangugesOptions = async (): Promise<Options | undefined> => {
   try {
@@ -18,6 +21,8 @@ export const getLangugesOptions = async (): Promise<Options | undefined> => {
 };
 
 const LanguageFilter = () => {
+  const dispatch = useAppDispatch();
+
   const [options, setOptions] = useState<Options>([]);
 
   useEffect(() => {
@@ -30,8 +35,23 @@ const LanguageFilter = () => {
 
     getOptions();
   }, []);
+
+  const onChange: SelectChangeHandler = (option) => {
+    console.log(option);
+    dispatch(
+      fetchTeachers({
+        startKey: "0",
+        isFirstBatch: true,
+        filters: {
+          language: option.value,
+        },
+      })
+    );
+  };
+
   return (
     <FiltrationSelect
+      onChange={onChange}
       options={options}
       name="languages"
       width="221px"
