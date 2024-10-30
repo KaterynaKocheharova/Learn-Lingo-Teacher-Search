@@ -54,7 +54,7 @@ const TeachersPage = () => {
           currentPage < totalPages && (
             <LoadMore setCurrentPage={setCurrentPage} />
           )}
-        {error && <PageError />}
+        {error && <PageError error={error ? error : ""} />}
         {isLoading && <Loader />}
       </PageContainer>
     </Box>

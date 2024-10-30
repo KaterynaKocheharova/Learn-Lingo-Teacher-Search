@@ -1,11 +1,14 @@
 import { Center, Text } from "@chakra-ui/react";
 
-const PageError = () => {
+type PageErrorProps = {
+  error: string;
+};
+
+const PageError = ({ error }: PageErrorProps) => {
   return (
-    <Center pos="relative">
+    <Center pos="relative" pt="100px">
       <Text as="h2" color="red.400" fontSize="24px" pos="absolute">
-        "Wooops. Something went wrong. Check out the internet connection or try
-        again later"
+        {error ? error : "Wooops. Something went wrong. Check out the internet connection or try again later"}
       </Text>
     </Center>
   );

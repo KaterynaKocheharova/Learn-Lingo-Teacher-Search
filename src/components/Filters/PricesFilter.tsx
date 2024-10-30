@@ -2,23 +2,26 @@ import { useCallback } from "react";
 import { useAppDispatch } from "../../redux/hooks.ts";
 import { fetchTeachers } from "../../redux/teachers/operations.ts";
 import { SelectChangeHandler } from "./FiltrationSelect.tsx";
-
+import { type Option } from "../../data/options.ts";
 import FiltrationSelect from "./FiltrationSelect.tsx";
 import { pricesOptions } from "../../data/options.ts";
 
 const PricesFilter = () => {
   const dispatch = useAppDispatch();
+
   const onChange: SelectChangeHandler = useCallback(
-    (option) => {
-      dispatch(
-        fetchTeachers({
-          startKey: "0",
-          isFirstBatch: true,
-          filters: {
-            price: option.value,
-          },
-        })
-      );
+    (option: Option) => {
+      if (option.value) {
+        dispatch(
+          fetchTeachers({
+            startKey: "0",
+            filters: {
+              price: option.value,
+            },
+            isFirstBatch: true,
+          })
+        );
+      }
     },
     [dispatch]
   );

@@ -5,7 +5,7 @@ import { type TeachersPayloadType } from "./slice.js";
 
 export type QueryDetails = {
   startKey?: string;
-  isFirstBatch: boolean;
+  isFirstBatch?: boolean;
   filters?: {
     language?: string;
     level?: string;
@@ -16,23 +16,22 @@ export type QueryDetails = {
 export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async (queryDetails: QueryDetails, thunkAPI) => {
-    const { startKey, isFirstBatch, filters = {} } = queryDetails;
+    const { startKey, isFirstBatch = false, filters = {} } = queryDetails;
 
     const limit = 4;
     let url;
 
-    if (filters.language && isFirstBatch) {
-      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="languages/${filters.language}"&equalTo=true&limitToFirst=${limit}`;
+    if (filters.language) {
+      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="languages/${filters.language}"&equalTo=true&`;
     }
 
-    if (filters.level && isFirstBatch) {
+    if (filters.level) {
       url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="levels/${filters.level}"&equalTo=true`;
     }
-
-    if (filters.price && isFirstBatch) {
-      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${
-        filters.price
-      }&endAt=${filters.price + 5}&limitToFirst=${limit}`;
+    if (filters.price) {
+      const startPrice = filters.price;
+      const endPrice = String(Number(filters.price) + 5);
+      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${startPrice}&endAt=${endPrice}`;
     }
 
     if (isFirstBatch && !filters.price && !filters.level && !filters.language) {
@@ -58,6 +57,11 @@ export const fetchTeachers = createAsyncThunk(
           return acc;
         }, [] as Teachers);
 
+      if (!teachers.length) {
+        return thunkAPI.rejectWithValue(
+          "No items found matching your search query"
+        );
+      }
       const payload: TeachersPayloadType = {
         teachers: teachers.filter((teacher) => teacher !== undefined),
         isFirstBatch: isFirstBatch,
