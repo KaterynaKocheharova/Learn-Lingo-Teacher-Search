@@ -1,3 +1,4 @@
+import { useDeferredValue } from "react";
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { fetchTeachers } from "../redux/teachers/operations";
@@ -25,6 +26,8 @@ const TeachersPage = () => {
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const deferredTeachers = useDeferredValue(teachers);
+
   const totalPages = useMemo(
     () => Math.ceil(totalTeachers / 3),
     [totalTeachers]
@@ -48,7 +51,7 @@ const TeachersPage = () => {
     <Box bg="brand.gray.500" py="96px">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
         <Filters />
-        {!error && <TeacherCardsList teachers={teachers} />}
+        {!error && <TeacherCardsList teachers={deferredTeachers} />}
         {!isLoading &&
           !error &&
           teachers.length > 0 &&
