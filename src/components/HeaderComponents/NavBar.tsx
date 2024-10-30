@@ -14,11 +14,8 @@ const NavBar = () => {
         px={{ md: "16" }}
         pb={{ base: "45px", md: "0" }}
       >
-        <HStack as="nav" w={{ lg: "390px" }}>
-          <Logo />
-          <Spacer />
-          <NavLinks />
-        </HStack>
+        <Logo />
+        <NavLinks />
         <AuthButtons />
       </HStack>
     </PageContainer>
