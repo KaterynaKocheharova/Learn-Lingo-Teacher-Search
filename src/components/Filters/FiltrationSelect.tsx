@@ -1,4 +1,3 @@
-
 import Select from "react-select";
 import { type Option } from "../../data/options";
 import css from "./select.module.css";
@@ -6,7 +5,10 @@ import { VStack } from "@chakra-ui/react";
 import ThickGrayText from "../TeachersPageComponents/ThickGrayText";
 import { ActionMeta } from "react-select";
 
-export type SelectChangeHandler = (option: Option, actionMeta: ActionMeta<Option>) => void;
+export type SelectChangeHandler = (
+  option: Option,
+  actionMeta: ActionMeta<Option>
+) => void;
 
 type FilterationSelectProps = {
   options: Option[];
@@ -15,8 +17,6 @@ type FilterationSelectProps = {
   labelText: string;
   onChange: SelectChangeHandler;
 };
-
-
 
 const FiltrationSelect = ({
   options,
@@ -29,7 +29,11 @@ const FiltrationSelect = ({
     <VStack spacing="8px" align="flex-start">
       <ThickGrayText fontSize="14px">{labelText}</ThickGrayText>
       <Select
-        onChange={onChange}
+        onChange={(option, actionMeta) => {
+          if (option && actionMeta) {
+            onChange(option as Option, actionMeta);
+          }
+        }}
         defaultValue={
           name === "languages"
             ? { value: "English", label: "English" }

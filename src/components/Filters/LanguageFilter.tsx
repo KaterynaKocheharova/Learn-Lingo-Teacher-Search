@@ -3,7 +3,7 @@ import { fetchTeachers } from "../../redux/teachers/operations.ts";
 import { ref, get } from "firebase/database";
 import { teachersDB } from "../../config/firebase.js";
 import FiltrationSelect from "./FiltrationSelect.tsx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { type Options, Option } from "../../data/options.ts";
 import { type SelectChangeHandler } from "./FiltrationSelect.tsx";
 
@@ -36,18 +36,20 @@ const LanguageFilter = () => {
     getOptions();
   }, []);
 
-  const onChange: SelectChangeHandler = (option) => {
-    console.log(option);
-    dispatch(
-      fetchTeachers({
-        startKey: "0",
-        isFirstBatch: true,
-        filters: {
-          language: option.value,
-        },
-      })
-    );
-  };
+  const onChange: SelectChangeHandler = useCallback(
+    (option) => {
+      dispatch(
+        fetchTeachers({
+          startKey: "0",
+          isFirstBatch: true,
+          filters: {
+            language: option.value,
+          },
+        })
+      );
+    },
+    [dispatch]
+  );
 
   return (
     <FiltrationSelect

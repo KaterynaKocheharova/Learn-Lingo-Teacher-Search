@@ -1,8 +1,12 @@
+import { useAppDispatch } from "../../redux/hooks.ts";
+import { fetchTeachers } from "../../redux/teachers/operations.ts";
+import { useCallback } from "react";
 import { ref, get } from "firebase/database";
 import { teachersDB } from "../../config/firebase.js";
 import FiltrationSelect from "./FiltrationSelect.tsx";
 import { roundDownToNearestTen } from "../../utils/roundToTheNearestTen";
 import { levelsOptions } from "../../data/options.ts";
+import { SelectChangeHandler } from "./FiltrationSelect.tsx";
 
 export const getPricesOptions = async () => {
   try {
@@ -22,7 +26,31 @@ export const getPricesOptions = async () => {
 };
 
 const LevelsFilter = () => {
-  return <FiltrationSelect options={levelsOptions} name="language" width="198px" labelText="Level of knowledge" />;
+  const dispatch = useAppDispatch();
+  const onChange: SelectChangeHandler = useCallback(
+    (option) => {
+      dispatch(
+        fetchTeachers({
+          startKey: "0",
+          isFirstBatch: true,
+          filters: {
+            level: option.value,
+          },
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  return (
+    <FiltrationSelect
+      onChange={onChange}
+      options={levelsOptions}
+      name="language"
+      width="198px"
+      labelText="Level of knowledge"
+    />
+  );
 };
 
 export default LevelsFilter;
