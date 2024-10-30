@@ -34,11 +34,7 @@ const FiltrationSelect = ({
             onChange(option as Option, actionMeta);
           }
         }}
-        defaultValue={
-          name === "languages"
-            ? { value: "English", label: "English" }
-            : options[0]
-        }
+        defaultValue={{ value: "", label: name }}
         unstyled
         styles={{
           container: (baseStyles) => ({

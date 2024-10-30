@@ -31,7 +31,7 @@ const PricesFilter = () => {
     <FiltrationSelect
       onChange={onChange}
       options={pricesOptions}
-      name="prices"
+      name="price"
       width="124px"
       labelText="Price"
     />

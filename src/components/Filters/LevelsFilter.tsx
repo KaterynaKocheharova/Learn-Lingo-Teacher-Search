@@ -47,7 +47,7 @@ const LevelsFilter = () => {
     <FiltrationSelect
       onChange={onChange}
       options={levelsOptions}
-      name="language"
+      name="level"
       width="198px"
       labelText="Level of knowledge"
     />

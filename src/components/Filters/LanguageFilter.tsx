@@ -56,7 +56,7 @@ const LanguageFilter = () => {
     <FiltrationSelect
       onChange={onChange}
       options={options}
-      name="languages"
+      name="language"
       width="221px"
       labelText="Languages"
     />
