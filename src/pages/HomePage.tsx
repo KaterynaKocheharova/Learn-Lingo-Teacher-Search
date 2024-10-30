@@ -5,7 +5,7 @@ import Benefits from "../components/HomePageComponents/Description/Benefits";
 
 const HomePage = () => {
   return (
-    <PageContainer>
+    <PageContainer as="section">
       <Flex
         direction={{ base: "column", md: "row" }}
         wrap="wrap"

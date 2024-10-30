@@ -48,7 +48,7 @@ const TeachersPage = () => {
   }, [dispatch]);
 
   return (
-    <Box bg="brand.gray.500" py="96px">
+    <Box bg="brand.gray.500" py="96px" as="section">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
         <Filters />
         {!error && <TeacherCardsList teachers={deferredTeachers} />}
