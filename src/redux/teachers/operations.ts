@@ -11,12 +11,18 @@ export type QueryDetails = {
     level?: string;
     price?: string;
   };
+  isFiltered?: boolean;
 };
 
 export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async (queryDetails: QueryDetails, thunkAPI) => {
-    const { startKey, isFirstBatch = false, filters = {} } = queryDetails;
+    const {
+      startKey,
+      isFirstBatch = false,
+      filters = {},
+      isFiltered = false,
+    } = queryDetails;
 
     const limit = 4;
     let url;
@@ -66,6 +72,7 @@ export const fetchTeachers = createAsyncThunk(
         teachers: teachers.filter((teacher) => teacher !== undefined),
         isFirstBatch: isFirstBatch,
         lastKey: Object.keys(response.data).pop(),
+        isFiltered: isFiltered ? true : false,
       };
 
       return payload;

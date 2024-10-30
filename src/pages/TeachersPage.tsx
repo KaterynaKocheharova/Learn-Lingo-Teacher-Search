@@ -17,6 +17,7 @@ import { ref, get } from "firebase/database";
 import Filters from "../components/Filters/Filters.js";
 
 const TeachersPage = () => {
+  const isFiltered = useAppSelector((state) => state.teachers.isFiltered);
   const teachers = useAppSelector(selectTeachers);
   const error = useAppSelector(selectError);
   const isLoading = useAppSelector(selectIsLoading);
@@ -51,9 +52,8 @@ const TeachersPage = () => {
         {!isLoading &&
           !error &&
           teachers.length > 0 &&
-          currentPage < totalPages && (
-            <LoadMore setCurrentPage={setCurrentPage} />
-          )}
+          currentPage < totalPages &&
+          !isFiltered && <LoadMore setCurrentPage={setCurrentPage} />}
         {error && <PageError error={error ? error : ""} />}
         {isLoading && <Loader />}
       </PageContainer>

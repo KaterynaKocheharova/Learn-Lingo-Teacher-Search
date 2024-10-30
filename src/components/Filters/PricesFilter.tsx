@@ -19,6 +19,7 @@ const PricesFilter = () => {
               price: option.value,
             },
             isFirstBatch: true,
+            isFiltered: true,
           })
         );
       }

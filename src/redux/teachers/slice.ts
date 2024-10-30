@@ -8,6 +8,7 @@ const initialState: TeachersSliceState = {
   isLoading: false,
   error: null,
   lastKey: "",
+  isFiltered: false
 };
 
 export const handlePending = (state: TeachersSliceState) => {
@@ -17,6 +18,7 @@ export const handlePending = (state: TeachersSliceState) => {
 export type TeachersPayloadType = {
   teachers: Teachers;
   lastKey: string | undefined;
+  isFiltered: boolean;
 } & Pick<QueryDetails, "isFirstBatch">;
 
 const TeachersSlice = createSlice({
@@ -36,7 +38,11 @@ const TeachersSlice = createSlice({
           state.error = null;
 
           if (action.payload) {
-            const { isFirstBatch, teachers, lastKey } = action.payload;
+            const { isFirstBatch, teachers, lastKey, isFiltered } = action.payload;
+            console.log(isFiltered)
+            if(isFiltered) {
+              state.isFiltered = true;
+            }
             if (isFirstBatch) {
               state.items = teachers;
             } else {

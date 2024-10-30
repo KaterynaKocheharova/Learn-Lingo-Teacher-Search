@@ -36,6 +36,7 @@ const LevelsFilter = () => {
           filters: {
             level: option.value,
           },
+          isFiltered: true
         })
       );
     },

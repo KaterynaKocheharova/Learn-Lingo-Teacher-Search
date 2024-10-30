@@ -45,6 +45,7 @@ const LanguageFilter = () => {
           filters: {
             language: option.value,
           },
+          isFiltered: true
         })
       );
     },
