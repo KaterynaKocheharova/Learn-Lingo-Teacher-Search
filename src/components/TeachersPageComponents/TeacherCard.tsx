@@ -75,7 +75,7 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
           fontWeight="medium"
           lineHeight="1"
           mb="32px"
-        >{`${name}${surname}`}</Text>
+        >{`${name} ${surname}`}</Text>
         <TeacherMainInfo
           conditions={conditions}
           lesson_info={lesson_info}
