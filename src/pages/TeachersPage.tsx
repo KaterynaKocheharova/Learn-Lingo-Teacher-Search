@@ -1,7 +1,9 @@
-import { useDeferredValue } from "react";
 import { useEffect, useState, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { fetchTeachers } from "../redux/teachers/operations";
+import {
+  fetchTeachers,
+  fetchFilteredTeachers,
+} from "../redux/teachers/operations";
 import {
   selectError,
   selectTeachers,
@@ -34,6 +36,15 @@ const TeachersPage = () => {
   const teacherDBRef = ref(teachersDB, "teacherInTotal/");
 
   useEffect(() => {
+    dispatch(
+      fetchFilteredTeachers({
+        filters: {
+          language: "English",
+          price: "20",
+          level: "C1 Advanced"
+        },
+      })
+    );
     const getTotalTeachers = async () => {
       const snapshot = await get(teacherDBRef);
       const total = snapshot.val();
@@ -48,7 +59,7 @@ const TeachersPage = () => {
   return (
     <Box bg="brand.gray.500" py="96px" as="section">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
-        <Filters />
+        {/* <Filters /> */}
         {!error && <TeacherCardsList teachers={teachers} />}
         {!isLoading &&
           !error &&

@@ -2,54 +2,27 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { type Teachers } from "./types.js";
 import { type TeachersPayloadType } from "./slice.js";
+import { type Teacher } from "./types.js";
 
 export type QueryDetails = {
   startKey?: string;
   isFirstBatch?: boolean;
-  filters?: {
-    language?: string;
-    level?: string;
-    price?: string;
-  };
   isFiltered?: boolean;
 };
 
 export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async (queryDetails: QueryDetails, thunkAPI) => {
-    const {
-      startKey,
-      isFirstBatch = false,
-      filters = {},
-      isFiltered = false,
-    } = queryDetails;
+    const { startKey, isFirstBatch = false, isFiltered = false } = queryDetails;
 
     const limit = 4;
     let url;
 
-    if (filters.language) {
-      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="languages/${filters.language}"&equalTo=true&`;
-    }
-
-    if (filters.level) {
-      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="levels/${filters.level}"&equalTo=true`;
-    }
-    if (filters.price) {
-      const startPrice = filters.price;
-      const endPrice = String(Number(filters.price) + 5);
-      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${startPrice}&endAt=${endPrice}`;
-    }
-
-    if (isFirstBatch && !filters.price && !filters.level && !filters.language) {
+    if (isFirstBatch) {
       url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&limitToFirst=${limit}`;
     }
 
-    if (
-      !isFirstBatch &&
-      !filters.price &&
-      !filters.level &&
-      !filters.language
-    ) {
+    if (!isFirstBatch) {
       url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&startAfter="${startKey}"&limitToFirst=${limit}`;
     }
 
@@ -63,14 +36,6 @@ export const fetchTeachers = createAsyncThunk(
           return acc;
         }, [] as Teachers);
 
-      if (
-        (!teachers.length && filters.language) ||
-        (filters.level && filters.price)
-      ) {
-        return thunkAPI.rejectWithValue(
-          "No items found matching your search query"
-        );
-      }
       const payload: TeachersPayloadType = {
         teachers: teachers.filter((teacher) => teacher !== undefined),
         isFirstBatch: isFirstBatch,
@@ -79,6 +44,110 @@ export const fetchTeachers = createAsyncThunk(
       };
 
       return payload;
+    } catch (error) {
+      let errorMessage;
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else {
+        errorMessage = "Fetching teachers failed. Please, try again";
+      }
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export type FilterQueryDetails = {
+  filters: {
+    language: string;
+    level: string;
+    price: string;
+  };
+};
+
+export const fetchFilteredTeachers = createAsyncThunk(
+  "teachers/fetchFilteredTeachers",
+  async (queryDetails: FilterQueryDetails, thunkAPI) => {
+    const { filters } = queryDetails;
+
+    let fetchFilteredTeachersPromises = [];
+
+    if (filters.language) {
+      fetchFilteredTeachersPromises.push(
+        await axios.get(
+          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="languages/${filters.language}"&equalTo=true&`
+        )
+      );
+    }
+
+    if (filters.level) {
+      fetchFilteredTeachersPromises.push(
+        await axios.get(
+          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="levels/${filters.level}"&equalTo=true`
+        )
+      );
+    }
+
+    if (filters.price) {
+      const startPrice = filters.price;
+      const endPrice = String(Number(filters.price) + 5);
+      fetchFilteredTeachersPromises.push(
+        await axios.get(
+          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${startPrice}&endAt=${endPrice}`
+        )
+      );
+    }
+
+    try {
+      const responses = await Promise.all(fetchFilteredTeachersPromises);
+      const allFilteredTeachers = responses.flatMap((response) => {
+        const entries = Object.entries(response.data);
+        const teachersArray = entries.map((entry) => {
+          return entry[1];
+        });
+        return teachersArray;
+      }) as Teachers;
+
+      const onlyNeededTeachers = allFilteredTeachers.filter((teacher) => {
+        let priceInRange = true;
+
+        if (filters.price !== "") {
+          priceInRange =
+            Number(teacher.price_per_hour) >= Number(filters.price) &&
+            Number(teacher.price_per_hour) <= Number(filters.price) + 5;
+        }
+
+        let levelMatches = true;
+        if (filters.level !== "") {
+          levelMatches = teacher.levels[filters.level] !== undefined;
+        }
+
+        let languageMatches = true;
+        if (filters.language !== "") {
+          languageMatches = teacher.languages[filters.language] !== undefined;
+        }
+
+        console.log(priceInRange, levelMatches, languageMatches);
+        return priceInRange && levelMatches && languageMatches;
+      });
+
+      console.log(onlyNeededTeachers);
+
+      // if (
+      //   (!teachers.length && filters.language) ||
+      //   (filters.level && filters.price)
+      // ) {
+      //   return thunkAPI.rejectWithValue(
+      //     "No items found matching your search query"
+      //   );
+      // }
+      // const payload: TeachersPayloadType = {
+      //   teachers: teachers.filter((teacher) => teacher !== undefined),
+      //   isFirstBatch: isFirstBatch,
+      //   lastKey: Object.keys(response.data).pop(),
+      //   isFiltered: isFiltered ? true : false,
+      // };
+
+      // return payload;
     } catch (error) {
       let errorMessage;
       if (error instanceof Error) {
