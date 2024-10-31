@@ -3,6 +3,7 @@ import axios from "axios";
 import { type Teachers } from "./types.js";
 import { type TeachersPayloadType } from "./slice.js";
 import { type Teacher } from "./types.js";
+import { type Filters } from "../filters/slice.js";
 
 export type QueryDetails = {
   startKey?: string;
@@ -57,11 +58,7 @@ export const fetchTeachers = createAsyncThunk(
 );
 
 export type FilterQueryDetails = {
-  filters: {
-    language: string;
-    level: string;
-    price: string;
-  };
+  filters: Partial<Filters["filters"]>;
 };
 
 export const fetchFilteredTeachers = createAsyncThunk(
@@ -97,7 +94,6 @@ export const fetchFilteredTeachers = createAsyncThunk(
       );
     }
 
-    
     try {
       const responses = await Promise.all(fetchFilteredTeachersPromises);
       const allFilteredTeachers = responses.flatMap((response) => {
@@ -111,37 +107,41 @@ export const fetchFilteredTeachers = createAsyncThunk(
       const onlyNeededTeachers = allFilteredTeachers.filter((teacher) => {
         let priceInRange = true;
 
-        if (filters.price !== "") {
+        if (filters.price) {
           priceInRange =
             Number(teacher.price_per_hour) >= Number(filters.price) &&
             Number(teacher.price_per_hour) <= Number(filters.price) + 5;
         }
 
         let levelMatches = true;
-        if (filters.level !== "") {
-          levelMatches = teacher.levels[filters.level] !== undefined;
+        if (filters.level) {
+          levelMatches = teacher.levels[filters.level];
         }
 
         let languageMatches = true;
-        if (filters.language !== "") {
-          languageMatches = teacher.languages[filters.language] !== undefined;
+        if (filters.language) {
+          languageMatches = teacher.languages[filters.language];
         }
 
         return priceInRange && levelMatches && languageMatches;
       });
 
-      const nonRepeatedNeededTeachers = onlyNeededTeachers.filter(
-        (teacher, index, array) =>
-          array.findIndex((t) => t.id === teacher.id) === index
-      );
+      console.log(onlyNeededTeachers);
 
-      if (!nonRepeatedNeededTeachers.length) {
-        return thunkAPI.rejectWithValue(
-          "No items found matching your search query"
-        );
-      }
+      // const nonRepeatedNeededTeachers = onlyNeededTeachers.filter(
+      //   (teacher, index, array) =>
+      //     array.findIndex((t) => t.id === teacher.id) === index
+      // );
+
+      // console.log(nonRepeatedNeededTeachers);
+
+      // if (!nonRepeatedNeededTeachers.length) {
+      //   return thunkAPI.rejectWithValue(
+      //     "No items found matching your search query"
+      //   );
+      // }
       const payload: TeachersPayloadType = {
-        teachers: nonRepeatedNeededTeachers,
+        teachers: onlyNeededTeachers,
       };
 
       return payload;

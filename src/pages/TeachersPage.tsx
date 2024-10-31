@@ -38,15 +38,7 @@ const TeachersPage = () => {
   const teacherDBRef = ref(teachersDB, "teacherInTotal/");
 
   useEffect(() => {
-    // dispatch(
-    //   fetchFilteredTeachers({
-    //     filters: {
-    //       language: "",
-    //       price: "",
-    //       level: "B2 Upper-Intermediate",
-    //     },
-    //   })
-    // );
+
     const getTotalTeachers = async () => {
       const snapshot = await get(teacherDBRef);
       const total = snapshot.val();
@@ -61,7 +53,7 @@ const TeachersPage = () => {
   return (
     <Box bg="brand.gray.500" py="96px" as="section">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
-        {/* <Filters /> */}
+        <Filters />
         {!error && <TeacherCardsList teachers={teachers} />}
         {!isLoading &&
           !error &&

@@ -1,5 +1,6 @@
 import { useAppDispatch } from "../../redux/hooks.ts";
-import { fetchTeachers } from "../../redux/teachers/operations.ts";
+import { fetchFilteredTeachers } from "../../redux/teachers/operations.ts";
+import { addFilter } from "../../redux/filters/slice.ts";
 import { ref, get } from "firebase/database";
 import { teachersDB } from "../../config/firebase.js";
 import FiltrationSelect from "./FiltrationSelect.tsx";
@@ -38,14 +39,12 @@ const LanguageFilter = () => {
 
   const onChange: SelectChangeHandler = useCallback(
     (option) => {
+      dispatch(addFilter({ filters: { language: option.value } }));
       dispatch(
-        fetchTeachers({
-          startKey: "0",
-          isFirstBatch: true,
+        fetchFilteredTeachers({
           filters: {
             language: option.value,
           },
-          isFiltered: true
         })
       );
     },
