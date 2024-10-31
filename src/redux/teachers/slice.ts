@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { type TeachersSliceState, Teachers } from "./types";
 import { type QueryDetails } from "./operations";
-import { fetchTeachers } from "./operations";
+import { fetchTeachers, fetchFilteredTeachers } from "./operations";
 
 const initialState: TeachersSliceState = {
   items: [],
@@ -9,11 +9,14 @@ const initialState: TeachersSliceState = {
   error: null,
   lastKey: "",
   isFiltered: false,
-  filteredTeachers: []
 };
 
 export const handlePending = (state: TeachersSliceState) => {
   state.isLoading = true;
+};
+
+export type FilteredTeachersPayloadType = {
+  teachers: Teachers;
 };
 
 export type TeachersPayloadType = {
@@ -39,8 +42,9 @@ const TeachersSlice = createSlice({
           state.error = null;
 
           if (action.payload) {
-            const { isFirstBatch, teachers, lastKey, isFiltered } = action.payload;
-            if(isFiltered) {
+            const { isFirstBatch, teachers, lastKey, isFiltered } =
+              action.payload;
+            if (isFiltered) {
               state.isFiltered = true;
             }
             if (isFirstBatch) {
@@ -48,13 +52,30 @@ const TeachersSlice = createSlice({
             } else {
               state.items = [...state.items, ...teachers];
             }
-            state.lastKey = lastKey; 
+            state.lastKey = lastKey;
           }
         }
       )
       .addCase(fetchTeachers.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(
+        fetchFilteredTeachers.fulfilled,
+        (state, action: PayloadAction<FilteredTeachersPayloadType>) => {
+          const { teachers } = action.payload;
+          state.error = null;
+          state.isLoading = false;
+          state.items = teachers;
+          state.isFiltered = true;
+        }
+      )
+      .addCase(fetchFilteredTeachers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchFilteredTeachers.pending, (state, action) => {
+        state.isLoading = true;
       });
   },
 });

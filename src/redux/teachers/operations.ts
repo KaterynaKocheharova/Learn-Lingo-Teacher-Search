@@ -97,6 +97,7 @@ export const fetchFilteredTeachers = createAsyncThunk(
       );
     }
 
+    
     try {
       const responses = await Promise.all(fetchFilteredTeachersPromises);
       const allFilteredTeachers = responses.flatMap((response) => {
@@ -126,28 +127,24 @@ export const fetchFilteredTeachers = createAsyncThunk(
           languageMatches = teacher.languages[filters.language] !== undefined;
         }
 
-        console.log(priceInRange, levelMatches, languageMatches);
         return priceInRange && levelMatches && languageMatches;
       });
 
-      console.log(onlyNeededTeachers);
+      const nonRepeatedNeededTeachers = onlyNeededTeachers.filter(
+        (teacher, index, array) =>
+          array.findIndex((t) => t.id === teacher.id) === index
+      );
 
-      // if (
-      //   (!teachers.length && filters.language) ||
-      //   (filters.level && filters.price)
-      // ) {
-      //   return thunkAPI.rejectWithValue(
-      //     "No items found matching your search query"
-      //   );
-      // }
-      // const payload: TeachersPayloadType = {
-      //   teachers: teachers.filter((teacher) => teacher !== undefined),
-      //   isFirstBatch: isFirstBatch,
-      //   lastKey: Object.keys(response.data).pop(),
-      //   isFiltered: isFiltered ? true : false,
-      // };
+      if (!nonRepeatedNeededTeachers.length) {
+        return thunkAPI.rejectWithValue(
+          "No items found matching your search query"
+        );
+      }
+      const payload: TeachersPayloadType = {
+        teachers: nonRepeatedNeededTeachers,
+      };
 
-      // return payload;
+      return payload;
     } catch (error) {
       let errorMessage;
       if (error instanceof Error) {

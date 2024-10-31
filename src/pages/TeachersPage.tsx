@@ -28,6 +28,8 @@ const TeachersPage = () => {
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
+  console.log(teachers);
+
   const totalPages = useMemo(
     () => Math.ceil(totalTeachers / 4),
     [totalTeachers]
@@ -36,15 +38,15 @@ const TeachersPage = () => {
   const teacherDBRef = ref(teachersDB, "teacherInTotal/");
 
   useEffect(() => {
-    dispatch(
-      fetchFilteredTeachers({
-        filters: {
-          language: "English",
-          price: "20",
-          level: "C1 Advanced"
-        },
-      })
-    );
+    // dispatch(
+    //   fetchFilteredTeachers({
+    //     filters: {
+    //       language: "",
+    //       price: "",
+    //       level: "B2 Upper-Intermediate",
+    //     },
+    //   })
+    // );
     const getTotalTeachers = async () => {
       const snapshot = await get(teacherDBRef);
       const total = snapshot.val();
