@@ -13,6 +13,7 @@ import * as yup from "yup";
 import { useToast } from "@chakra-ui/react";
 import { type ModalForm } from "./types";
 import { type Teacher } from "../../redux/teachers/types";
+import { toastConfigs } from "../../utils/toast";
 
 const bookingSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -70,6 +71,12 @@ const BookingForm = ({
     if (event) {
       event?.target.reset();
     }
+    onClose();
+    toast({
+      ...toastConfigs,
+      status: "success",
+      description: "Thank you for your order. We'll call you soon!",
+    });
   };
 
   return (
