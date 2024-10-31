@@ -26,8 +26,6 @@ const TeachersPage = () => {
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const deferredTeachers = useDeferredValue(teachers);
-
   const totalPages = useMemo(
     () => Math.ceil(totalTeachers / 3),
     [totalTeachers]
@@ -51,7 +49,7 @@ const TeachersPage = () => {
     <Box bg="brand.gray.500" py="96px" as="section">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
         <Filters />
-        {!error && <TeacherCardsList teachers={deferredTeachers} />}
+        {!error && <TeacherCardsList teachers={teachers} />}
         {!isLoading &&
           !error &&
           teachers.length > 0 &&
