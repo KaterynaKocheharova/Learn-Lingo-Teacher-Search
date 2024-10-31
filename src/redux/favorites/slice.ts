@@ -32,9 +32,16 @@ const favoritesSlice = createSlice({
         (id) => id !== action.payload
       );
     },
+    clearFavorites: (state) => {
+      state.favoriteTeachersIds = [];
+    },
   },
 });
 
-export const { refreshFavorites, addToFavorites, removeFromFavorites } =
-  favoritesSlice.actions;
+export const {
+  refreshFavorites,
+  addToFavorites,
+  removeFromFavorites,
+  clearFavorites,
+} = favoritesSlice.actions;
 export const favoritesReducer = favoritesSlice.reducer;

@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { selectIsLoggedIn, selectIsLoading } from "../../redux/auth/selectors";
 import { logoutUser } from "../../redux/auth/operations";
 import { toastConfigs } from "../../utils/toast";
+import { clearFavorites } from "../../redux/favorites/slice";
 
 const loginIcon = (
   <svg width="20" height="20">
@@ -27,6 +28,7 @@ const LoginLogoutButton = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser()).then(() => {
+      dispatch(clearFavorites());
       toast({
         ...toastConfigs,
         description: "Logged out successfully",

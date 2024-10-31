@@ -25,7 +25,7 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     teachers: teachersReducer,
-    favorites: persistReducer(persistConfiguration, favoritesReducer),
+    favorites: favoritesReducer,
     favoriteTeachers: favoriteTeachersReaducer,
   },
   middleware: (getDefaultMiddleware) =>
