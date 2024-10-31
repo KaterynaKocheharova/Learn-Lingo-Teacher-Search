@@ -27,9 +27,13 @@ const TeachersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = useMemo(
-    () => Math.ceil(totalTeachers / 3),
+    () => Math.ceil(totalTeachers / 4),
     [totalTeachers]
   );
+
+
+
+  console.log(currentPage, totalPages, currentPage < totalPages);
 
   const teacherDBRef = ref(teachersDB, "teacherInTotal/");
 
