@@ -31,10 +31,6 @@ const TeachersPage = () => {
     [totalTeachers]
   );
 
-
-
-  console.log(currentPage, totalPages, currentPage < totalPages);
-
   const teacherDBRef = ref(teachersDB, "teacherInTotal/");
 
   useEffect(() => {

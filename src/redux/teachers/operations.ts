@@ -63,7 +63,10 @@ export const fetchTeachers = createAsyncThunk(
           return acc;
         }, [] as Teachers);
 
-      if (!teachers.length) {
+      if (
+        (!teachers.length && filters.language) ||
+        (filters.level && filters.price)
+      ) {
         return thunkAPI.rejectWithValue(
           "No items found matching your search query"
         );

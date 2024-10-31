@@ -1,7 +1,7 @@
 import { Center, Text } from "@chakra-ui/react";
 
 type PageErrorProps = {
-  error: string;
+  error?: string;
 };
 
 const PageError = ({ error }: PageErrorProps) => {

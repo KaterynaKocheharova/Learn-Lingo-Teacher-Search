@@ -34,14 +34,10 @@ const FavoriteTeachersPage = () => {
         {!error && <TeacherCardsList teachers={favoriteTeachers} />}
         {error && <PageError />}
         {isLoading && <Loader />}
-        {
-          <Center>
-            <Text as="h2" fontSize="3xl">
-              You have no teachers in your favorites
-            </Text>
-          </Center>
-        }
       </PageContainer>
+      {!favoriteTeachersIds.length && (
+        <PageError error="You have no teachers in your favorites" />
+      )}
     </Box>
   );
 };
