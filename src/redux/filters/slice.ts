@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { type PayloadAction } from "@reduxjs/toolkit";
 
-type Filters = {
+export type Filters = {
   filters: {
     language: string;
     level: string;
