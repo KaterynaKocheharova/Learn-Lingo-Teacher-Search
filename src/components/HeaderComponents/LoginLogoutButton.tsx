@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import AppModal from "../common/AppModal";
+import AppModal from "../ModalReusableComponents/AppModal";
 import LoginForm from "../Auth/LoginForm";
 import { Button, Spinner, useToast } from "@chakra-ui/react";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";

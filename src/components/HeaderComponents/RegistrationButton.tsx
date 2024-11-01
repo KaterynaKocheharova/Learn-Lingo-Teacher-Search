@@ -1,5 +1,5 @@
 import AppButton from "../common/AppButton";
-import AppModal from "../common/AppModal";
+import AppModal from "../ModalReusableComponents/AppModal";
 import RegistrationForm from "../Auth/RegistrationForm";
 import { useDisclosure } from "@chakra-ui/react";
 

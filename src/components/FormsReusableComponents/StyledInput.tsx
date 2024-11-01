@@ -1,5 +1,5 @@
 import { Input } from "@chakra-ui/react";
-import { type InputGroupProps } from "./InputGroup";
+import { type InputGroupProps } from "../FormsReusableComponents/InputGroup";
 
 const StyledInput = ({
   name,

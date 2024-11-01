@@ -1,5 +1,5 @@
 import AppButton from "../common/AppButton";
-import AppModal from "../common/AppModal";
+import AppModal from "../ModalReusableComponents/AppModal";
 import { useDisclosure } from "@chakra-ui/react";
 import BookingForm from "./BookingForm";
 import { type Teacher } from "../../redux/teachers/types";

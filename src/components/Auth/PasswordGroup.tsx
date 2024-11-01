@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Box, IconButton } from "@chakra-ui/react";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
-import StyledInput from "../common/StyledInput";
-import StyledFormError from "../common/StyledFormError";
+import StyledInput from "../FormsReusableComponents/StyledInput";
+import StyledFormError from "../FormsReusableComponents/StyledFormError";
 
-import { type InputGroupProps } from "../common/InputGroup";
+import { type InputGroupProps } from "../FormsReusableComponents/InputGroup";
 
 type PasswordGroupProps = Omit<InputGroupProps, "name" | "placeholder">;
 

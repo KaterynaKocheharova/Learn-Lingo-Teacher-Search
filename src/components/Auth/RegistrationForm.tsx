@@ -3,10 +3,10 @@ import { registerUser } from "../../redux/auth/operations.ts";
 import { selectIsLoading } from "../../redux/auth/selectors.ts";
 
 import { Box, Spinner } from "@chakra-ui/react";
-import StyledModalHeader from "../common/StyledModalHeader";
-import StyledModalText from "../common/StyledModalText";
-import InputsColumn from "../common/InputsColumn";
-import InputGroup from "../common/InputGroup";
+import StyledModalHeader from "../ModalReusableComponents/StyledModalHeader.tsx";
+import StyledModalText from "../ModalReusableComponents/StyledModalText.tsx";
+import InputsColumn from "../FormsReusableComponents/InputsColumn.tsx";
+import InputGroup from "../FormsReusableComponents/InputGroup.tsx";
 import AppButton from "../common/AppButton";
 import PasswordGroup from "./PasswordGroup";
 

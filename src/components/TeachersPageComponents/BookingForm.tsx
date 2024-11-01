@@ -1,11 +1,11 @@
-import StyledModalHeader from "../common/StyledModalHeader";
-import StyledModalText from "../common/StyledModalText";
+import StyledModalHeader from "../ModalReusableComponents/StyledModalHeader";
+import StyledModalText from "../ModalReusableComponents/StyledModalText";
 import ThickGrayText from "./ThickGrayText";
 import ThickBlackText from "./ThickBlackText";
 import { HStack, Image, Box } from "@chakra-ui/react";
 import LearningGoalRadios from "./LearningGoalRadios";
-import InputsColumn from "../common/InputsColumn";
-import InputGroup from "../common/InputGroup";
+import InputsColumn from "../FormsReusableComponents/InputsColumn";
+import InputGroup from "../FormsReusableComponents/InputGroup";
 import AppButton from "../common/AppButton";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
