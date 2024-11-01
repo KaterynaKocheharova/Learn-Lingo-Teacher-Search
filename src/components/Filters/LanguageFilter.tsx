@@ -1,37 +1,20 @@
 import { useState, useEffect } from "react";
-
-import { ref, get } from "firebase/database";
-import { teachersDB } from "../../config/firebase.js";
-
 import FiltrationSelect from "./FiltrationSelect.tsx";
-
 import { type Options } from "../../data/options.ts";
-
-export const getLangugesOptions = async (): Promise<Options | undefined> => {
-  try {
-    const languagesRef = ref(teachersDB, "languages/");
-    const languagesSnapshot = await get(languagesRef);
-    const langaugesOptions = languagesSnapshot.val().map((language: string) => {
-      return { value: language, label: language };
-    });
-    return langaugesOptions;
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { getOptions } from "../../utils/getOptions.ts";
 
 const LanguageFilter = () => {
   const [options, setOptions] = useState<Options>([]);
 
   useEffect(() => {
-    const getOptions = async () => {
-      const options = await getLangugesOptions();
+    const getLanguagesOptions = async () => {
+      const options = await getOptions("languages/");
       if (options) {
         setOptions(options);
       }
     };
 
-    getOptions();
+    getLanguagesOptions();
   }, []);
 
   return (
