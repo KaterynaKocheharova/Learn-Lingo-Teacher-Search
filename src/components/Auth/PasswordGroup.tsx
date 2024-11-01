@@ -12,7 +12,6 @@ type PasswordGroupProps = Omit<InputGroupProps, "name" | "placeholder">;
 const PasswordGroup = ({
   register,
   errorMessage,
-  required,
   ...props
 }: PasswordGroupProps) => {
   const [isPasswordOpen, setIsPasswordOpen] = useState(true);

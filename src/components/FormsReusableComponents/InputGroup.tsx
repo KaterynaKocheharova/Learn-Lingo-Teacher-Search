@@ -2,17 +2,18 @@ import { InputProps, Box } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
 import { type RegisterInputValues, LoginInputValues } from "../Auth/types";
 import { type BookingValues } from "../TeachersPageComponents/BookingForm";
+import { type Names } from "./types";
 import StyledInput from "./StyledInput";
 import StyledFormError from "./StyledFormError";
 
-export type InputGroupProps = Partial<InputProps> &
-  Partial<React.InputHTMLAttributes<HTMLInputElement>> & {
-    errorMessage: string | undefined;
-    register:
-      | UseFormRegister<RegisterInputValues>
-      | UseFormRegister<LoginInputValues> | UseFormRegister<BookingValues>;
-    name: keyof RegisterInputValues | keyof BookingValues | keyof LoginInputValues;
-  };
+export type InputGroupProps = Partial<InputProps> & {
+  errorMessage: string | undefined;
+  register:
+    | UseFormRegister<RegisterInputValues>
+    | UseFormRegister<LoginInputValues>
+    | UseFormRegister<BookingValues>;
+  name: Names;
+};
 
 const InputGroup = ({
   name,
@@ -20,7 +21,6 @@ const InputGroup = ({
   placeholder,
   type,
   errorMessage,
-  required,
   ...props
 }: InputGroupProps) => {
   return (

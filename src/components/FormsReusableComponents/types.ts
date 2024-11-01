@@ -1,0 +1,1 @@
+export type Names = "number" | "name" | "email" | "password" | "learningGoal";
