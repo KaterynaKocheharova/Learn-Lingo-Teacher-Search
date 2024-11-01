@@ -41,7 +41,8 @@ const LoginForm = ({ onClose }: ModalForm) => {
 
   const dispatch = useAppDispatch();
 
-  type FormData = yup.InferType<typeof loginUserSchema>;
+  type FormData = LoginInputValues;
+
   const onSubmit: SubmitHandler<LoginInputValues> = async (data: FormData) => {
     dispatch(loginUser(data))
       .unwrap()
@@ -84,8 +85,6 @@ const LoginForm = ({ onClose }: ModalForm) => {
           />
           <PasswordGroup
             register={register}
-            name="password"
-            placeholder="Password"
             errorMessage={errors.password ? errors.password.message : ""}
           />
         </InputsColumn>

@@ -7,9 +7,7 @@ import { IconButton } from "@chakra-ui/react";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const PasswordGroup = ({
-  name,
   register,
-  placeholder,
   errorMessage,
   required,
   ...props
@@ -20,12 +18,12 @@ const PasswordGroup = ({
   return (
     <Box position="relative" w="100%">
       <StyledInput
-        name={name}
         errorMessage={errorMessage}
         register={register}
-        placeholder={placeholder}
+        placeholder="Password"
         type={isPasswordOpen ? "text" : "password"}
         {...props}
+        name="password"
       />
       <IconButton
         variant="unstyled"
