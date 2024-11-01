@@ -6,7 +6,7 @@ import AuthButtons from "./AuthButtons";
 
 const NavBar = () => {
   return (
-    <PageContainer>
+    <PageContainer bg="inherit">
       <HStack
         wrap="wrap"
         justify="space-between"

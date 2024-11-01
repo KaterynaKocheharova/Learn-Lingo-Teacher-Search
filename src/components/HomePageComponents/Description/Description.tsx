@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 const Description = () => {
   return (
     <Box
-      w={{ base: "100%", md: "400px", lg: "720px" }}
+      w={{ base: "100%", md: "80%", lg: "720px" }}
       bg="brand.gray.500"
       borderRadius="30px"
       p={{ base: "6", lg: "98px 108px 98px 64px" }}
