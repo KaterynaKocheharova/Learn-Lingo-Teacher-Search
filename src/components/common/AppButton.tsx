@@ -1,9 +1,8 @@
 import { Button, ButtonProps } from "@chakra-ui/react";
 
-type AppButtonProps = Partial<React.ButtonHTMLAttributes<HTMLButtonElement>> &
-  Partial<ButtonProps> & {
-    children: React.ReactNode;
-  };
+type AppButtonProps = Partial<ButtonProps> & {
+  children: React.ReactNode;
+};
 
 const AppButton = ({ children, onClick, ...props }: AppButtonProps) => {
   return (
@@ -24,13 +23,13 @@ const AppButton = ({ children, onClick, ...props }: AppButtonProps) => {
         bg: "brand.orange.800",
         color: "brand.black.900",
         border: "none",
-        outline: "none"
+        outline: "none",
       }}
       _active={{
         bg: "brand.orange.800",
         color: "brand.black.900",
         border: "none",
-        outiline: "none"
+        outiline: "none",
       }}
       {...props}
       line-height="1.5"
