@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, IconButton } from "@chakra-ui/react";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+
 import StyledInput from "../common/StyledInput";
 import StyledFormError from "../common/StyledFormError";
+
 import { type InputGroupProps } from "../common/InputGroup";
-import { IconButton } from "@chakra-ui/react";
-import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+
+type PasswordGroupProps = Omit<InputGroupProps, "name" | "placeholder">;
 
 const PasswordGroup = ({
   register,
   errorMessage,
   required,
   ...props
-}: InputGroupProps) => {
+}: PasswordGroupProps) => {
   const [isPasswordOpen, setIsPasswordOpen] = useState(true);
   const handleClick = () => setIsPasswordOpen(!isPasswordOpen);
 
