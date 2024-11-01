@@ -6,7 +6,9 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 
-const AppModal = ({ isOpen, onClose, children }: ModalProps) => {
+type AppModalProps = ModalProps;
+
+const AppModal = ({ isOpen, onClose, children }: AppModalProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
@@ -22,8 +24,8 @@ const AppModal = ({ isOpen, onClose, children }: ModalProps) => {
           "&::-webkit-scrollbar": {
             display: "none",
           },
-          msOverflowStyle: "none", 
-          scrollbarWidth: "none", 
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
         }}
       >
         <ModalCloseButton
@@ -35,30 +37,6 @@ const AppModal = ({ isOpen, onClose, children }: ModalProps) => {
           _active={{ bg: "brand.orange.400" }}
           _focus={{ bg: "brand.orange.400" }}
         />
-        {/* <AppButton
-          width="32px"
-          height="32px"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          position="absolute"
-          top="20px"
-          right="20px"
-          bg="transparent"
-          padding="0"
-          outline="none"
-          border="none"
-          _hover="brand.orange.400"
-          _active="brand.orange.400"
-          _focus="brand.orange.400"
-          fill="brand.black.900"
-          stroke="brand.black.900"
-          onClick={onClose}
-        >
-          <svg width="32px" height="32px">
-            <use href="/sprite.svg#icon-close"></use>
-          </svg>
-        </AppButton> */}
         {children}
       </ModalContent>
     </Modal>
