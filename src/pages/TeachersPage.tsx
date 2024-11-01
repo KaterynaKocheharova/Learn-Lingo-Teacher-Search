@@ -28,7 +28,6 @@ const TeachersPage = () => {
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log(teachers);
 
   const totalPages = useMemo(
     () => Math.ceil(totalTeachers / 4),

@@ -5,10 +5,10 @@ import LevelsFilter from "./LevelsFilter";
 
 const Filters = () => {
   return (
-    <HStack spacing="20px" wrap="wrap" mb="32px" pl={{lg: "60px"}}>
+    <HStack spacing="20px" wrap="wrap" mb="32px" pl={{ lg: "60px" }}>
       <LanguageFilter />
-      {/* <LevelsFilter />
-      <PricesFilter /> */}
+      <LevelsFilter />
+      <PricesFilter />
     </HStack>
   );
 };

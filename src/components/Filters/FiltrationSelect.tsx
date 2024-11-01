@@ -1,5 +1,6 @@
 import Select from "react-select";
 import { type Option } from "../../data/options";
+import CreatableSelect from 'react-select/creatable';
 import css from "./select.module.css";
 import { VStack } from "@chakra-ui/react";
 import ThickGrayText from "../TeachersPageComponents/ThickGrayText";
@@ -28,7 +29,7 @@ const FiltrationSelect = ({
   return (
     <VStack spacing="8px" align="flex-start">
       <ThickGrayText fontSize="14px">{labelText}</ThickGrayText>
-      <Select
+      <CreatableSelect
         onChange={(option, actionMeta) => {
           if (option && actionMeta) {
             onChange(option as Option, actionMeta);

@@ -1,5 +1,7 @@
-import { useAppDispatch } from "../../redux/hooks.ts";
-import { fetchTeachers } from "../../redux/teachers/operations.ts";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
+import { fetchFilteredTeachers } from "../../redux/teachers/operations.ts";
+import { selectFilters } from "../../redux/filters/selectors.ts";
+import { addFilter } from "../../redux/filters/slice.ts";
 import { useCallback } from "react";
 import { ref, get } from "firebase/database";
 import { teachersDB } from "../../config/firebase.js";
@@ -27,20 +29,22 @@ export const getPricesOptions = async () => {
 
 const LevelsFilter = () => {
   const dispatch = useAppDispatch();
+  const filters = useAppSelector(selectFilters);
+
   const onChange: SelectChangeHandler = useCallback(
     (option) => {
+      dispatch(addFilter({ filters: { level: option.value } }));
+
       dispatch(
-        fetchTeachers({
-          startKey: "0",
-          isFirstBatch: true,
+        fetchFilteredTeachers({
           filters: {
+            ...filters,
             level: option.value,
           },
-          isFiltered: true
         })
       );
     },
-    [dispatch]
+    [dispatch, filters]
   );
 
   return (

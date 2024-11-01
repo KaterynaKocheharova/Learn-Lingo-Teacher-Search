@@ -65,6 +65,7 @@ export const fetchFilteredTeachers = createAsyncThunk(
   "teachers/fetchFilteredTeachers",
   async (queryDetails: FilterQueryDetails, thunkAPI) => {
     const { filters } = queryDetails;
+    console.log(filters);
 
     let fetchFilteredTeachersPromises = [];
 
@@ -85,11 +86,16 @@ export const fetchFilteredTeachers = createAsyncThunk(
     }
 
     if (filters.price) {
-      const startPrice = filters.price;
-      const endPrice = String(Number(filters.price) + 5);
+      // const startPrice = Number(filters.price);
+      // const endPrice = String(Number(filters.price) + 5);
+      // fetchFilteredTeachersPromises.push(
+      //   await axios.get(
+      //     `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${startPrice}&endAt=${endPrice}`
+      //   )
+      // );
       fetchFilteredTeachersPromises.push(
         await axios.get(
-          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${startPrice}&endAt=${endPrice}`
+          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${filters.price}&endAt=${filters.price}`
         )
       );
     }
@@ -126,22 +132,18 @@ export const fetchFilteredTeachers = createAsyncThunk(
         return priceInRange && levelMatches && languageMatches;
       });
 
-      console.log(onlyNeededTeachers);
+      const nonRepeatedNeededTeachers = onlyNeededTeachers.filter(
+        (teacher, index, array) =>
+          array.findIndex((t) => t.id === teacher.id) === index
+      );
 
-      // const nonRepeatedNeededTeachers = onlyNeededTeachers.filter(
-      //   (teacher, index, array) =>
-      //     array.findIndex((t) => t.id === teacher.id) === index
-      // );
-
-      // console.log(nonRepeatedNeededTeachers);
-
-      // if (!nonRepeatedNeededTeachers.length) {
-      //   return thunkAPI.rejectWithValue(
-      //     "No items found matching your search query"
-      //   );
-      // }
+      if (!nonRepeatedNeededTeachers.length) {
+        return thunkAPI.rejectWithValue(
+          "No items found matching your search query"
+        );
+      }
       const payload: TeachersPayloadType = {
-        teachers: onlyNeededTeachers,
+        teachers: nonRepeatedNeededTeachers,
       };
 
       return payload;

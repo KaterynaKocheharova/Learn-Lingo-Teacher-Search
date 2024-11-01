@@ -1,6 +1,8 @@
 import { useCallback } from "react";
-import { useAppDispatch } from "../../redux/hooks.ts";
-import { fetchTeachers } from "../../redux/teachers/operations.ts";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
+import { selectFilters } from "../../redux/filters/selectors.ts";
+import { addFilter } from "../../redux/filters/slice.ts";
+import { fetchFilteredTeachers } from "../../redux/teachers/operations.ts";
 import { SelectChangeHandler } from "./FiltrationSelect.tsx";
 import { type Option } from "../../data/options.ts";
 import FiltrationSelect from "./FiltrationSelect.tsx";
@@ -8,23 +10,21 @@ import { pricesOptions } from "../../data/options.ts";
 
 const PricesFilter = () => {
   const dispatch = useAppDispatch();
+  const filters = useAppSelector(selectFilters);
 
   const onChange: SelectChangeHandler = useCallback(
     (option: Option) => {
-      if (option.value) {
-        dispatch(
-          fetchTeachers({
-            startKey: "0",
-            filters: {
-              price: option.value,
-            },
-            isFirstBatch: true,
-            isFiltered: true,
-          })
-        );
-      }
+      dispatch(addFilter({ filters: { price: option.value } }));
+      dispatch(
+        fetchFilteredTeachers({
+          filters: {
+            ...filters,
+            price: option.value,
+          },
+        })
+      );
     },
-    [dispatch]
+    [dispatch, filters]
   );
 
   return (
@@ -33,7 +33,7 @@ const PricesFilter = () => {
       options={pricesOptions}
       name="price"
       width="124px"
-      labelText="Price"
+      labelText="Bottom margin + 5"
     />
   );
 };
