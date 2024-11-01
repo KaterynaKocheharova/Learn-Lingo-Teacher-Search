@@ -1,14 +1,13 @@
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { loginUser } from "../../redux/auth/operations.ts";
 import { selectIsLoading } from "../../redux/auth/selectors.ts";
-import { Box } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 import StyledModalHeader from "../common/StyledModalHeader";
 import StyledModalText from "../common/StyledModalText";
 import InputsColumn from "../common/InputsColumn";
 import InputGroup from "../common/InputGroup";
 import AppButton from "../common/AppButton";
 import PasswordGroup from "./PasswordGroup";
-import { Spinner } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { type LoginInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
