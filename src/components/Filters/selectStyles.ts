@@ -1,6 +1,7 @@
 import { StylesConfig } from "react-select";
+import { type Option } from "../../data/options";
 
-type GetSelectStyles = (width: string) => StylesConfig;
+type GetSelectStyles = (width: string) => StylesConfig<Option>;
 
 export const getSelectStyles: GetSelectStyles = (width) => {
   return {
