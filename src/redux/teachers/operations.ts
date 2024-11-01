@@ -95,7 +95,7 @@ export const fetchFilteredTeachers = createAsyncThunk(
       // );
       fetchFilteredTeachersPromises.push(
         await axios.get(
-          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${filters.price}&endAt=${filters.price}`
+          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&equalTo=${Number(filters.price)}`
         )
       );
     }
