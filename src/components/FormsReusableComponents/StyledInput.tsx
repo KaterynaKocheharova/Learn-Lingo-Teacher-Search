@@ -1,5 +1,17 @@
-import { Input } from "@chakra-ui/react";
-import { type InputGroupProps } from "../FormsReusableComponents/InputGroup";
+import { Input, InputProps } from "@chakra-ui/react";
+import { UseFormRegister } from "react-hook-form";
+import { type RegisterInputValues, LoginInputValues } from "../Auth/types";
+import { type BookingValues } from "../TeachersPageComponents/BookingForm";
+import { type Names } from "./types";
+
+export type StyledInputProps = Partial<InputProps> & {
+  errorMessage: string | undefined;
+  register:
+    | UseFormRegister<RegisterInputValues>
+    | UseFormRegister<LoginInputValues>
+    | UseFormRegister<BookingValues>;
+  name: Names;
+};
 
 const StyledInput = ({
   name,
@@ -7,13 +19,12 @@ const StyledInput = ({
   placeholder,
   type,
   errorMessage,
-  required,
   ...props
-}: InputGroupProps) => {
+}: StyledInputProps) => {
   return (
     <Input
       variant="unstyled"
-      {...register(name, { required })}
+      {...register(name, { required: true })}
       placeholder={placeholder}
       type={type}
       {...props}
@@ -32,3 +43,5 @@ const StyledInput = ({
 };
 
 export default StyledInput;
+
+

@@ -1,19 +1,9 @@
-import { InputProps, Box } from "@chakra-ui/react";
-import { UseFormRegister } from "react-hook-form";
-import { type RegisterInputValues, LoginInputValues } from "../Auth/types";
-import { type BookingValues } from "../TeachersPageComponents/BookingForm";
-import { type Names } from "./types";
+import {  Box } from "@chakra-ui/react";
 import StyledInput from "./StyledInput";
 import StyledFormError from "./StyledFormError";
+import { type StyledInputProps } from "./StyledInput";
 
-export type InputGroupProps = Partial<InputProps> & {
-  errorMessage: string | undefined;
-  register:
-    | UseFormRegister<RegisterInputValues>
-    | UseFormRegister<LoginInputValues>
-    | UseFormRegister<BookingValues>;
-  name: Names;
-};
+export type InputGroupProps = StyledInputProps;
 
 const InputGroup = ({
   name,
