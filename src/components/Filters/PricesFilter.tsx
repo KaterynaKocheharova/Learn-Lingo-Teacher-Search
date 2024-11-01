@@ -33,7 +33,7 @@ const PricesFilter = () => {
       options={pricesOptions}
       name="price"
       width="124px"
-      labelText="Bottom margin + 5"
+      labelText="Price"
     />
   );
 };
