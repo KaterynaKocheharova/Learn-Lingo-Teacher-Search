@@ -1,7 +1,6 @@
 import { Flex, Spinner } from "@chakra-ui/react";
 
 const Loader = () => {
-
     return (
       <Flex
         pos="fixed"
