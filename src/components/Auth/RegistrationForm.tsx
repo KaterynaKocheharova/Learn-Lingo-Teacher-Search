@@ -1,21 +1,24 @@
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { registerUser } from "../../redux/auth/operations.ts";
 import { selectIsLoading } from "../../redux/auth/selectors.ts";
-import { Box } from "@chakra-ui/react";
+
+import { Box, Spinner } from "@chakra-ui/react";
 import StyledModalHeader from "../common/StyledModalHeader";
 import StyledModalText from "../common/StyledModalText";
 import InputsColumn from "../common/InputsColumn";
 import InputGroup from "../common/InputGroup";
 import AppButton from "../common/AppButton";
 import PasswordGroup from "./PasswordGroup";
-import { Spinner } from "@chakra-ui/react";
+
 import { useForm, SubmitHandler } from "react-hook-form";
-import { type RegisterInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import { type RegisterInputValues } from "./types";
+import { type ModalForm } from "./types";
+
 import { toastConfigs } from "../../utils/toast.ts";
 import { useToast } from "@chakra-ui/react";
-import { type ModalForm } from "./types";
 
 const registerUserSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -44,8 +47,8 @@ const RegistrationForm = ({ onClose }: ModalForm) => {
 
   const dispatch = useAppDispatch();
 
-  type FormData = yup.InferType<typeof registerUserSchema>;
-  
+  type FormData = RegisterInputValues;
+
   const onSubmit: SubmitHandler<RegisterInputValues> = async (
     data: FormData
   ) => {
@@ -105,8 +108,6 @@ const RegistrationForm = ({ onClose }: ModalForm) => {
           />
           <PasswordGroup
             register={register}
-            name="password"
-            placeholder="Password"
             errorMessage={errors.password ? errors.password.message : ""}
           />
         </InputsColumn>
