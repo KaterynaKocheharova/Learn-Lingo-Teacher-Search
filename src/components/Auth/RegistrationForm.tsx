@@ -90,7 +90,7 @@ const RegistrationForm = ({ onClose }: ModalForm) => {
         Thank you for your interest in our platform! In order to register, we
         need some information. Please provide us with the following information
       </StyledModalText>
-      <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+      <Box as="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <InputsColumn>
           <InputGroup
             register={register}

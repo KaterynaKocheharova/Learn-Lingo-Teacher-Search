@@ -74,7 +74,7 @@ const LoginForm = ({ onClose }: ModalForm) => {
         Welcome back! Please enter your credentials to access your account and
         continue your search for an teacher.
       </StyledModalText>
-      <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+      <Box as="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <InputsColumn>
           <InputGroup
             register={register}

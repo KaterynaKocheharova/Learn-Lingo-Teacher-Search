@@ -101,7 +101,7 @@ const BookingForm = ({
           <ThickBlackText as="h4">{`${name} ${surname}`}</ThickBlackText>
         </Box>
       </HStack>
-      <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+      <Box as="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <LearningGoalRadios
           register={register}
           name="learningGoal"
