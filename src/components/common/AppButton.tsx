@@ -24,11 +24,13 @@ const AppButton = ({ children, onClick, ...props }: AppButtonProps) => {
         bg: "brand.orange.800",
         color: "brand.black.900",
         border: "none",
+        outline: "none"
       }}
       _active={{
         bg: "brand.orange.800",
         color: "brand.black.900",
         border: "none",
+        outiline: "none"
       }}
       {...props}
       line-height="1.5"

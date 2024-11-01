@@ -13,12 +13,18 @@ const UnstyledButton = ({ onClick, children, ...props }: UnstyledButton) => {
       border="none"
       _hover={{
         bg: "transparent",
+        outline: "none",
+        border: "none"
       }}
       _active={{
         bg: "transparent",
+        outline: "none",
+        border: "none"
       }}
       _focus={{
         bg: "transparent",
+        outline: "none",
+        border: "none"
       }}
       {...props}
     >
