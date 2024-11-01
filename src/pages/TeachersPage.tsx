@@ -28,7 +28,6 @@ const TeachersPage = () => {
   const [totalTeachers, setTotalTeachers] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const totalPages = useMemo(
     () => Math.ceil(totalTeachers / 4),
     [totalTeachers]
@@ -37,7 +36,6 @@ const TeachersPage = () => {
   const teacherDBRef = ref(teachersDB, "teacherInTotal/");
 
   useEffect(() => {
-
     const getTotalTeachers = async () => {
       const snapshot = await get(teacherDBRef);
       const total = snapshot.val();
@@ -50,7 +48,7 @@ const TeachersPage = () => {
   }, [dispatch]);
 
   return (
-    <Box bg="brand.gray.500" py="96px" as="section">
+    <Box bg="brand.gray.500" py="96px" as="section" minHeight="100%">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
         <Filters />
         {!error && <TeacherCardsList teachers={teachers} />}

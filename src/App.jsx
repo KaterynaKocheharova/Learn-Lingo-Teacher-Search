@@ -5,6 +5,7 @@ import AuthProvider from "./components/Auth/AuthProvider";
 import Loader from "./components/common/Loader";
 import "./data/options";
 import PrivateRoute from "./components/PrivateRoute";
+import { Box } from "@chakra-ui/react";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const TeachersPage = lazy(() => import("./pages/TeachersPage"));
@@ -12,8 +13,10 @@ const FavoriteTeachersPage = lazy(() => import("./pages/FavoriteTeachersPage"));
 
 export default function App() {
   return (
-    <div id="App">
-      <Suspense fallback={<Loader />}>
+    <Box id="App" minHeight="100%">
+      <Suspense fallback={<Loader />} style={{
+        minHeight: "100%"
+      }}>
         <AuthProvider>
           <Layout>
             <Routes>
@@ -34,6 +37,6 @@ export default function App() {
           </Layout>
         </AuthProvider>
       </Suspense>
-    </div>
+    </Box>
   );
 }

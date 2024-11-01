@@ -62,6 +62,7 @@ import { firestore } from "../../config/firebase.js";
 import { doc, getDoc } from "firebase/firestore";
 import { refreshFavorites } from "../../redux/favorites/slice.js";
 import Loader from "../common/Loader.js";
+import { Box } from "@chakra-ui/react";
 
 type AuthProviderProps = {
   children: React.ReactNode;
@@ -100,7 +101,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   if (loading) return <Loader />;
 
-  return <>{children}</>;
+  return <Box minHeight="100%">{children}</Box>;
 };
 
 export default AuthProvider;

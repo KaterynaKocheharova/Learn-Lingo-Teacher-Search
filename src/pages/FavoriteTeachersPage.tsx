@@ -29,7 +29,7 @@ const FavoriteTeachersPage = () => {
   }, [dispatch, favoriteTeachersIds]);
 
   return (
-    <Box bg="brand.gray.500" py="96px" as="section">
+    <Box bg="brand.gray.500" py="96px" as="section" minHeight="100%">
       <PageContainer px={{ base: "16px", lg: "64px" }}>
         {!error && <TeacherCardsList teachers={favoriteTeachers} />}
         {error && <PageError />}

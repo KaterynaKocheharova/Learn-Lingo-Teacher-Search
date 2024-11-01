@@ -15,7 +15,7 @@ const HomePage = () => {
       >
         <Description />
         <Image
-          boxSize={{ base: "100%", md: "80%", lg: "568px" }}
+          boxSize={{ base: "100%", md: "70%", lg: "568px" }}
           borderRadius="30px"
           objectFit="cover"
           src="/hero-image.png"
