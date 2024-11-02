@@ -1,7 +1,10 @@
 import PageContainer from "../components/common/PageContainer";
+
 import { Flex, Image } from "@chakra-ui/react";
+
 import Description from "../components/HomePageComponents/Description";
 import Benefits from "../components/HomePageComponents/Benefits";
+import Banner from "../components/HomePageComponents/Banner";
 
 const HomePage = () => {
   return (
@@ -14,14 +17,7 @@ const HomePage = () => {
         align="flex-between"
       >
         <Description />
-        <Image
-          boxSize={{ base: "100%", md: "70%", lg: "568px" }}
-          borderRadius="30px"
-          objectFit="cover"
-          src="/hero-image.png"
-          alt="home page banner playful cartoon girl at the computer"
-          alignSelf="center"
-        />
+        <Banner />
         <Benefits />
       </Flex>
     </PageContainer>
