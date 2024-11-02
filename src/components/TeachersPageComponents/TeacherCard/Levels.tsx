@@ -1,10 +1,12 @@
 import { HStack, Box } from "@chakra-ui/react";
-import { type Teacher } from "../../redux/teachers/types";
+import { type Teacher } from "../../../redux/teachers/types";
 
 type LevelsProps = Pick<Teacher, "levels">;
 
 const Levels = ({ levels }: LevelsProps) => {
+
   const levelsArray = Object.keys(levels);
+  
   return (
     <HStack as="ul" wrap="wrap" spacing="8px">
       {levelsArray.map((level, index) => {
