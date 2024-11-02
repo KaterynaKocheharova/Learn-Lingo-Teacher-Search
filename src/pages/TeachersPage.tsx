@@ -9,7 +9,6 @@ import Loader from "../components/common/Loader";
 import { useFetchTeachers } from "../hooks/useFetchTeachers.js";
 
 const TeachersPage = () => {
-  
   const {
     isFiltered,
     teachers,
@@ -30,7 +29,7 @@ const TeachersPage = () => {
           teachers.length > 0 &&
           currentPage < totalPages &&
           !isFiltered && <LoadMore setCurrentPage={setCurrentPage} />}
-        {error && <PageError error={error ? error : ""} />}
+        {error && <PageError error={typeof error === "string" ? error : ""} />}
         {isLoading && <Loader />}
       </PageContainer>
     </PageSection>
