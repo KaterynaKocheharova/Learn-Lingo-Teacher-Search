@@ -7,13 +7,16 @@ import LearningGoalRadios from "../TeachersPageComponents/LearningGoalRadios";
 import InputsColumn from "../FormsReusableComponents/InputsColumn";
 import InputGroup from "../FormsReusableComponents/InputGroup";
 import AppButton from "../common/AppButton";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
 import { useToast } from "@chakra-ui/react";
+import { toastConfigs } from "../../utils/toast";
+
 import { type ModalForm } from "./types";
 import { type Teacher } from "../../redux/teachers/types";
-import { toastConfigs } from "../../utils/toast";
 
 const bookingSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -24,14 +27,17 @@ const bookingSchema = yup.object({
     .oneOf(
       ["business", "kids", "abroad", "study", "travel"],
       "You must accept the terms"
-    ),
+    )
+    .required(),
 });
+
+type LearningGoal = "business" | "kids" | "abroad" | "study" | "travel";
 
 export type BookingValues = {
   name: string;
   email: string;
   number: string;
-  learningGoal: "business" | "kids" | "abroad" | "study" | "travel";
+  learningGoal: LearningGoal;
 };
 
 type BookingFormProps = ModalForm &
@@ -62,12 +68,12 @@ const BookingForm = ({
 
   const toast = useToast();
 
-  type FormData = yup.InferType<typeof bookingSchema>;
+  type FormData = BookingValues;
+
   const onSubmit: SubmitHandler<BookingValues> = async (
     data: FormData,
     event
   ) => {
-    console.log(data);
     if (event) {
       event?.target.reset();
     }
@@ -75,7 +81,7 @@ const BookingForm = ({
     toast({
       ...toastConfigs,
       status: "success",
-      description: "Thank you for your order. We'll call you soon!",
+      description: "Thank you for your booking. We'll call you soon!",
     });
   };
 
