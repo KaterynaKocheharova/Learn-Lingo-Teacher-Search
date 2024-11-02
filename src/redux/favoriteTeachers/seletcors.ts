@@ -1,5 +1,3 @@
-import { RootState } from "../store";
-import { type Teachers } from "../teachers/types";
 import {
   type SelectBoolean,
   SelectTeachers,

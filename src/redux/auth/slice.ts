@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { registerUser, loginUser, logoutUser } from "./operations";
 
-import { type UserSlice, RegisterPayload, RefreshUserPayload } from "./types";
-import { type FetchingData } from "../types";
+import {
+  type UserSliceState,
+  RegisterPayload,
+  RefreshUserPayload,
+} from "./types";
 
-const initialState: UserSlice = {
+const initialState: UserSliceState = {
   user: {
     name: "",
     email: "",
@@ -15,14 +18,8 @@ const initialState: UserSlice = {
   isLoading: "",
 };
 
-export const handleError = <
-  T extends { isLoading: boolean | string; error: FetchingData["error"] }
->(
-  state: T,
-  action: PayloadAction<unknown>
-) => {
-  state.isLoading = false;
-
+const handleError = (state: UserSliceState, action: PayloadAction<unknown>) => {
+  state.isLoading = "";
   if (action.payload instanceof Error) {
     state.error = action.payload;
   } else {
@@ -47,7 +44,7 @@ const userSlice = createSlice({
           state.user.userId = action.payload.userId;
         }
       )
-      .addCase(registerUser.rejected, handleError<UserSlice>)
+      .addCase(registerUser.rejected, handleError)
       .addCase(loginUser.pending, (state) => {
         state.isLoading = "logining-in-progress";
       })
@@ -56,7 +53,7 @@ const userSlice = createSlice({
         state.isLoading = "";
         state.error = null;
       })
-      .addCase(loginUser.rejected, handleError<UserSlice>)
+      .addCase(loginUser.rejected, handleError)
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = "logout-in-progress";
       })
@@ -71,7 +68,7 @@ const userSlice = createSlice({
         state.isLoading = "";
         state.error = null;
       })
-      .addCase(logoutUser.rejected, handleError<UserSlice>);
+      .addCase(logoutUser.rejected, handleError);
   },
   reducers: {
     refreshUser: (state, action: PayloadAction<RefreshUserPayload>) => {

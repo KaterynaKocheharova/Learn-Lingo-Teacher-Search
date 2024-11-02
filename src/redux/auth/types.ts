@@ -1,7 +1,7 @@
 import { type FetchingData } from "../types";
 import { type RegisterInputValues } from "../../components/Auth/types";
 
-export type UserSlice = {
+export type UserSliceState = {
   user: {
     name: string;
     email: string;

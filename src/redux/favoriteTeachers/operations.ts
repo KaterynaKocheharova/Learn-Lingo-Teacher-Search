@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Teachers } from "../teachers/types";
 
 export type QueryDetails = {
   favoriteTeachersIds: string[];
@@ -21,7 +22,7 @@ export const fetchFavoriteTeachers = createAsyncThunk(
 
       const results = await Promise.all(promises);
       return {
-        teachers: results.flat(),
+        teachers: results.flat() as Teachers,
       };
     } catch (error) {
       let errorMessage;

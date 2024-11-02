@@ -1,11 +1,13 @@
 import { fetchFavoriteTeachers } from "./operations";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TeachersPayloadType } from "./../teachers/slice";
-import { TeachersSliceState } from "./../teachers/types";
-import { removeFromFavorites } from "../favorites/slice";
-import { type Teacher } from "./../teachers/types";
 
-type FavoriteTeachersState = Omit<TeachersSliceState, "lastKey">;
+import { type Teachers, Teacher } from "./../teachers/types";
+import { type FetchingData } from "../types";
+
+type FavoriteTeachersState = { items: Teachers; isLoading: boolean } & Pick<
+  FetchingData,
+  "error"
+>;
 
 const initialState: FavoriteTeachersState = {
   items: [],
@@ -13,12 +15,25 @@ const initialState: FavoriteTeachersState = {
   error: null,
 };
 
-export type FavoriteTeachersPayload = Omit<
-  TeachersPayloadType,
-  "lastKey" | "isFirstBatch"
->;
+export type FavoriteTeachersPayload = {
+  teachers: Teachers;
+};
 
-export const handlePending = (state: FavoriteTeachersState) => {
+export const handleError = <
+  T extends { isLoading: boolean } & Pick<FetchingData, "error">
+>(
+  state: T,
+  action: PayloadAction<unknown>
+) => {
+  state.isLoading = false;
+  if (action.payload instanceof Error) {
+    state.error = action.payload;
+  } else {
+    state.error = "Unknown error";
+  }
+};
+
+export const handlePending = <T extends { isLoading: boolean }>(state: T) => {
   state.isLoading = true;
 };
 
@@ -33,22 +48,19 @@ const favoriteTeachersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFavoriteTeachers.pending, handlePending)
+      .addCase(
+        fetchFavoriteTeachers.pending,
+        handlePending
+      )
       .addCase(
         fetchFavoriteTeachers.fulfilled,
-        (
-          state: FavoriteTeachersState,
-          action: PayloadAction<FavoriteTeachersPayload>
-        ) => {
+        (state, action: PayloadAction<FavoriteTeachersPayload>) => {
           state.isLoading = false;
           state.error = null;
           state.items = action.payload.teachers;
         }
       )
-      .addCase(fetchFavoriteTeachers.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      });
+      .addCase(fetchFavoriteTeachers.rejected, handleError);
   },
 });
 
