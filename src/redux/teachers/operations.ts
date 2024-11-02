@@ -2,7 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { type Teachers } from "./types.js";
-import { type TeachersPayloadType } from "./slice.js";
+import {
+  type TeachersPayloadType,
+  FilteredTeachersPayloadType,
+} from "./slice.js";
 import { type Filters } from "../filters/slice.js";
 
 export type QueryDetails = {
@@ -10,15 +13,15 @@ export type QueryDetails = {
   isFirstBatch?: boolean;
 };
 
+const BASE_URL =
+  "https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json";
+
 export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async (queryDetails: QueryDetails, thunkAPI) => {
     const { startKey, isFirstBatch = false } = queryDetails;
 
     const limit = 4;
-
-    const BASE_URL =
-      "https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json";
 
     const params = {
       orderBy: JSON.stringify("$key"),
@@ -54,6 +57,8 @@ export const fetchTeachers = createAsyncThunk(
   }
 );
 
+// =================================== FETCHING FILTERED TEACHERS
+
 export type FilterQueryDetails = {
   filters: Partial<Filters["filters"]>;
 };
@@ -62,7 +67,6 @@ export const fetchFilteredTeachers = createAsyncThunk(
   "teachers/fetchFilteredTeachers",
   async (queryDetails: FilterQueryDetails, thunkAPI) => {
     const { filters } = queryDetails;
-    console.log(filters);
 
     let fetchFilteredTeachersPromises = [];
 
@@ -83,13 +87,6 @@ export const fetchFilteredTeachers = createAsyncThunk(
     }
 
     if (filters.price) {
-      // const startPrice = Number(filters.price);
-      // const endPrice = String(Number(filters.price) + 5);
-      // fetchFilteredTeachersPromises.push(
-      //   await axios.get(
-      //     `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${startPrice}&endAt=${endPrice}`
-      //   )
-      // );
       fetchFilteredTeachersPromises.push(
         await axios.get(
           `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&equalTo=${filters.price}`
@@ -99,6 +96,7 @@ export const fetchFilteredTeachers = createAsyncThunk(
 
     try {
       const responses = await Promise.all(fetchFilteredTeachersPromises);
+
       const allFilteredTeachers = responses.flatMap((response) => {
         const entries = Object.entries(response.data);
         const teachersArray = entries.map((entry) => {
@@ -109,12 +107,8 @@ export const fetchFilteredTeachers = createAsyncThunk(
 
       const onlyNeededTeachers = allFilteredTeachers.filter((teacher) => {
         let priceInRange = true;
-
-        // !!!!!!!!!! remove this extar check
         if (filters.price) {
-          priceInRange =
-            Number(teacher.price_per_hour) >= Number(filters.price) &&
-            Number(teacher.price_per_hour) <= Number(filters.price) + 5;
+          priceInRange = teacher.price_per_hour === Number(filters.price);
         }
 
         let levelMatches = true;
@@ -140,7 +134,7 @@ export const fetchFilteredTeachers = createAsyncThunk(
           "No items found matching your search query"
         );
       }
-      const payload: TeachersPayloadType = {
+      const payload: FilteredTeachersPayloadType = {
         teachers: nonRepeatedNeededTeachers,
       };
 
