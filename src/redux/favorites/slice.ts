@@ -44,4 +44,5 @@ export const {
   removeFromFavorites,
   clearFavorites,
 } = favoritesSlice.actions;
+
 export const favoritesReducer = favoritesSlice.reducer;
