@@ -13,3 +13,5 @@ export const selectIsLoading: SelectBoolean = (state) =>
 export const selectTeachers: SelectTeachers = (state) => state.teachers.items;
 export const selectError: SelectError = (state) => state.teachers.error;
 export const selectLastKey: SelectString = (state) => state.teachers.lastKey;
+export const SelectIsFiltered: SelectBoolean = (state) =>
+  state.teachers.isFiltered;

@@ -1,54 +1,27 @@
-import { useEffect, useState, useMemo } from "react";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import {
-  fetchTeachers,
-  fetchFilteredTeachers,
-} from "../redux/teachers/operations";
-import {
-  selectError,
-  selectTeachers,
-  selectIsLoading,
-} from "../redux/teachers/selectros";
-import { Box } from "@chakra-ui/react";
+import PageSection from "../components/common/PageSection.js";
 import PageContainer from "../components/common/PageContainer";
+import Filters from "../components/Filters/Filters.js";
 import TeacherCardsList from "../components/TeachersPageComponents/TeacherCardsList";
 import LoadMore from "../components/TeachersPageComponents/LoadMore";
 import PageError from "../components/common/PageError";
 import Loader from "../components/common/Loader";
-import { teachersDB } from "../config/firebase.js";
-import { ref, get } from "firebase/database";
-import Filters from "../components/Filters/Filters.js";
+
+import { useFetchTeachers } from "../hooks/useFetchTeachers.js";
 
 const TeachersPage = () => {
-  const isFiltered = useAppSelector((state) => state.teachers.isFiltered);
-  const teachers = useAppSelector(selectTeachers);
-  const error = useAppSelector(selectError);
-  const isLoading = useAppSelector(selectIsLoading);
-  const dispatch = useAppDispatch();
-  const [totalTeachers, setTotalTeachers] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const totalPages = useMemo(
-    () => Math.ceil(totalTeachers / 4),
-    [totalTeachers]
-  );
-
-  const teacherDBRef = ref(teachersDB, "teacherInTotal/");
-
-  useEffect(() => {
-    const getTotalTeachers = async () => {
-      const snapshot = await get(teacherDBRef);
-      const total = snapshot.val();
-      setTotalTeachers(total);
-    };
-
-    getTotalTeachers();
-
-    dispatch(fetchTeachers({ startKey: "0", isFirstBatch: true }));
-  }, [dispatch]);
+  
+  const {
+    isFiltered,
+    teachers,
+    error,
+    isLoading,
+    currentPage,
+    totalPages,
+    setCurrentPage,
+  } = useFetchTeachers();
 
   return (
-    <Box bg="brand.gray.500" py="96px" as="section" minHeight="100vh">
+    <PageSection>
       <PageContainer px={{ base: "16px", lg: "64px" }}>
         <Filters />
         {!error && <TeacherCardsList teachers={teachers} />}
@@ -60,7 +33,7 @@ const TeachersPage = () => {
         {error && <PageError error={error ? error : ""} />}
         {isLoading && <Loader />}
       </PageContainer>
-    </Box>
+    </PageSection>
   );
 };
 
