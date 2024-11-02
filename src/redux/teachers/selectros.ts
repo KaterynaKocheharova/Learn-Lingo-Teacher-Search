@@ -1,12 +1,8 @@
 import { RootState } from "../store";
 import { type Teachers } from "./types";
+import { type SelectError, SelectBoolean, SelectString } from "../types";
 
-//  maybe generic???
-
-export type SelectBoolean = (state: RootState) => boolean;
 export type SelectTeachers = (state: RootState) => Teachers;
-export type SelectError = (state: RootState) => Error | string | null;
-export type SelectString = (state: RootState) => string;
 
 export const selectIsLoading: SelectBoolean = (state) =>
   state.teachers.isLoading;

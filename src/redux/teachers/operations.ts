@@ -57,7 +57,7 @@ export const fetchTeachers = createAsyncThunk(
   }
 );
 
-// =================================== FETCHING FILTERED TEACHERS
+// ========================================================= FETCHING FILTERED TEACHERS ==================================================
 
 export type FilterQueryDetails = {
   filters: Partial<Filters["filters"]>;

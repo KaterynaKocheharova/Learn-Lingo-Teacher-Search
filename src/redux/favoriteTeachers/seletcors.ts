@@ -1,8 +1,7 @@
 import {
-  type SelectBoolean,
   SelectTeachers,
-  SelectError,
 } from "../teachers/selectros";
+import { type SelectBoolean, SelectError } from "../types";
 
 export const selectIsLoading: SelectBoolean = (state) =>
   state.favoriteTeachers.isLoading;

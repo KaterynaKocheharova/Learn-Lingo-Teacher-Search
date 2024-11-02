@@ -22,19 +22,18 @@ export type Review = {
 //   id: string;
 // };
 
-
 export type Teacher = {
   name: string;
   surname: string;
-  languages: { [language: string]: boolean }; 
-  levels: { [level: string]: boolean }; 
+  languages: { [language: string]: boolean };
+  levels: { [level: string]: boolean };
   rating: number;
   reviews: Review[];
   price_per_hour: number;
   lessons_done: number;
   avatar_url: string;
   lesson_info: string;
-  conditions: string[]; 
+  conditions: string[];
   experience: string;
   id: string;
 };
@@ -42,6 +41,8 @@ export type Teacher = {
 export type Teachers = Teacher[];
 
 export type TeachersSliceState = {
-  teachers: Teachers;
-  filteredTeachers: Teachers;
-} & FetchingData;
+  items: Teacher[];
+  isLoading: boolean;
+  lastKey: string;
+  isFiltered: boolean;
+} & Pick<FetchingData, "error">;
