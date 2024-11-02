@@ -1,4 +1,4 @@
-import { HStack, Spacer } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import PageContainer from "../common/PageContainer";
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";

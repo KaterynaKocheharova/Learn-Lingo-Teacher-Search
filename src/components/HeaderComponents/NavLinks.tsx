@@ -5,6 +5,7 @@ import { HStack, Text } from "@chakra-ui/react";
 
 const NavLinks = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  
   return (
     <HStack as="ul" spacing="7" wrap="wrap">
       <NavLink to="/">
