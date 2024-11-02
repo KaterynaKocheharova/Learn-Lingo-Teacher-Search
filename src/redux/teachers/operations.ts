@@ -1,22 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 import { type Teachers } from "./types.js";
 import { type TeachersPayloadType } from "./slice.js";
-import { type Teacher } from "./types.js";
 import { type Filters } from "../filters/slice.js";
 
-// !!! very slow operation
 
 export type QueryDetails = {
   startKey?: string;
   isFirstBatch?: boolean;
-  isFiltered?: boolean;
 };
 
 export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async (queryDetails: QueryDetails, thunkAPI) => {
-    const { startKey, isFirstBatch = false, isFiltered = false } = queryDetails;
+    const { startKey, isFirstBatch = false } = queryDetails;
 
     const limit = 4;
     let url;
@@ -43,7 +41,6 @@ export const fetchTeachers = createAsyncThunk(
         teachers: teachers.filter((teacher) => teacher !== undefined),
         isFirstBatch: isFirstBatch,
         lastKey: Object.keys(response.data).pop(),
-        isFiltered: isFiltered ? true : false,
       };
 
       return payload;
