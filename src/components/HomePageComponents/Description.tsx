@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Heading, Text } from "@chakra-ui/react";
-import AppButton from "../../common/AppButton";
 import { NavLink } from "react-router-dom";
+import AppButton from "../common/AppButton";
 
 const Description = () => {
   return (

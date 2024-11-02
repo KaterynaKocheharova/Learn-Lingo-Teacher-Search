@@ -1,7 +1,7 @@
 import PageContainer from "../components/common/PageContainer";
 import { Flex, Image } from "@chakra-ui/react";
-import Description from "../components/HomePageComponents/Description/Description";
-import Benefits from "../components/HomePageComponents/Description/Benefits";
+import Description from "../components/HomePageComponents/Description";
+import Benefits from "../components/HomePageComponents/Benefits";
 
 const HomePage = () => {
   return (

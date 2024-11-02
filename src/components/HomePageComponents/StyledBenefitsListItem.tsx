@@ -1,5 +1,5 @@
 import { HStack, Text } from "@chakra-ui/react";
-import { type Benefit } from "../../../utils/benefits";
+import { type Benefit } from "../../data/benefits";
 
 type StyledBenefitsListItem = {
   benefit: Benefit;

@@ -1,6 +1,6 @@
 import StyledBenefitsList from "./StyledBenefitsList";
 import StyledBenefitsListItem from "./StyledBenefitsListItem";
-import { benefits } from "../../../utils/benefits";
+import { benefits } from "../../data/benefits";
 
 const Benefits = () => {
   return (
