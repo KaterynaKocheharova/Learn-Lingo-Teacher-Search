@@ -33,7 +33,7 @@ const FavoriteTeachersPage = () => {
     <PageSection>
       <PageContainer px={{ base: "16px", lg: "64px" }}>
         {!error && <TeacherCardsList teachers={favoriteTeachers} />}
-        {error && <PageError />}
+        {error && <PageError error={typeof error === "string" ? error : ""} />}
         {isLoading && <Loader />}
       </PageContainer>
       {!favoriteTeachersIds.length && (
