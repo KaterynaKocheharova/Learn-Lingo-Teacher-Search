@@ -14,9 +14,7 @@ const FavoriteTeachersPage = lazy(() => import("./pages/FavoriteTeachersPage"));
 export default function App() {
   return (
     <Box id="App" minHeight="100%">
-      <Suspense fallback={<Loader />} style={{
-        minHeight: "100%"
-      }}>
+      <Suspense fallback={<Loader />}>
         <AuthProvider>
           <Layout>
             <Routes>
