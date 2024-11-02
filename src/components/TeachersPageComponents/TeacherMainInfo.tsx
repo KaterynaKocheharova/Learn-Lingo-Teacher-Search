@@ -1,8 +1,8 @@
 import { VStack, HStack } from "@chakra-ui/react";
 import { type Teacher } from "../../redux/teachers/types";
 import { useMemo } from "react";
-import ThickBlackText from "./ThickBlackText";
-import ThickGrayText from "./ThickGrayText";
+import ThickBlackText from "../common/ThickBlackText";
+import ThickGrayText from "../common/ThickGrayText";
 
 type TeacherMainInfoProps = Pick<
   Teacher,

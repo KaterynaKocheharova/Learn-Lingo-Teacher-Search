@@ -2,16 +2,16 @@ import { useCallback, useState } from "react";
 import { type Teacher } from "../../redux/teachers/types";
 import { HStack, Box, Spacer } from "@chakra-ui/react";
 import TeacherAvatar from "./TeacherAvatar";
-import ThickGrayText from "./ThickGrayText";
+import ThickGrayText from "../common/ThickGrayText";
 import TopDetails from "./TopDetails";
 import UnstyledButton from "../common/UnstyledButton";
 import { Text } from "@chakra-ui/react";
 import TeacherMainInfo from "./TeacherMainInfo";
-import ThickBlackText from "./ThickBlackText";
+import ThickBlackText from "../common/ThickBlackText";
 import Levels from "./Levels";
 import ExtraTeacherInfo from "./ExtraTeacherInfo";
 import AddToFavoritesButton from "./AddToFavoritesButton";
-import BookLessonButton from "./BookLessonButton";
+import BookLessonButton from "../BookingComponents/BookLessonButton";
 
 type TeacherCardProps = {
   teacher: Teacher;

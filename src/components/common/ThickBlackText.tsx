@@ -1,6 +1,8 @@
 import { Text, TextProps } from "@chakra-ui/react";
 
-const ThickBlackText = ({ children, ...props }: Partial<TextProps>) => {
+type ThickBlackTextProps = Partial<TextProps>;
+
+const ThickBlackText = ({ children, ...props }: ThickBlackTextProps) => {
   return (
     <Text fontWeight="medium" {...props}>
       {children}

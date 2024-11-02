@@ -1,9 +1,9 @@
 import StyledModalHeader from "../ModalReusableComponents/StyledModalHeader";
 import StyledModalText from "../ModalReusableComponents/StyledModalText";
-import ThickGrayText from "./ThickGrayText";
-import ThickBlackText from "./ThickBlackText";
+import ThickGrayText from "../common/ThickGrayText";
+import ThickBlackText from "../common/ThickBlackText";
 import { HStack, Image, Box } from "@chakra-ui/react";
-import LearningGoalRadios from "./LearningGoalRadios";
+import LearningGoalRadios from "../TeachersPageComponents/LearningGoalRadios";
 import InputsColumn from "../FormsReusableComponents/InputsColumn";
 import InputGroup from "../FormsReusableComponents/InputGroup";
 import AppButton from "../common/AppButton";

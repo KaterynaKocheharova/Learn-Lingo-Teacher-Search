@@ -1,5 +1,5 @@
 import { TextProps } from "@chakra-ui/react";
-import ThickBlackText from "./ThickBlackText";
+import ThickBlackText from "../common/ThickBlackText";
 
 type DetailsItemProps = {
   children: React.ReactNode;

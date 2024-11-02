@@ -10,7 +10,7 @@ import CreatableSelect from "react-select/creatable";
 import { ActionMeta, SingleValue } from "react-select";
 
 import { VStack } from "@chakra-ui/react";
-import ThickGrayText from "../TeachersPageComponents/ThickGrayText";
+import ThickGrayText from "../common/ThickGrayText.tsx";
 
 import { type Option } from "../../data/options";
 

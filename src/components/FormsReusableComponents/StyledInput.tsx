@@ -1,7 +1,7 @@
 import { Input, InputProps } from "@chakra-ui/react";
 import { UseFormRegister } from "react-hook-form";
 import { type RegisterInputValues, LoginInputValues } from "../Auth/types";
-import { type BookingValues } from "../TeachersPageComponents/BookingForm";
+import { type BookingValues } from "../BookingComponents/BookingForm";
 import { type Names } from "./types";
 
 export type StyledInputProps = Partial<InputProps> & {

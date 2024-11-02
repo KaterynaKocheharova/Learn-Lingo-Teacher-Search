@@ -1,7 +1,7 @@
 import AppButton from "../common/AppButton";
 import AppModal from "../ModalReusableComponents/AppModal";
 import { useDisclosure } from "@chakra-ui/react";
-import BookingForm from "./BookingForm";
+import BookingForm from "../BookingComponents/BookingForm";
 import { type Teacher } from "../../redux/teachers/types";
 
 type BookLessonButtonProps = Pick<Teacher, "name" | "surname" | "avatar_url">;

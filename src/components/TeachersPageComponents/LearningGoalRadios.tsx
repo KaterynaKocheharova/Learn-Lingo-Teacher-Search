@@ -1,7 +1,7 @@
 import { Text, VStack, Box } from "@chakra-ui/react";
 import { learningGoals } from "../../utils/learningGoals";
 import { type UseFormRegister } from "react-hook-form";
-import { type BookingValues } from "./BookingForm";
+import { type BookingValues } from "../BookingComponents/BookingForm";
 import LearningGoalRadio from "./LearningGoalRadio";
 
 export type LearningGoalRadios = {

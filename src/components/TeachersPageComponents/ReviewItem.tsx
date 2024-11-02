@@ -1,7 +1,7 @@
 import { type Review } from "../../redux/teachers/types";
 import { Box, HStack, Avatar } from "@chakra-ui/react";
-import ThickGrayText from "./ThickGrayText";
-import ThickBlackText from "./ThickBlackText";
+import ThickGrayText from "../common/ThickGrayText";
+import ThickBlackText from "../common/ThickBlackText";
 import RatingStar from "./RatingStar";
 import { formatRating } from "../../utils/formatRating";
 
