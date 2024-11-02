@@ -26,7 +26,12 @@ const BookLessonButton = ({
         Book trial lesson
       </AppButton>
       <AppModal isOpen={isOpen} onClose={onClose}>
-        <BookingForm name={name} surname={surname} avatar_url={avatar_url} onClose={onClose} />
+        <BookingForm
+          name={name}
+          surname={surname}
+          avatar_url={avatar_url}
+          onClose={onClose}
+        />
       </AppModal>
     </>
   );
