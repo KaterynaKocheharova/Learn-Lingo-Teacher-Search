@@ -1,7 +1,4 @@
-import { RootState } from "../store";
-
-type SelectBoolean = (state: RootState) => boolean;
-type SelectString = (state: RootState) => string;
+import { SelectBoolean, SelectString } from "../types";
 
 export const selectIsLoading: SelectString = (state) => state.user.isLoading;
 export const selectIsLoggedIn: SelectBoolean = (state) => state.user.isLoggedIn;
