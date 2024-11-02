@@ -1,7 +1,7 @@
 import { RootState } from "./store";
 
-type FetchingData = {
-  isLoading: boolean;
+export type FetchingData = {
+  isLoading: boolean | string;
   error: Error | string | null;
 };
 
