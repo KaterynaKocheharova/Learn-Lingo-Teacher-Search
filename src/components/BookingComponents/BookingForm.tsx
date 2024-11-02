@@ -3,7 +3,7 @@ import StyledModalText from "../ModalReusableComponents/StyledModalText";
 import ThickGrayText from "../common/ThickGrayText";
 import ThickBlackText from "../common/ThickBlackText";
 import { HStack, Image, Box } from "@chakra-ui/react";
-import LearningGoalRadios from "../TeachersPageComponents/LearningGoalRadios";
+import LearningGoalRadios from "./LearningGoalRadios";
 import InputsColumn from "../FormsReusableComponents/InputsColumn";
 import InputGroup from "../FormsReusableComponents/InputGroup";
 import AppButton from "../common/AppButton";
@@ -15,7 +15,7 @@ import * as yup from "yup";
 import { useToast } from "@chakra-ui/react";
 import { toastConfigs } from "../../utils/toast";
 
-import { type ModalForm } from "./types";
+import { type ModalForm } from "../Auth/types";
 import { type Teacher } from "../../redux/teachers/types";
 
 const bookingSchema = yup.object({
@@ -31,7 +31,7 @@ const bookingSchema = yup.object({
     .required(),
 });
 
-type LearningGoal = "business" | "kids" | "abroad" | "study" | "travel";
+export type LearningGoal = "business" | "kids" | "abroad" | "study" | "travel";
 
 export type BookingValues = {
   name: string;

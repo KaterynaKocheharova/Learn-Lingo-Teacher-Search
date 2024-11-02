@@ -1,20 +1,25 @@
 import { Text, VStack, Box } from "@chakra-ui/react";
-import { learningGoals } from "../../utils/learningGoals";
-import { type UseFormRegister } from "react-hook-form";
-import { type BookingValues } from "../BookingComponents/BookingForm";
-import LearningGoalRadio from "./LearningGoalRadio";
+import LearningGoalRadio from "../BookingComponents/LearningGoalRadio";
 
-export type LearningGoalRadios = {
+import { learningGoals } from "../../data/learningGoals";
+
+import { type UseFormRegister } from "react-hook-form";
+import {
+  type BookingValues,
+  LearningGoal,
+} from "../BookingComponents/BookingForm";
+
+export type LearningGoalRadiosProps = {
   register: UseFormRegister<BookingValues>;
-  checkedGoal: "business" | "kids" | "abroad" | "study" | "travel";
-  name: "name" | "email" | "number" | "learningGoal";
+  checkedGoal: LearningGoal;
+  name: "learningGoal";
 };
 
 const LearningGoalRadios = ({
   register,
   name,
   checkedGoal,
-}: LearningGoalRadios) => {
+}: LearningGoalRadiosProps) => {
   return (
     <Box mb="40px">
       <Text fontSize="24px" mb="20px">

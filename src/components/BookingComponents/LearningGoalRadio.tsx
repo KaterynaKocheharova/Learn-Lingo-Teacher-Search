@@ -1,7 +1,8 @@
-import { type LearningGoalRadios } from "./LearningGoalRadios";
-import { useRadio, HStack, Flex, Box, Text } from "@chakra-ui/react";
+import { useRadio, HStack, Text } from "@chakra-ui/react";
 
-type LearningGoalRadioProps = LearningGoalRadios & {
+import { type LearningGoalRadiosProps } from "./LearningGoalRadios";
+
+type LearningGoalRadioProps = LearningGoalRadiosProps & {
   value: string;
   label: string;
 };
@@ -12,6 +13,7 @@ const LearningGoalRadio = ({
   label,
   value,
 }: LearningGoalRadioProps) => {
+  
   const { getInputProps } = useRadio({
     value,
     name,
