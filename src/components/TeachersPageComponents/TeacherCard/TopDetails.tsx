@@ -1,9 +1,11 @@
-import { HStack } from "@chakra-ui/react";
 import DetailsItem from "./DetailsItem";
-import { type Teacher } from "../../../redux/teachers/types";
 import ThickBlackText from "../../common/ThickBlackText";
-import { LuBookOpen } from "react-icons/lu";
 import RatingStar from "./RatingStar";
+
+import { HStack } from "@chakra-ui/react";
+import { LuBookOpen } from "react-icons/lu";
+
+import { type Teacher } from "../../../redux/teachers/types";
 
 type TopDetailsProps = Pick<
   Teacher,
@@ -24,7 +26,7 @@ const TopDetails = ({
       <DetailsItem>{` Lessons done: ${lessons_done}`}</DetailsItem>
       <DetailsItem>
         <RatingStar />
-        {` Rating: 4.8: ${rating}`}
+        {`Rating: ${rating}`}
       </DetailsItem>
       <DetailsItem hasLine={false}>
         Price / 1 hour{" "}
