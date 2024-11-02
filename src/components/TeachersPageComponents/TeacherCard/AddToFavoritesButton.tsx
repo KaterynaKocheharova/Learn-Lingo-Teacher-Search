@@ -1,20 +1,20 @@
 import { useCallback } from "react";
 
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { selectUserId, selectIsLoggedIn } from "../../redux/auth/selectors";
+import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
+import { selectUserId, selectIsLoggedIn } from "../../../redux/auth/selectors";
 import {
   addToFavorites,
   removeFromFavorites,
-} from "../../redux/favorites/slice";
-import { selectFavorites } from "../../redux/favorites/selectors";
+} from "../../../redux/favorites/slice";
+import { selectFavorites } from "../../../redux/favorites/selectors";
 
 import { useToast } from "@chakra-ui/react";
 
 import { FiHeart } from "react-icons/fi";
-import UnstyledButton from "../common/UnstyledButton";
+import UnstyledButton from "../../common/UnstyledButton";
 
-import { toastConfigs } from "../../utils/toast";
-import { firestore } from "../../config/firebase";
+import { toastConfigs } from "../../../utils/toast";
+import { firestore } from "../../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 

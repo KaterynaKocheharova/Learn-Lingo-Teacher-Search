@@ -1,4 +1,4 @@
-import { type Teacher } from "../../redux/teachers/types";
+import { type Teacher } from "../../../redux/teachers/types";
 import { VStack } from "@chakra-ui/react";
 import ReviewItem from "./ReviewItem";
 

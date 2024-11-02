@@ -1,7 +1,7 @@
 import { HStack } from "@chakra-ui/react";
 import DetailsItem from "./DetailsItem";
-import { type Teacher } from "../../redux/teachers/types";
-import ThickBlackText from "../common/ThickBlackText";
+import { type Teacher } from "../../../redux/teachers/types";
+import ThickBlackText from "../../common/ThickBlackText";
 import { LuBookOpen } from "react-icons/lu";
 import RatingStar from "./RatingStar";
 
