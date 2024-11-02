@@ -5,7 +5,6 @@ import { type Teachers } from "./types.js";
 import { type TeachersPayloadType } from "./slice.js";
 import { type Filters } from "../filters/slice.js";
 
-
 export type QueryDetails = {
   startKey?: string;
   isFirstBatch?: boolean;
@@ -17,28 +16,27 @@ export const fetchTeachers = createAsyncThunk(
     const { startKey, isFirstBatch = false } = queryDetails;
 
     const limit = 4;
-    let url;
 
-    if (isFirstBatch) {
-      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&limitToFirst=${limit}`;
-    }
+    const BASE_URL =
+      "https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json";
 
-    if (!isFirstBatch) {
-      url = `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="$key"&startAfter="${startKey}"&limitToFirst=${limit}`;
-    }
+    const params = {
+      orderBy: JSON.stringify("$key"),
+      limitToFirst: limit,
+      ...(isFirstBatch ? {} : { startAfter: JSON.stringify(startKey) }),
+    };
 
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(BASE_URL, {
+        params,
+      });
 
-      const teachers = Object.entries(response.data || {})
+      const teachers = Object.entries(response.data)
         .filter(([key, value]) => value !== null && value !== undefined)
-        .reduce((acc, [key, value]) => {
-          acc[key] = value;
-          return acc;
-        }, [] as Teachers);
+        .map((entry) => entry[1]);
 
       const payload: TeachersPayloadType = {
-        teachers: teachers.filter((teacher) => teacher !== undefined),
+        teachers: teachers as Teachers,
         isFirstBatch: isFirstBatch,
         lastKey: Object.keys(response.data).pop(),
       };
