@@ -1,6 +1,6 @@
-import { Suspense } from "react";
 import NavBar from "./HeaderComponents/NavBar";
 import Loader from "./common/Loader";
+import { Suspense } from "react";
 import { Box } from "@chakra-ui/react";
 
 type LayoutProps = {
@@ -9,12 +9,12 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <Box minHeight="100%">
+    <>
       <NavBar />
-      <Box as="main" minHeight="100%">
+      <Box as="main">
         <Suspense fallback={<Loader />}>{children}</Suspense>
       </Box>
-    </Box>
+    </>
   );
 };
 
