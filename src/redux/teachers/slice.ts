@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { type TeachersSliceState, Teachers } from "./types";
-import { type QueryDetails } from "./operations";
 import { fetchTeachers, fetchFilteredTeachers } from "./operations";
+import { handlePending, handleError } from "../favoriteTeachers/slice";
 
 const initialState: TeachersSliceState = {
   items: [],
@@ -11,19 +11,15 @@ const initialState: TeachersSliceState = {
   isFiltered: false,
 };
 
-export const handlePending = (state: TeachersSliceState) => {
-  state.isLoading = true;
+export type TeachersPayloadType = {
+  teachers: Teachers;
+  lastKey: string;
+  isFirstBatch: boolean;
 };
 
 export type FilteredTeachersPayloadType = {
   teachers: Teachers;
 };
-
-export type TeachersPayloadType = {
-  teachers: Teachers;
-  lastKey?: string | undefined;
-  isFiltered?: boolean;
-} & Pick<QueryDetails, "isFirstBatch">;
 
 const TeachersSlice = createSlice({
   name: "teachers",
@@ -35,18 +31,15 @@ const TeachersSlice = createSlice({
       .addCase(
         fetchTeachers.fulfilled,
         (
-          state: TeachersSliceState,
+          state,
           action: PayloadAction<TeachersPayloadType>
         ) => {
           state.isLoading = false;
           state.error = null;
 
           if (action.payload) {
-            const { isFirstBatch, teachers, lastKey, isFiltered } =
+            const { isFirstBatch, teachers, lastKey } =
               action.payload;
-            if (isFiltered) {
-              state.isFiltered = true;
-            }
             if (isFirstBatch) {
               state.items = teachers;
             } else {
@@ -56,10 +49,7 @@ const TeachersSlice = createSlice({
           }
         }
       )
-      .addCase(fetchTeachers.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
+      .addCase(fetchTeachers.rejected, handleError)
       .addCase(
         fetchFilteredTeachers.fulfilled,
         (state, action: PayloadAction<FilteredTeachersPayloadType>) => {
@@ -70,13 +60,8 @@ const TeachersSlice = createSlice({
           state.isFiltered = true;
         }
       )
-      .addCase(fetchFilteredTeachers.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(fetchFilteredTeachers.pending, (state, action) => {
-        state.isLoading = true;
-      });
+      .addCase(fetchFilteredTeachers.rejected, handleError)
+      .addCase(fetchFilteredTeachers.pending, handlePending);
   },
 });
 

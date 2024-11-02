@@ -41,7 +41,7 @@ export const fetchTeachers = createAsyncThunk(
       const payload: TeachersPayloadType = {
         teachers: teachers as Teachers,
         isFirstBatch: isFirstBatch,
-        lastKey: Object.keys(response.data).pop(),
+        lastKey: Object.keys(response.data).pop() as string,
       };
 
       return payload;
