@@ -1,5 +1,6 @@
 import { Image, Flex } from "@chakra-ui/react";
-import { type Teacher } from "../../redux/teachers/types";
+
+import { type Teacher } from "../../../redux/teachers/types";
 
 type TeacherAvatarProps = Pick<Teacher, "avatar_url">;
 
