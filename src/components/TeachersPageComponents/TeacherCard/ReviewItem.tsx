@@ -1,13 +1,16 @@
-import { type Review } from "../../../redux/teachers/types";
 import { Box, HStack, Avatar } from "@chakra-ui/react";
 import ThickGrayText from "../../common/ThickGrayText";
 import ThickBlackText from "../../common/ThickBlackText";
 import RatingStar from "./RatingStar";
+
+import { type Review } from "../../../redux/teachers/types";
+
 import { formatRating } from "../../../utils/formatRating";
 
 type ReviewItemProps = {
   review: Review;
 };
+
 const ReviewItem = ({
   review: { reviewer_name, reviewer_rating, comment },
 }: ReviewItemProps) => {
