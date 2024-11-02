@@ -1,7 +1,10 @@
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchTeachers } from "../../redux/teachers/operations";
+import { selectLastKey } from "../../redux/teachers/selectros";
+
 import AppButton from "../common/AppButton";
 import { Center } from "@chakra-ui/react";
+
 import { handleSmoothScrollDown } from "../../utils/handleSmoothScrollDown";
 
 type LoadMoreProps = {
@@ -10,7 +13,7 @@ type LoadMoreProps = {
 
 const LoadMore = ({ setCurrentPage }: LoadMoreProps) => {
   const dispatch = useAppDispatch();
-  const lastKey = useAppSelector((state) => state.teachers.lastKey);
+  const lastKey = useAppSelector(selectLastKey);
 
   const handleLoadMore = () => {
     setCurrentPage((prev) => prev + 1);

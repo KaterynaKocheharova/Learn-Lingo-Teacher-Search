@@ -5,6 +5,8 @@ import { type TeachersPayloadType } from "./slice.js";
 import { type Teacher } from "./types.js";
 import { type Filters } from "../filters/slice.js";
 
+// !!! very slow operation
+
 export type QueryDetails = {
   startKey?: string;
   isFirstBatch?: boolean;
