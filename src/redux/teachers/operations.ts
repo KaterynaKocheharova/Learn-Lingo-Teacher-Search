@@ -95,7 +95,7 @@ export const fetchFilteredTeachers = createAsyncThunk(
       // );
       fetchFilteredTeachersPromises.push(
         await axios.get(
-          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&equalTo=${Number(filters.price)}`
+          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&equalTo=${filters.price}`
         )
       );
     }
@@ -113,6 +113,7 @@ export const fetchFilteredTeachers = createAsyncThunk(
       const onlyNeededTeachers = allFilteredTeachers.filter((teacher) => {
         let priceInRange = true;
 
+        // !!!!!!!!!! remove this extar check
         if (filters.price) {
           priceInRange =
             Number(teacher.price_per_hour) >= Number(filters.price) &&

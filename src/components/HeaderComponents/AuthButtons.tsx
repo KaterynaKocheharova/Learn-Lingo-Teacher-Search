@@ -5,7 +5,7 @@ import LoginLogoutButton from "./LoginLogoutButton";
 const AuthButtons = () => {
   return (
     <HStack>
-      <LoginLogoutButton variant="login" />
+      <LoginLogoutButton />
       <RegistrationButton />
     </HStack>
   );
