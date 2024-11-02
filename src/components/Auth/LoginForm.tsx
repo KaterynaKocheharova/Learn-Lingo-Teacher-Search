@@ -56,12 +56,20 @@ const LoginForm = ({ onClose }: ModalForm) => {
       .then(() => {
         onClose();
       })
-      .catch(() => {
-        toast({
-          ...toastConfigs,
-          status: "error",
-          description: "Incorrect login or password",
-        });
+      .catch((error) => {
+        if (error.includes("invalid-credential")) {
+          toast({
+            ...toastConfigs,
+            status: "error",
+            description: "Invalid email or password",
+          });
+        } else {
+          toast({
+            ...toastConfigs,
+            status: "error",
+            description: "Login failed. Try again",
+          });
+        }
       });
   };
 

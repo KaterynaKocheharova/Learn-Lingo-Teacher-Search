@@ -36,7 +36,13 @@ const LoginLogoutButton = () => {
           description: "Logged out successfully",
           status: "success",
         });
-      });
+      }).catch(() => {
+        toast({
+          ...toastConfigs,
+          description: "Something went wrong. Try again now or later",
+          status: "error",
+        })
+      })
   };
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);

@@ -5,8 +5,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { auth, firestore } from "../../config/firebase.js";
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { auth, firestore } from "../../config/firebase.ts";
+import { doc, setDoc } from "firebase/firestore";
 import {
   type RegisterInputValues,
   type LoginInputValues,
@@ -28,14 +28,21 @@ export const registerUser = createAsyncThunk(
         favorites: [],
       });
 
-      await updateProfile(auth.currentUser, { displayName: data.name });
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, { displayName: data.name });
+      }
       return {
         ...data,
         userId: credentials.user.uid,
       };
-    } catch (error: any) {
-      const errorMessage =
-        error.message || "Registration failed. Please try again.";
+      
+    } catch (error: unknown) {
+      let errorMessage;
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else {
+        errorMessage = "Registration failed";
+      }
       return thunkAPI.rejectWithValue(errorMessage);
     }
   }
@@ -47,9 +54,13 @@ export const loginUser = createAsyncThunk(
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
       return;
-    } catch (error: any) {
-      const errorMessage =
-        error.message || "Registration failed. Please try again.";
+    } catch (error: unknown) {
+      let errorMessage;
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else {
+        errorMessage = "Login failed";
+      }
       return thunkAPI.rejectWithValue(errorMessage);
     }
   }

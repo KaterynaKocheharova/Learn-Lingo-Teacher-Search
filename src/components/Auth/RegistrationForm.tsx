@@ -75,7 +75,7 @@ const RegistrationForm = ({ onClose }: ModalForm) => {
           toast({
             ...toastConfigs,
             status: "error",
-            description: "Registration error",
+            description: "Registration failed. Try again",
           });
         }
       });
