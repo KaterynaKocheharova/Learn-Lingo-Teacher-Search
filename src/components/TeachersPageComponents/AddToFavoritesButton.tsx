@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { selectUserId, selectIsLoggedIn } from "../../redux/auth/selectors";
@@ -6,13 +7,16 @@ import {
   removeFromFavorites,
 } from "../../redux/favorites/slice";
 import { selectFavorites } from "../../redux/favorites/selectors";
+
 import { useToast } from "@chakra-ui/react";
+
 import { FiHeart } from "react-icons/fi";
 import UnstyledButton from "../common/UnstyledButton";
+
 import { toastConfigs } from "../../utils/toast";
 import { firestore } from "../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { useCallback } from "react";
+
 
 type AddToFavoritesButtonProps = {
   id: string;
@@ -22,6 +26,7 @@ const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
   const favorites = useAppSelector(selectFavorites);
   const userId = useAppSelector(selectUserId);
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  
   const toast = useToast();
   const dispatch = useAppDispatch();
 
@@ -55,7 +60,7 @@ const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
       updatedFavorites = [...favorites, id];
     }
 
-    updateFavorites(updatedFavorites); // Call after dispatch
+    updateFavorites(updatedFavorites); 
   };
 
   return (
