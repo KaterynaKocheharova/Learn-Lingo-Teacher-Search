@@ -1,6 +1,7 @@
 import ReviewsList from "./ReviewsList";
 import { Box, Text } from "@chakra-ui/react";
-import { type Teacher } from "../../redux/teachers/types";
+
+import { type Teacher } from "../../../redux/teachers/types";
 
 type ExtraTeacherInfoProps = Pick<Teacher, "experience" | "reviews">;
 
