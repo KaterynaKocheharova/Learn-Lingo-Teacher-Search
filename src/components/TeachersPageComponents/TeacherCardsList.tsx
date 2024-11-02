@@ -1,6 +1,7 @@
-import { type Teachers } from "../../redux/teachers/types";
 import { VStack } from "@chakra-ui/react";
 import TeacherCard from "./TeacherCard/TeacherCard";
+
+import { type Teachers } from "../../redux/teachers/types";
 
 type TeacherCardsListProps = {
   teachers: Teachers;
