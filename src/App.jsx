@@ -13,14 +13,13 @@ const FavoriteTeachersPage = lazy(() => import("./pages/FavoriteTeachersPage"));
 
 export default function App() {
   return (
-    <Box id="App" minHeight="100%">
+    <Box id="App">
       <Suspense fallback={<Loader />}>
         <AuthProvider>
           <Layout>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/teachers" element={<TeachersPage />} />
-              {/* <Route path="/favorites" element={<FavoriteTeachersPage />} /> */}
               <Route
               path="/favorites"
               element={
