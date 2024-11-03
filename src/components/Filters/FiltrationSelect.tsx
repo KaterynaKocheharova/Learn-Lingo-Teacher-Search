@@ -1,10 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
 
 import { selectFilters } from "../../redux/filters/selectors.ts";
-import { fetchFilteredTeachers } from "../../redux/teachers/operations.ts";
 import { addFilter } from "../../redux/filters/slice.ts";
+import { clearFilter } from "../../redux/filters/slice.ts";
 
 import CreatableSelect from "react-select/creatable";
 import { ActionMeta, SingleValue } from "react-select";
@@ -16,10 +16,14 @@ import { type Option } from "../../data/options";
 
 import css from "./select.module.css";
 import { getSelectStyles } from "./selectStyles";
+import {
+  fetchFilteredTeachers,
+  fetchTeachers,
+} from "../../redux/teachers/operations.ts";
 
 type FilterationSelectProps = {
   options: Option[];
-  name: string;
+  name: "language" | "level" | "price";
   width: string;
   labelText: string;
 };
@@ -32,37 +36,46 @@ const FiltrationSelect = ({
 }: FilterationSelectProps) => {
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
-
   const onChange = useCallback(
     (newValue: SingleValue<Option>, actionMeta: ActionMeta<Option>) => {
-      if (newValue) {
-        if (newValue.hasOwnProperty("value")) {
-          dispatch(
-            addFilter({
-              filters: {
-                [name]: newValue.value,
-              },
-            })
-          );
-
-          dispatch(
-            fetchFilteredTeachers({
-              filters: {
-                ...filters,
-                [name]: newValue.value,
-              },
-            })
-          );
-        }
+      if (!newValue) {
+        dispatch(clearFilter(name));
+      } else if (newValue.hasOwnProperty("value")) {
+        dispatch(
+          addFilter({
+            filters: {
+              [name]: newValue.value,
+            },
+          })
+        );
       }
     },
-    [dispatch, filters, name]
+    [dispatch, name]
   );
+
+  useEffect(() => {
+    if (filters?.language || filters?.price || filters?.level) {
+      dispatch(
+        fetchFilteredTeachers({
+          filters: {
+            ...filters,
+          },
+        })
+      );
+    } else {
+      dispatch(
+        fetchTeachers({
+          isFirstBatch: true,
+        })
+      );
+    }
+  }, [filters]);
 
   return (
     <VStack spacing="8px" align="flex-start">
       <ThickGrayText fontSize="14px">{labelText}</ThickGrayText>
       <CreatableSelect
+        isClearable={true}
         onChange={onChange}
         defaultValue={{ value: "", label: name }}
         unstyled

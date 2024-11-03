@@ -45,8 +45,14 @@ const filtersSlice = createSlice({
       state.filters.language = "";
       state.filters.level = "";
     },
+    clearFilter: (
+      state,
+      action: PayloadAction<"level" | "language" | "price">
+    ) => {
+      state.filters[action.payload] = "";
+    },
   },
 });
 
-export const { addFilter, clearFilters } = filtersSlice.actions;
+export const { addFilter, clearFilters, clearFilter } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

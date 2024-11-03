@@ -51,5 +51,14 @@ export const getSelectStyles: GetSelectStyles = (width) => {
       textOverflow: "ellipsis",
       cursor: "pointer",
     }),
+
+    clearIndicator: (baseStyles, state) => {
+      return {
+        position: "absolute",
+        top: "50%",
+        transform: "translateY(-50%)",
+        left: "-20px"
+      }
+    } 
   };
 };
