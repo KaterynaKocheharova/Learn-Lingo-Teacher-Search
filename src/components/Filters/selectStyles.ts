@@ -55,9 +55,9 @@ export const getSelectStyles: GetSelectStyles = (width) => {
     clearIndicator: (baseStyles, state) => {
       return {
         position: "absolute",
-        top: "50%",
+        top: "-5px",
         transform: "translateY(-50%)",
-        left: "-20px"
+        right: "0"
       }
     } 
   };

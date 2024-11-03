@@ -20,6 +20,8 @@ import {
   fetchFilteredTeachers,
   fetchTeachers,
 } from "../../redux/teachers/operations.ts";
+import { removeIsFilteredFlag } from "../../redux/teachers/slice.ts";
+import { SelectIsFiltered } from "../../redux/teachers/selectros.ts";
 
 type FilterationSelectProps = {
   options: Option[];
@@ -36,6 +38,8 @@ const FiltrationSelect = ({
 }: FilterationSelectProps) => {
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
+  const isFiltered = useAppSelector(SelectIsFiltered);
+
   const onChange = useCallback(
     (newValue: SingleValue<Option>, actionMeta: ActionMeta<Option>) => {
       if (!newValue) {
@@ -63,13 +67,16 @@ const FiltrationSelect = ({
         })
       );
     } else {
-      dispatch(
-        fetchTeachers({
-          isFirstBatch: true,
-        })
-      );
+      dispatch(removeIsFilteredFlag());
+      if (!isFiltered) {
+        dispatch(
+          fetchTeachers({
+            isFirstBatch: true,
+          })
+        );
+      }
     }
-  }, [filters]);
+  }, [filters, isFiltered]);
 
   return (
     <VStack spacing="8px" align="flex-start">

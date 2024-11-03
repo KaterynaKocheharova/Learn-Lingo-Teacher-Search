@@ -24,22 +24,22 @@ export type FilteredTeachersPayloadType = {
 const TeachersSlice = createSlice({
   name: "teachers",
   initialState,
-  reducers: {},
+  reducers: {
+    removeIsFilteredFlag: (state) => {
+      state.isFiltered = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTeachers.pending, handlePending)
       .addCase(
         fetchTeachers.fulfilled,
-        (
-          state,
-          action: PayloadAction<TeachersPayloadType>
-        ) => {
+        (state, action: PayloadAction<TeachersPayloadType>) => {
           state.isLoading = false;
           state.error = null;
 
           if (action.payload) {
-            const { isFirstBatch, teachers, lastKey } =
-              action.payload;
+            const { isFirstBatch, teachers, lastKey } = action.payload;
             if (isFirstBatch) {
               state.items = teachers;
             } else {
@@ -66,3 +66,4 @@ const TeachersSlice = createSlice({
 });
 
 export default TeachersSlice.reducer;
+export const { removeIsFilteredFlag } = TeachersSlice.actions;
