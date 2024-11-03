@@ -21,6 +21,8 @@ const initialState: UserSliceState = {
 const handleError = (state: UserSliceState, action: PayloadAction<unknown>) => {
   state.isLoading = "";
   if (action.payload instanceof Error) {
+    state.error = action.payload.message;
+  } else if (typeof action.payload === "string") {
     state.error = action.payload;
   } else {
     state.error = "Unknown error";

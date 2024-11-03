@@ -27,6 +27,8 @@ export const handleError = <
 ) => {
   state.isLoading = false;
   if (action.payload instanceof Error) {
+    state.error = action.payload.message;
+  } else if (typeof action.payload === "string") {
     state.error = action.payload;
   } else {
     state.error = "Unknown error";
@@ -48,10 +50,7 @@ const favoriteTeachersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(
-        fetchFavoriteTeachers.pending,
-        handlePending
-      )
+      .addCase(fetchFavoriteTeachers.pending, handlePending)
       .addCase(
         fetchFavoriteTeachers.fulfilled,
         (state, action: PayloadAction<FavoriteTeachersPayload>) => {
