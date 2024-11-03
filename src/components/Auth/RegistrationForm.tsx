@@ -17,7 +17,7 @@ import * as yup from "yup";
 import { type RegisterInputValues } from "./types";
 import { type ModalForm } from "./types";
 
-import { toastConfigs } from "../../utils/toast.ts";
+import { toastConfigs } from "../../config/toast.ts";
 import { useToast } from "@chakra-ui/react";
 
 const registerUserSchema = yup.object({

@@ -12,7 +12,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { type LoginInputValues } from "./types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { toastConfigs } from "../../utils/toast.ts";
+import { toastConfigs } from "../../config/toast.ts";
 import { useToast } from "@chakra-ui/react";
 import { type ModalForm } from "./types";
 

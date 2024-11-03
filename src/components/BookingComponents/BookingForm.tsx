@@ -13,7 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { useToast } from "@chakra-ui/react";
-import { toastConfigs } from "../../utils/toast";
+import { toastConfigs } from "../../config/toast";
 
 import { type ModalForm } from "../Auth/types";
 import { type Teacher } from "../../redux/teachers/types";

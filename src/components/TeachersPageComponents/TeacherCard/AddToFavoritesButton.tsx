@@ -13,7 +13,7 @@ import { useToast } from "@chakra-ui/react";
 import { FiHeart } from "react-icons/fi";
 import UnstyledButton from "../../common/UnstyledButton";
 
-import { toastConfigs } from "../../../utils/toast";
+import { toastConfigs } from "../../../config/toast";
 import { firestore } from "../../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
 
