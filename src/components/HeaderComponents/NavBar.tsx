@@ -12,7 +12,7 @@ const NavBar = () => {
         justify="space-between"
         as="header"
         px={{ md: "16" }}
-        pb={{ base: "45px", md: "0" }}
+        pb={{ base: "45px", sm2: "0" }}
       >
         <Logo />
         <NavLinks />
