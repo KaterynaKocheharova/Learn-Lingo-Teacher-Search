@@ -1,4 +1,4 @@
-import { extendTheme, ComponentStyleConfig } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
 const colors = {
   brand: {
@@ -24,7 +24,6 @@ const colors = {
     },
   },
 };
-
 
 const fonts = {
   body: "Roboto, sans-serif",
