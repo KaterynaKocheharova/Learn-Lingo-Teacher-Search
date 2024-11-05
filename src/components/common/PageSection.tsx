@@ -8,7 +8,7 @@ type PageSectionProps = {
 const PageSection = ({ children }: PageSectionProps) => {
   return (
     <Box
-      backgroundImage="linear-gradient(90deg, var(--chakra-colors-brand-gray-500), var(--chakra-colors-brand-orange-100))"
+      backgroundImage="linear-gradient(90deg, var(--chakra-colors-brand-gray-500), var(--chakra-colors-brand-gray-300))"
       py="96px"
       as="section"
       minHeight="100vh"
