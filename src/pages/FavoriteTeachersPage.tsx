@@ -31,7 +31,7 @@ const FavoriteTeachersPage = () => {
 
   return (
     <PageSection>
-      <PageContainer px={{ base: "16px", lg: "64px" }}>
+      <PageContainer>
         {!error && <TeacherCardsList teachers={favoriteTeachers} />}
         {error && <PageError error={typeof error === "string" ? error : ""} />}
         {isLoading && <Loader />}

@@ -21,7 +21,7 @@ const TeachersPage = () => {
 
   return (
     <PageSection>
-      <PageContainer px={{ base: "16px", lg: "64px" }}>
+      <PageContainer>
         <Filters />
         {!error && <TeacherCardsList teachers={teachers} />}
         {!isLoading &&
