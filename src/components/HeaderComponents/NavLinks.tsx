@@ -14,11 +14,11 @@ const NavLinks = () => {
 
   return (
     <HStack as="ul" spacing="7" wrap="wrap">
-      <NavLink to="/" className={buildActiveClass}>
-        <Box as="li">
+      <Box as="li">
+        <NavLink to="/" className={buildActiveClass}>
           <Text py="8">Home</Text>
-        </Box>
-      </NavLink>
+        </NavLink>
+      </Box>
       <Box as="li">
         <NavLink to="/teachers" className={buildActiveClass}>
           <Text py="8">Teachers</Text>
