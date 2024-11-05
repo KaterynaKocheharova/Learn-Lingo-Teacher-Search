@@ -4,7 +4,7 @@ import { selectFilters } from "../../redux/filters/selectors.ts";
 import { addFilter } from "../../redux/filters/slice.ts";
 import { clearFilter } from "../../redux/filters/slice.ts";
 import AsyncSelect from "react-select/async";
-import { ActionMeta, SingleValue } from "react-select";
+import { SingleValue } from "react-select";
 import { VStack } from "@chakra-ui/react";
 import ThickGrayText from "../common/ThickGrayText.tsx";
 import { type Option } from "../../data/options";
