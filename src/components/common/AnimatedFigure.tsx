@@ -24,7 +24,7 @@ const AnimatedFigure = ({ animation, ...props }: AninmatedFigureProps) => {
       h="30px"
       borderRadius="60px"
       bg="transparent"
-      border="3px solid #FFFFFF"
+      border="3px solid #FFDC86"
       animation={`${circlesAnimation} ${animation}`}
       {...props}
     ></Box>
