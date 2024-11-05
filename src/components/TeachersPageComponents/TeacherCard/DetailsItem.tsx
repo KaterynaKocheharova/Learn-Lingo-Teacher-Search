@@ -9,6 +9,7 @@ type DetailsItemProps = {
 const DetailsItem = ({ children, hasLine = true }: DetailsItemProps) => {
   return (
     <ThickBlackText
+      as="li"
       display="flex"
       gap="8px"
       alignItems="center"
