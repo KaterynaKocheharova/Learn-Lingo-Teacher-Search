@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
 import { selectFilters } from "../../redux/filters/selectors.ts";
 import { addFilter } from "../../redux/filters/slice.ts";
@@ -36,9 +36,12 @@ const FiltrationSelect = ({
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
   const isFiltered = useAppSelector(SelectIsFiltered);
+  const [selectedValue, setSelectedValue] =
+    useState<SingleValue<Option> | null>(null);
 
   const onChange = useCallback(
     (newValue: SingleValue<Option>, actionMeta: ActionMeta<Option>) => {
+      setSelectedValue(newValue);
       if (!newValue) {
         dispatch(clearFilter(name));
       } else if (newValue.hasOwnProperty("value")) {
@@ -81,8 +84,9 @@ const FiltrationSelect = ({
         {labelText}
       </ThickGrayText>
       <AsyncSelect
+        value={selectedValue}
         cacheOptions
-        defaultOptions={defaultOptions ? defaultOptions : true}
+        defaultOptions={defaultOptions || true}
         loadOptions={loadOptions}
         placeholder={name}
         pageSize={2}
