@@ -8,6 +8,28 @@ type PageSectionProps = {
 const PageSection = ({ children }: PageSectionProps) => {
   const showAnimatedFigures = useBreakpointValue({ base: false, lg: true });
 
+  const animatedFigures = [
+    { top: "5%", animation: "8s linear infinite" },
+    { top: "10%", animation: "12s linear infinite" },
+    { top: "15%", animation: "7s linear infinite" },
+    { top: "20%", animation: "10s linear infinite" },
+    { top: "25%", animation: "5s linear infinite" },
+    { top: "30%", animation: "14s linear infinite" },
+    { top: "35%", animation: "6s linear infinite" },
+    { top: "40%", animation: "9s linear infinite" },
+    { top: "45%", animation: "11s linear infinite" },
+    { top: "50%", animation: "13s linear infinite" },
+    { top: "55%", animation: "7s linear infinite" },
+    { top: "60%", animation: "15s linear infinite" },
+    { top: "65%", animation: "6s linear infinite" },
+    { top: "70%", animation: "9s linear infinite" },
+    { top: "75%", animation: "8s linear infinite" },
+    { top: "80%", animation: "14s linear infinite" },
+    { top: "85%", animation: "7s linear infinite" },
+    { top: "90%", animation: "10s linear infinite" },
+    { top: "95%", animation: "12s linear infinite" },
+  ];
+
   return (
     <Box
       backgroundImage="linear-gradient(90deg, var(--chakra-colors-brand-gray-500), var(--chakra-colors-brand-gray-300))"
@@ -21,25 +43,14 @@ const PageSection = ({ children }: PageSectionProps) => {
     >
       {showAnimatedFigures && (
         <>
-          <AnimatedFigure top="5%" right="1%" animation="8s linear infinite" />
-          <AnimatedFigure top="10%" right="1%" animation="12s linear infinite" />
-          <AnimatedFigure top="15%" right="1%" animation="7s linear infinite" />
-          <AnimatedFigure top="20%" right="1%" animation="10s linear infinite" />
-          <AnimatedFigure top="25%" right="1%" animation="5s linear infinite" />
-          <AnimatedFigure top="30%" right="1%" animation="14s linear infinite" />
-          <AnimatedFigure top="35%" right="1%" animation="6s linear infinite" />
-          <AnimatedFigure top="40%" right="1%" animation="9s linear infinite" />
-          <AnimatedFigure top="45%" right="1%" animation="11s linear infinite" />
-          <AnimatedFigure top="50%" right="1%" animation="13s linear infinite" />
-          <AnimatedFigure top="55%" right="1%" animation="7s linear infinite" />
-          <AnimatedFigure top="60%" right="1%" animation="15s linear infinite" />
-          <AnimatedFigure top="65%" right="1%" animation="6s linear infinite" />
-          <AnimatedFigure top="70%" right="1%" animation="9s linear infinite" />
-          <AnimatedFigure top="75%" right="1%" animation="8s linear infinite" />
-          <AnimatedFigure top="80%" right="1%" animation="14s linear infinite" />
-          <AnimatedFigure top="85%" right="1%" animation="7s linear infinite" />
-          <AnimatedFigure top="90%" right="1%" animation="10s linear infinite" />
-          <AnimatedFigure top="95%" right="1%" animation="12s linear infinite" />
+          {animatedFigures.map((figure, index) => (
+            <AnimatedFigure
+              key={index}
+              top={figure.top}
+              right="1%"
+              animation={figure.animation}
+            />
+          ))}
         </>
       )}
 
