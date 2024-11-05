@@ -42,6 +42,7 @@ const styles = {
 const breakpoints = {
   sm2: "700px",
   md: "768px",
+  md2: "822px",
   lg: "1440px",
 };
 
