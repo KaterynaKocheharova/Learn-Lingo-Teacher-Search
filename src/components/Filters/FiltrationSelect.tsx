@@ -40,7 +40,7 @@ const FiltrationSelect = ({
     useState<SingleValue<Option> | null>(null);
 
   const onChange = useCallback(
-    (newValue: SingleValue<Option>, actionMeta: ActionMeta<Option>) => {
+    (newValue: SingleValue<Option>) => {
       setSelectedValue(newValue);
       if (!newValue) {
         dispatch(clearFilter(name));
@@ -84,6 +84,7 @@ const FiltrationSelect = ({
         {labelText}
       </ThickGrayText>
       <AsyncSelect
+        isMulti={false}
         value={selectedValue}
         cacheOptions
         defaultOptions={defaultOptions || true}
