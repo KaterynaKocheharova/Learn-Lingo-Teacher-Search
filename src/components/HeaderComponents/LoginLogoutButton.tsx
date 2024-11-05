@@ -1,13 +1,11 @@
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { selectIsLoggedIn, selectIsLoading } from "../../redux/auth/selectors";
 import { logoutUser } from "../../redux/auth/operations";
-
 import AppModal from "../ModalReusableComponents/AppModal";
 import LoginForm from "../Auth/LoginForm";
+import LogoutConfirmationModal from "./LogoutConfirmationModal";
 import { Button, Spinner, useToast } from "@chakra-ui/react";
-
 import { useDisclosure } from "@chakra-ui/react";
-
 import { toastConfigs } from "../../config/toast";
 import { clearFavorites } from "../../redux/favorites/slice";
 
@@ -36,13 +34,17 @@ const LoginLogoutButton = () => {
           description: "Logged out successfully",
           status: "success",
         });
-      }).catch(() => {
+      })
+      .then(() => {
+        onClose();
+      })
+      .catch(() => {
         toast({
           ...toastConfigs,
           description: "Something went wrong. Try again now or later",
           status: "error",
-        })
-      })
+        });
+      });
   };
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
@@ -54,15 +56,23 @@ const LoginLogoutButton = () => {
         _hover={{ bg: "transparent" }}
         px="16px"
         leftIcon={loginIcon}
-        onClick={isLoggedIn ? handleLogout : onOpen}
+        onClick={onOpen}
         isLoading={Boolean(isLoading === "logout-in-progress")}
         spinner={<Spinner size="sm" />}
       >
         {isLoggedIn ? "Log out" : "Log in"}
       </Button>
-      <AppModal isOpen={isOpen} onClose={onClose}>
-        <LoginForm onClose={onClose} />
-      </AppModal>
+      {isLoggedIn ? (
+        <LogoutConfirmationModal
+          isOpen={isOpen}
+          onClose={onClose}
+          onConfirmClick={handleLogout}
+        />
+      ) : (
+        <AppModal isOpen={isOpen} onClose={onClose}>
+          <LoginForm onClose={onClose} />
+        </AppModal>
+      )}
     </>
   );
 };
