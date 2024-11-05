@@ -4,7 +4,7 @@ import LoginLogoutButton from "./LoginLogoutButton";
 
 const AuthButtons = () => {
   return (
-    <HStack>
+    <HStack wrap="wrap">
       <LoginLogoutButton />
       <RegistrationButton />
     </HStack>

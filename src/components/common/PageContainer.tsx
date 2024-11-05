@@ -8,7 +8,7 @@ const PageContainer = ({ children, ...props }: PageContainerProps) => {
   return (
     <Container
       maxW={{ lg: "1440px" }}
-      px={{ base: "16px", lg: "64px" }}
+      px={{ base: "24px", lg: "64px" }}
       {...props}
     >
       {children}
