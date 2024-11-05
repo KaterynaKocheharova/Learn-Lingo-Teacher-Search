@@ -6,7 +6,7 @@ import Banner from "../components/HomePageComponents/Banner";
 
 const HomePage = () => {
   return (
-    <PageContainer as="section">
+    <PageContainer as="section" pb="50px">
       <HomePageElementsWrapper>
         <Description />
         <Banner />
