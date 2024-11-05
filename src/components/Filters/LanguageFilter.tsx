@@ -1,25 +1,16 @@
-import { useState, useEffect } from "react";
 import FiltrationSelect from "./FiltrationSelect.tsx";
-import { type Options } from "../../data/options.ts";
 import { getOptions } from "../../utils/getOptions.ts";
+import { filterOptions } from "../../utils/filterOptions.ts";
 
 const LanguageFilter = () => {
-  const [options, setOptions] = useState<Options>([]);
-
-  useEffect(() => {
-    const getLanguagesOptions = async () => {
-      const options = await getOptions("languages/");
-      if (options) {
-        setOptions(options);
-      }
-    };
-
-    getLanguagesOptions();
-  }, []);
+  const loadOptions = async (inputValue: string) => {
+    const options = await getOptions("languages/");
+    return filterOptions(inputValue, options);
+  };
 
   return (
     <FiltrationSelect
-      options={options}
+      loadOptions={loadOptions}
       name="language"
       width="221px"
       labelText="Languages"

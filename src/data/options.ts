@@ -20,3 +20,4 @@ export const pricesOptions: Options = [
   { value: "30", label: "30 $" },
   { value: "40", label: "40 $" },
 ];
+

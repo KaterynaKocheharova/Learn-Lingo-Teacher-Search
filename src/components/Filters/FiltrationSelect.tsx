@@ -1,19 +1,13 @@
 import { useCallback, useEffect } from "react";
-
 import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
-
 import { selectFilters } from "../../redux/filters/selectors.ts";
 import { addFilter } from "../../redux/filters/slice.ts";
 import { clearFilter } from "../../redux/filters/slice.ts";
-
-import CreatableSelect from "react-select/creatable";
+import AsyncSelect from "react-select/async";
 import { ActionMeta, SingleValue } from "react-select";
-
 import { VStack } from "@chakra-ui/react";
 import ThickGrayText from "../common/ThickGrayText.tsx";
-
 import { type Option } from "../../data/options";
-
 import css from "./select.module.css";
 import { getSelectStyles } from "./selectStyles";
 import {
@@ -22,16 +16,19 @@ import {
 } from "../../redux/teachers/operations.ts";
 import { removeIsFilteredFlag } from "../../redux/teachers/slice.ts";
 import { SelectIsFiltered } from "../../redux/teachers/selectros.ts";
+import { type Options } from "../../data/options";
 
 type FilterationSelectProps = {
-  options: Option[];
   name: "language" | "level" | "price";
   width: string;
   labelText: string;
+  defaultOptions?: Options;
+  loadOptions: (inputValue: string) => Promise<Options>;
 };
 
 const FiltrationSelect = ({
-  options,
+  defaultOptions,
+  loadOptions,
   name,
   width,
   labelText,
@@ -80,8 +77,18 @@ const FiltrationSelect = ({
 
   return (
     <VStack spacing="8px" align="flex-start">
-      <ThickGrayText fontSize="14px">{labelText}</ThickGrayText>
-      <CreatableSelect
+      <ThickGrayText fontSize="14px" id="filter teachers label">
+        {labelText}
+      </ThickGrayText>
+      <AsyncSelect
+        cacheOptions
+        defaultOptions={defaultOptions ? defaultOptions : true}
+        loadOptions={loadOptions}
+        placeholder={name}
+        pageSize={2}
+        blurInputOnSelect={true}
+        aria-labelledby="filter teachers label"
+        aria-label="Filtrating teachers dropdown"
         isClearable={true}
         onChange={onChange}
         defaultValue={{ value: "", label: name }}
@@ -90,7 +97,6 @@ const FiltrationSelect = ({
         classNames={{
           option: () => `${css["custom-option"]}`,
         }}
-        options={options}
         name={name}
       />
     </VStack>
