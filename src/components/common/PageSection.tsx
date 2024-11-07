@@ -1,11 +1,12 @@
 import AnimationWrapper from "./AnimationWrapper";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 type PageSectionProps = {
   children: React.ReactNode;
 };
 
 const PageSection = ({ children }: PageSectionProps) => {
+
   return (
     <AnimationWrapper>
       <Box
@@ -17,6 +18,9 @@ const PageSection = ({ children }: PageSectionProps) => {
         h="100%"
         overflow="hidden"
       >
+        <Flex justify="flex-end">
+        
+        </Flex>
         {children}
       </Box>
     </AnimationWrapper>

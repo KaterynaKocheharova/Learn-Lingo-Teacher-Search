@@ -4,6 +4,7 @@ import { Box, useBreakpointValue } from "@chakra-ui/react";
 import AnimatedFigure from "./AnimatedFigure";
 import { useToast } from "@chakra-ui/react";
 import { toastConfigs } from "../../config/toast";
+import AppButton from "./AppButton";
 
 type AnimationWrapperProps = {
   children: React.ReactNode;
@@ -12,6 +13,8 @@ type AnimationWrapperProps = {
 const AnimationWrapper = ({ children }: AnimationWrapperProps) => {
   const showAnimatedFigures = useBreakpointValue({ base: false, lg: true });
   const toast = useToast();
+
+  const [isGame, setIsGame] = useState(false);
 
   const [isClicked, setIsClicked] = useState<string[]>([]);
 
@@ -39,19 +42,13 @@ const AnimationWrapper = ({ children }: AnimationWrapperProps) => {
     }
   }, [isClicked]);
 
-  //   const animatedFigures = useMemo(
-  //     () =>
-  //       Array.from({ length: 19 }, (_, index) => ({
-  //         id: `figure-${nanoid()}`,
-  //         top: `${5 * (index + 1)}%`,
-  //         animation: `${5 + index * 2}s linear infinite`,
-  //       })),
-  //     []
-  //   );
-
   return (
     <Box pos="relative">
+      <AppButton onClick={() => setIsGame(true)} bg="white" pos="absolute" top="15px" right="15px">
+        Start a game
+      </AppButton>
       {showAnimatedFigures &&
+        isGame &&
         animatedFigures.map((figure) => (
           <AnimatedFigure
             id={figure.id}
