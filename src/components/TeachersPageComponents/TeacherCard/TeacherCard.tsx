@@ -20,9 +20,8 @@ type TeacherCardProps = {
 };
 
 const TeacherCard = ({ teacher }: TeacherCardProps) => {
-
   const [isFullInfoShown, setIsFullInfoShown] = useState(false);
-  
+
   const toggleShowInfo = useCallback(() => {
     setIsFullInfoShown(!isFullInfoShown);
   }, [isFullInfoShown]);
@@ -86,7 +85,13 @@ const TeacherCard = ({ teacher }: TeacherCardProps) => {
           languages={languages}
         />
         {!isFullInfoShown && (
-          <UnstyledButton onClick={toggleShowInfo} mb="32px">
+          <UnstyledButton
+            onClick={toggleShowInfo}
+            mb="32px"
+            _hover={{
+              color: "brand.orange.900",
+            }}
+          >
             <ThickBlackText textDecoration="underline">
               Read more
             </ThickBlackText>
