@@ -13,16 +13,16 @@ const RegistrationButton = () => {
         backgroundColor="brand.black.900"
         px="39px"
         _hover={{
-          backgroundColor: "brand.black.900",
-          color: "brand.white.900",
+          backgroundColor: "brand.orange.800",
+          color: "brand.black.900",
         }}
         _focus={{
-          backgroundColor: "brand.black.900",
-          color: "brand.white.900",
+          backgroundColor: "brand.orange.800",
+          color: "brand.black.900",
         }}
         _active={{
-          backgroundColor: "brand.black.900",
-          color: "brand.white.900",
+          backgroundColor: "brand.orange.800",
+          color: "brand.black.900",
         }}
         onClick={onOpen}
       >
