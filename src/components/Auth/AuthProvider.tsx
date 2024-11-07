@@ -22,8 +22,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       if (user) {
         dispatch(
           refreshUser({
-            name: user.displayName as string,
-            email: user.email as string,
             userId: user.uid as string,
           })
         );
