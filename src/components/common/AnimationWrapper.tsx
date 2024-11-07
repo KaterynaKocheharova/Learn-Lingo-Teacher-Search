@@ -36,7 +36,8 @@ const AnimationWrapper = ({ children }: AnimationWrapperProps) => {
     if (isClicked.length === animatedFigures.length) {
       toast({
         ...toastConfigs,
-        description: "Congrats! You killed all circles",
+        description:
+          "Congrats! You killed all circles. If you book a lesson, we'll contact the teacher and you'll get a discount",
         status: "success",
       });
     }
@@ -44,7 +45,7 @@ const AnimationWrapper = ({ children }: AnimationWrapperProps) => {
 
   return (
     <Box pos="relative">
-      {showAnimatedFigures && (
+      {showAnimatedFigures && !isGame && (
         <AppButton
           onClick={() => setIsGame(true)}
           bg="white"
