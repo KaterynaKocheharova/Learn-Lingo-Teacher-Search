@@ -33,9 +33,7 @@ const AppModal = ({ isOpen, onClose, children }: AppModalProps) => {
           h="32px"
           top={{ base: "10px", md: "20px" }}
           right="20px"
-          _hover={{ bg: "brand.orange.400" }}
-          _active={{ bg: "brand.orange.400" }}
-          _focus={{ bg: "brand.orange.400" }}
+          _hover={{ bg: "brand.orange.900" }}
         />
         {children}
       </ModalContent>
