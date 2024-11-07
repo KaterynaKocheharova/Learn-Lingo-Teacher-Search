@@ -1,3 +1,4 @@
+import { Image } from "@chakra-ui/react";
 import { Box, BoxProps } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 
@@ -27,7 +28,14 @@ const AnimatedFigure = ({ animation, ...props }: AninmatedFigureProps) => {
       border="3px solid #FFDC86"
       animation={`${circlesAnimation} ${animation}`}
       {...props}
-    ></Box>
+    >
+      <Image
+        src="/favicon.jpg"
+        borderRadius="full"
+        fit="cover"
+        alt="a student pic inside a bubble"
+      />
+    </Box>
   );
 };
 
