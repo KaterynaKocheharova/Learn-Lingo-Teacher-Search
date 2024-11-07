@@ -14,7 +14,7 @@ const PasswordGroup = ({
   errorMessage,
   ...props
 }: PasswordGroupProps) => {
-  const [isPasswordOpen, setIsPasswordOpen] = useState(true);
+  const [isPasswordOpen, setIsPasswordOpen] = useState(false);
   const handleClick = () => setIsPasswordOpen(!isPasswordOpen);
 
   return (
