@@ -1,5 +1,4 @@
-import { useCallback } from "react";
-
+import { useState, useCallback } from "react";
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import { selectUserId, selectIsLoggedIn } from "../../../redux/auth/selectors";
 import {
@@ -7,16 +6,12 @@ import {
   removeFromFavorites,
 } from "../../../redux/favorites/slice";
 import { selectFavorites } from "../../../redux/favorites/selectors";
-
 import { useToast } from "@chakra-ui/react";
-
 import { FiHeart } from "react-icons/fi";
 import UnstyledButton from "../../common/UnstyledButton";
-
 import { toastConfigs } from "../../../config/toast";
 import { firestore } from "../../../config/firebase";
 import { doc, setDoc } from "firebase/firestore";
-
 
 type AddToFavoritesButtonProps = {
   id: string;
@@ -26,19 +21,23 @@ const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
   const favorites = useAppSelector(selectFavorites);
   const userId = useAppSelector(selectUserId);
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  
+  const [isHovered, setIsHovered] = useState(false);
+
   const toast = useToast();
   const dispatch = useAppDispatch();
 
-  const updateFavorites = useCallback(async (newFavorites: string[]) => {
-    try {
-      await setDoc(doc(firestore, "users", userId), {
-        favorites: newFavorites,
-      });
-    } catch (error) {
-      console.error("Error updating favorites:", error);
-    }
-  }, [userId]);
+  const updateFavorites = useCallback(
+    async (newFavorites: string[]) => {
+      try {
+        await setDoc(doc(firestore, "users", userId), {
+          favorites: newFavorites,
+        });
+      } catch (error) {
+        console.error("Error updating favorites:", error);
+      }
+    },
+    [userId]
+  );
 
   const handleClick = () => {
     if (!isLoggedIn) {
@@ -60,7 +59,7 @@ const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
       updatedFavorites = [...favorites, id];
     }
 
-    updateFavorites(updatedFavorites); 
+    updateFavorites(updatedFavorites);
   };
 
   return (
@@ -70,11 +69,13 @@ const AddToFavoritesButton = ({ id }: AddToFavoritesButtonProps) => {
       right="24px"
       h="unset"
       onClick={handleClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <FiHeart
         size="26"
         fill={favorites?.includes(id) && isLoggedIn ? "#F4C550" : "transparent"}
-        stroke={favorites?.includes(id) ? "#F4C550" : "black"}
+        stroke={isHovered || favorites?.includes(id) ? "#F4C550" : "black"}
       />
     </UnstyledButton>
   );
