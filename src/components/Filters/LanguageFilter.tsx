@@ -5,7 +5,11 @@ import { filterOptions } from "../../utils/filterOptions.ts";
 const LanguageFilter = () => {
   const loadOptions = async (inputValue: string) => {
     const options = await getOptions("languages/");
-    return filterOptions(inputValue, options);
+
+    return [
+      { label: "All", value: "all" },
+      ...filterOptions(inputValue, options),
+    ];
   };
 
   return (

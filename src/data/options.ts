@@ -6,6 +6,7 @@ export type Option = {
 export type Options = Option[];
 
 export const levelsOptions: Options = [
+  { value: "all", label: "All" },
   { value: "A1 Beginner", label: "A1 Beginner" },
   { value: "A2 Elementary", label: "A2 Elementary" },
   { value: "B1 Intermediate", label: "B1 Intermediate" },
@@ -15,9 +16,9 @@ export const levelsOptions: Options = [
 ];
 
 export const pricesOptions: Options = [
+  { value: "all", label: "All" },
   { value: "10", label: "10 $" },
   { value: "20", label: "20 $" },
   { value: "30", label: "30 $" },
   { value: "40", label: "40 $" },
 ];
-

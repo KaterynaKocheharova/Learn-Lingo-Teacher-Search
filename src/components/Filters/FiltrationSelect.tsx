@@ -42,9 +42,9 @@ const FiltrationSelect = ({
   const onChange = useCallback(
     (newValue: SingleValue<Option>) => {
       setSelectedValue(newValue);
-      if (!newValue) {
+      if (newValue?.value === "all") {
         dispatch(clearFilter(name));
-      } else if (newValue.hasOwnProperty("value")) {
+      } else if (newValue?.hasOwnProperty("value")) {
         dispatch(
           addFilter({
             filters: {
@@ -94,7 +94,6 @@ const FiltrationSelect = ({
         blurInputOnSelect={true}
         aria-labelledby="filter teachers label"
         aria-label="Filtrating teachers dropdown"
-        isClearable={true}
         onChange={onChange}
         defaultValue={{ value: "", label: name }}
         unstyled
