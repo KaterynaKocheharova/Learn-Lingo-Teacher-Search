@@ -53,7 +53,7 @@ const LoginLogoutButton = () => {
     <>
       <Button
         variant="ghost"
-        _hover={{ bg: "transparent" }}
+        _hover={{ bg: "brand.orange.100" }}
         px="16px"
         leftIcon={loginIcon}
         onClick={onOpen}
