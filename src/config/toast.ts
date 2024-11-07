@@ -7,7 +7,7 @@ type ToastConfigs = {
 };
 
 export const toastConfigs: ToastConfigs = {
-  duration: 2000,
+  duration: 5000,
   isClosable: true,
   position: "top-right",
 };

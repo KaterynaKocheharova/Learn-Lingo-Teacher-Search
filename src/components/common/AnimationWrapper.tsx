@@ -37,8 +37,9 @@ const AnimationWrapper = ({ children }: AnimationWrapperProps) => {
       toast({
         ...toastConfigs,
         description:
-          "Congrats! You killed all circles. If you book a lesson, we'll contact the teacher and you'll get a discount",
+          "Congrats! You killed all circles. If you book a lesson, we'll contact the teacher and you'll get a 5 percent discount for the first lesson",
         status: "success",
+        duration: 9000
       });
     }
   }, [isClicked]);
