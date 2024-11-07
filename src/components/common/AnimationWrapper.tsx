@@ -72,7 +72,7 @@ const AnimationWrapper = ({ children }: AnimationWrapperProps) => {
       Array.from({ length: 19 }, (_, index) => ({
         id: `figure-${nanoid()}`,
         top: `${5 * (index + 1)}%`,
-        animation: `${5 + (index % 10)}s linear infinite`,
+        animation: `${5 + index * 2}s linear infinite`,
       })),
     []
   );
