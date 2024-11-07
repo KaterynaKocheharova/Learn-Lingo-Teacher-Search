@@ -1,5 +1,4 @@
-import { Image } from "@chakra-ui/react";
-import { Box, BoxProps } from "@chakra-ui/react";
+import { BoxProps, Image, Box } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 
 type AninmatedFigureProps = BoxProps & {
@@ -20,6 +19,7 @@ const circlesAnimation = keyframes`
 const AnimatedFigure = ({ animation, ...props }: AninmatedFigureProps) => {
   return (
     <Box
+      cursor="pointer"
       pos="absolute"
       w="30px"
       h="30px"
