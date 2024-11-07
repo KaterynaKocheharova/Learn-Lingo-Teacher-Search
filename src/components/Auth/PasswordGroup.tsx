@@ -48,7 +48,13 @@ const PasswordGroup = ({
         right="18px"
         top="50%"
         transform="translateY(-50%)"
-      ></IconButton>
+        sx={{
+          _hover: {
+            color: "brand.orange.800",
+            cursor: "pointer",
+          },
+        }}
+      />
       <StyledFormError errorMessage={errorMessage} />
     </Box>
   );
