@@ -9,12 +9,12 @@ const NavLinks = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const buildActiveClass = ({ isActive }: { isActive: boolean }) => {
-    return clsx(isActive && css["active-link"]);
+    return clsx(css.link, isActive && css["active-link"]);
   };
 
   return (
     <HStack as="ul" spacing="7" wrap="wrap">
-      <Box as="li">
+      <Box as="li" >
         <NavLink to="/" className={buildActiveClass}>
           <Text py="8">Home</Text>
         </NavLink>

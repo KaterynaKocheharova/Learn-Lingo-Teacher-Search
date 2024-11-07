@@ -1,3 +1,7 @@
+.link:hover {
+  color: #f4c550;
+}
+
 .active-link {
   color: #f4c550;
 }
