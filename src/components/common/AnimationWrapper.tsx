@@ -44,9 +44,18 @@ const AnimationWrapper = ({ children }: AnimationWrapperProps) => {
 
   return (
     <Box pos="relative">
-      <AppButton onClick={() => setIsGame(true)} bg="white" pos="absolute" top="15px" right="15px">
-        Start a game
-      </AppButton>
+      {showAnimatedFigures && (
+        <AppButton
+          onClick={() => setIsGame(true)}
+          bg="white"
+          pos="absolute"
+          top="15px"
+          right="15px"
+        >
+          Start a game
+        </AppButton>
+      )}
+
       {showAnimatedFigures &&
         isGame &&
         animatedFigures.map((figure) => (
