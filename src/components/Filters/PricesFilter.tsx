@@ -19,11 +19,11 @@ const PricesFilter = () => {
   };
 
   const onClick = () => {
-    if (!filters.from || !filters.to) {
+    if ((filters.from && !filters.to) || (!filters.from && filters.to)) {
       toast({
         ...toastConfigs,
         status: "error",
-        description: "Choose both from and to",
+        description: "Choose both min and max prices",
       });
       return;
     }
