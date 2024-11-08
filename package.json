@@ -24,6 +24,7 @@
     "modern-normalize": "^2.0.0",
     "nanoid": "^5.0.8",
     "react": "^18.2.0",
+    "react-animated-text": "^0.1.4",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.53.0",
     "react-icons": "^5.2.1",
