@@ -5,9 +5,13 @@ import { getOptions } from "../../utils/getOptions.ts";
 import { filterOptions } from "../../utils/filterOptions.ts";
 import AppButton from "../common/AppButton.tsx";
 import { HStack } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
+import { toastConfigs } from "../../config/toast.ts";
 
 const PricesFilter = () => {
-  const {applyFilters} = useFilters();
+  const { applyFilters, filters } = useFilters();
+
+  const toast = useToast();
 
   const loadOptions = async (inputValue: string) => {
     const options = await getOptions("prices/");
@@ -15,7 +19,15 @@ const PricesFilter = () => {
   };
 
   const onClick = () => {
-  applyFilters()
+    if (!filters.from || !filters.to) {
+      toast({
+        ...toastConfigs,
+        status: "error",
+        description: "Choose both from and to",
+      });
+      return;
+    }
+    applyFilters();
   };
 
   return (
