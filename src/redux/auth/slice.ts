@@ -9,6 +9,8 @@ import {
 
 const initialState: UserSliceState = {
   user: {
+    name: "",
+    email: "",
     userId: "",
   },
   isLoggedIn: false,
@@ -61,6 +63,8 @@ const userSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.isLoggedIn = false;
         state.user = {
+          name: "",
+          email: "",
           userId: "",
         };
         state.isLoading = "";
@@ -71,6 +75,8 @@ const userSlice = createSlice({
   reducers: {
     refreshUser: (state, action: PayloadAction<RefreshUserPayload>) => {
       state.isLoggedIn = true;
+      state.user.name = action.payload.name;
+      state.user.email = action.payload.email;
       state.user.userId = action.payload.userId;
     },
   },

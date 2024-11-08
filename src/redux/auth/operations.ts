@@ -32,8 +32,10 @@ export const registerUser = createAsyncThunk(
         await updateProfile(auth.currentUser, { displayName: data.name });
       }
       return {
+        ...data,
         userId: credentials.user.uid,
       };
+      
     } catch (error: unknown) {
       let errorMessage;
       if (error instanceof Error) {

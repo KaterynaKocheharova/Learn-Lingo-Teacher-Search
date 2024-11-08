@@ -3,6 +3,8 @@ import { type RegisterInputValues } from "../../components/Auth/types";
 
 export type UserSliceState = {
   user: {
+    name: string;
+    email: string;
     userId: string;
   };
   isLoggedIn: boolean;
@@ -18,5 +20,7 @@ export type RegisterPayload = RegisterInputValues & {
 };
 
 export type RefreshUserPayload = {
+  name: string;
   userId: string;
+  email: string;
 };
