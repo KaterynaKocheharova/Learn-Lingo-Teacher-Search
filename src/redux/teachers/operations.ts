@@ -86,10 +86,10 @@ export const fetchFilteredTeachers = createAsyncThunk(
       );
     }
 
-    if (filters.price) {
+    if (filters.from && filters.to) {
       fetchFilteredTeachersPromises.push(
         await axios.get(
-          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&equalTo=${filters.price}`
+          `https://learnlingo-a826c-default-rtdb.firebaseio.com/teachers.json?orderBy="price_per_hour"&startAt=${filters.from}&endAt=${filters.to}`
         )
       );
     }
@@ -107,8 +107,10 @@ export const fetchFilteredTeachers = createAsyncThunk(
 
       const onlyNeededTeachers = allFilteredTeachers.filter((teacher) => {
         let priceInRange = true;
-        if (filters.price) {
-          priceInRange = teacher.price_per_hour === Number(filters.price);
+        if (filters.from && filters.to) {
+          priceInRange =
+            teacher.price_per_hour >= Number(filters.from) &&
+            teacher.price_per_hour <= Number(filters.to);
         }
 
         let levelMatches = true;

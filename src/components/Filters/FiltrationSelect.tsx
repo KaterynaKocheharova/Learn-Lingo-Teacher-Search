@@ -19,7 +19,7 @@ import { SelectIsFiltered } from "../../redux/teachers/selectros.ts";
 import { type Options } from "../../data/options";
 
 type FilterationSelectProps = {
-  name: "language" | "level" | "price";
+  name: "language" | "level" | "from" | "to";
   width: string;
   labelText: string;
   defaultOptions?: Options;
@@ -58,7 +58,7 @@ const FiltrationSelect = ({
   );
 
   useEffect(() => {
-    if (filters?.language || filters?.price || filters?.level) {
+    if (filters?.language || (filters?.from && filters?.to) || filters?.level) {
       dispatch(
         fetchFilteredTeachers({
           filters: {
@@ -76,7 +76,7 @@ const FiltrationSelect = ({
         );
       }
     }
-  }, [filters, isFiltered]);
+  }, [filters.level, filters.language, isFiltered]);
 
   return (
     <VStack spacing="8px" align="flex-start">

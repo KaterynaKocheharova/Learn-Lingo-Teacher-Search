@@ -5,7 +5,8 @@ export type Filters = {
   filters: {
     language: string;
     level: string;
-    price: string;
+    from: string;
+    to: string;
   };
 };
 
@@ -19,7 +20,8 @@ const filtersInitialState: FiltersInitialState = {
   filters: {
     language: "",
     level: "",
-    price: "",
+    from: "",
+    to: "",
   },
 };
 
@@ -30,8 +32,15 @@ const filtersSlice = createSlice({
     addFilter: (state, action: PayloadAction<FiltersPayloadType>) => {
       const { filters } = action.payload;
 
-      if (filters.price) {
-        state.filters.price = filters.price;
+      if (filters.from) {
+        state.filters.from = filters.from;
+      }
+      if (filters.to) {
+        state.filters.to = filters.to;
+      }
+
+      if (filters.from) {
+        state.filters.from = filters.from;
       }
       if (filters.language) {
         state.filters.language = filters.language;
@@ -41,13 +50,14 @@ const filtersSlice = createSlice({
       }
     },
     clearFilters: (state) => {
-      state.filters.price = "";
+      state.filters.from = "";
+      state.filters.to = "";
       state.filters.language = "";
       state.filters.level = "";
     },
     clearFilter: (
       state,
-      action: PayloadAction<"level" | "language" | "price">
+      action: PayloadAction<"level" | "language" | "from" | "to">
     ) => {
       state.filters[action.payload] = "";
     },

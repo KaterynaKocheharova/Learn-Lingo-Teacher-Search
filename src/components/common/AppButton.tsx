@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from "@chakra-ui/react";
 
 type AppButtonProps = Partial<ButtonProps> & {
-  children: React.ReactNode;
+  children: React.ReactNode | string;
 };
 
 const AppButton = ({ children, onClick, ...props }: AppButtonProps) => {
