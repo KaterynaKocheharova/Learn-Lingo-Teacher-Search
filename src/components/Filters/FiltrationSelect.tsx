@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useFilters } from "../../hooks/useFilters.ts";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
 import { selectFilters } from "../../redux/filters/selectors.ts";
 import { addFilter } from "../../redux/filters/slice.ts";
@@ -10,11 +11,6 @@ import ThickGrayText from "../common/ThickGrayText.tsx";
 import { type Option } from "../../data/options";
 import css from "./select.module.css";
 import { getSelectStyles } from "./selectStyles";
-import {
-  fetchFilteredTeachers,
-  fetchTeachers,
-} from "../../redux/teachers/operations.ts";
-import { removeIsFilteredFlag } from "../../redux/teachers/slice.ts";
 import { SelectIsFiltered } from "../../redux/teachers/selectros.ts";
 import { type Options } from "../../data/options";
 
@@ -38,6 +34,7 @@ const FiltrationSelect = ({
   const isFiltered = useAppSelector(SelectIsFiltered);
   const [selectedValue, setSelectedValue] =
     useState<SingleValue<Option> | null>(null);
+  const { applyFilters } = useFilters();
 
   const onChange = useCallback(
     (newValue: SingleValue<Option>) => {
@@ -58,24 +55,7 @@ const FiltrationSelect = ({
   );
 
   useEffect(() => {
-    if (filters?.language || (filters?.from && filters?.to) || filters?.level) {
-      dispatch(
-        fetchFilteredTeachers({
-          filters: {
-            ...filters,
-          },
-        })
-      );
-    } else {
-      dispatch(removeIsFilteredFlag());
-      if (!isFiltered) {
-        dispatch(
-          fetchTeachers({
-            isFirstBatch: true,
-          })
-        );
-      }
-    }
+    applyFilters();
   }, [filters.level, filters.language, isFiltered]);
 
   return (
