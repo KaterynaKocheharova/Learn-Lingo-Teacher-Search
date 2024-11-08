@@ -2,7 +2,7 @@ import { useFilters } from "../../hooks/useFilters.ts";
 import FiltrationSelect from "./FiltrationSelect.tsx";
 import { pricesOptions } from "../../data/options.ts";
 import { getOptions } from "../../utils/getOptions.ts";
-import { filterOptions } from "../../utils/filterOptions.ts";
+import { filterPricesOptions } from "../../utils/filterOptions.ts";
 import AppButton from "../common/AppButton.tsx";
 import { HStack } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
@@ -15,7 +15,7 @@ const PricesFilter = () => {
 
   const loadOptions = async (inputValue: string) => {
     const options = await getOptions("prices/");
-    return filterOptions(inputValue, options);
+    return filterPricesOptions(inputValue, options);
   };
 
   const onClick = () => {
